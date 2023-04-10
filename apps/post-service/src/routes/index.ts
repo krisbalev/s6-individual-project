@@ -14,19 +14,20 @@ export const postRouter = () => {
     }
   });
 
+  router.post("/", async (req, res) => {
+    const post = await service.CreatePost(req.body);
+    if (!post) {
+      return res.status(404).json({ message: "post not found" });
+    }
+    return res.json(post);
+  })
+
   // Dynamic routes
   router
     .route("/:id")
     .get(async (req, res) => {
       const post = await service.GetPostById(req.params.id);
       console.log("post router :", post);
-      if (!post) {
-        return res.status(404).json({ message: "post not found" });
-      }
-      return res.json(post);
-    })
-    .post(async (req, res) => {
-      const post = await service.CreatePost(req.body);
       if (!post) {
         return res.status(404).json({ message: "post not found" });
       }

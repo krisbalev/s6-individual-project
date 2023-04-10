@@ -1,0 +1,86 @@
+version: "3"
+
+services:
+  post-service:
+    container_name: post-service
+    build:
+      context: .
+      dockerfile: ./apps/post-service/Dockerfile
+    restart: always
+    ports:
+      - 3003:3003
+    networks:
+      - app_network
+    # depends_on:
+    #   - rabbitmq
+
+  # web:
+  #   container_name: web
+  #   build:
+  #     context: .
+  #     dockerfile: ./apps/web/Dockerfile
+  #   restart: always
+  #   ports:
+  #     - 3000:3000
+  #   networks:
+  #     - app_network
+
+  # upload-service:
+  #   container_name: upload-service
+  #   build:
+  #     context: .
+  #     dockerfile: ./apps/upload-service/Dockerfile
+  #   restart: always
+  #   ports:
+  #     - 3001:3001
+  #   networks:
+  #     - app_network
+  #   depends_on:
+  #     - rabbitmq
+
+  # user-service:
+  #   container_name: user-service
+  #   build:
+  #     context: .
+  #     dockerfile: ./apps/user-service/Dockerfile
+  #   restart: always
+  #   ports:
+  #     - 3002:3002
+  #   networks:
+  #     - app_network
+  #   depends_on:
+  #     - rabbitmq
+
+  # comment-service:
+  #   container_name: comment-service
+  #   build:
+  #     context: .
+  #     dockerfile: ./apps/comment-service/Dockerfile
+  #   restart: always
+  #   ports:
+  #     - 3004:3004
+  #   networks:
+  #     - app_network
+  #   depends_on:
+  #     - rabbitmq
+
+  # rabbitmq:
+  #   image: rabbitmq:3-management-alpine
+  #   container_name: rabbitmq
+  #   hostname: rabbitmq
+  #   ports:
+  #     - 15672:15672
+  #     - 5672:5672
+  #   volumes:
+  #     - ./.rabbitmq_data:/var/lib/rabbitmq/mnesia
+  #   environment:
+  #     - RABBITMQ_DEFAULT_USER=admin
+  #     - RABBITMQ_DEFAULT_PASS=admin
+  #   networks:
+  #     - app_network
+
+# Define a network, which allows containers to communicate
+# with each other, by using their container name as a hostname
+networks:
+  app_network:
+    external: true

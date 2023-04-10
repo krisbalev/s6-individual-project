@@ -3,7 +3,7 @@ import Head from 'next/head';
 import PostCard from '../components/PostCard';
 import PostForm from '../components/PostForm';
 import { Post } from '../types/post';
-import { fetchPosts } from '../api/posts';
+import { fetchPosts, createPost } from '../api/posts';
 import Navbar from '@/components/Navbar';
 
 interface HomePageProps {
@@ -14,7 +14,11 @@ const HomePage = ({ posts }: HomePageProps) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleAddPost = (post: Post) => {
-    // You can add your code here to submit the post to your backend or store it in your state
+    try {
+      createPost(post);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const handleModalOpen = () => {
@@ -41,7 +45,7 @@ const HomePage = ({ posts }: HomePageProps) => {
             Welcome to MyTap
           </h1>
           <p className="mt-4 text-xl text-gray-500">
-            Gamified Social Media
+            Gamified Social Mediaaaa
           </p>
         </div>
 
