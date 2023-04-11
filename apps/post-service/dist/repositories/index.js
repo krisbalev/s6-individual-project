@@ -10,8 +10,8 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.DeletePost = exports.UpdatePost = exports.CreatePost = exports.GetPostById = exports.GetPosts = void 0;
-const client_1 = require("@prisma/client");
-const prisma = new client_1.PrismaClient();
+const database_1 = require("database");
+const prisma = new database_1.PrismaClient();
 function GetPosts() {
     return __awaiter(this, void 0, void 0, function* () {
         const posts = yield prisma.post.findMany();
