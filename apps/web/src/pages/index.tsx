@@ -39,17 +39,17 @@ const HomePage = ({ posts }: HomePageProps) => {
 
       <Navbar />
 
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5">
         <div className="flex flex-col items-center justify-center">
           <h1 className="mt-4 text-4xl font-extrabold text-gray-900 sm:text-5xl sm:tracking-tight lg:text-6xl">
             Welcome to MyTap
           </h1>
           <p className="mt-4 text-xl text-gray-500">
-            Gamified Social Mediaaaa
+            Gamified Social Media
           </p>
         </div>
 
-        <div className="mt-10 grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-10 grid gap-6">
           {posts.map((post) => (
             <PostCard key={post.title} post={post} />
           ))}
