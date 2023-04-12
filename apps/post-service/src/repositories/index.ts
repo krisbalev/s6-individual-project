@@ -1,4 +1,4 @@
-import { PrismaClient } from "database/src/index"; //was "database"
+import { PrismaClient } from "database"; //was "database"
 const prisma = new PrismaClient();
 
 export async function GetPosts() {
