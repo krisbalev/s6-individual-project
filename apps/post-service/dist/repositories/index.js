@@ -37,7 +37,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.DeletePost = exports.UpdatePost = exports.CreatePost = exports.GetPostById = exports.GetPosts = void 0;
-var database_1 = require("database"); //was "database"
+var database_1 = require("database");
 var prisma = new database_1.PrismaClient();
 function GetPosts() {
     return __awaiter(this, void 0, void 0, function () {
