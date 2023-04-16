@@ -1,13 +1,13 @@
 import { PrismaClient } from "database";
 const prisma = new PrismaClient();
 
-export async function GetPosts() {
-  const posts = await prisma.post.findMany();
-  return posts;
+export async function GetUsers() {
+  const users = await prisma.user.findMany();
+  return users;
 }
 
-export async function GetPostById(id: string) {
-  const post = await prisma.post
+export async function GetUserById(id: string) {
+  const user = await prisma.user
     .findUnique({
       where: {
         id: id,
@@ -16,22 +16,22 @@ export async function GetPostById(id: string) {
     .catch(() => {
       return null;
     });
-  return post;
+  return user;
 }
 
-export async function CreatePost(data: any) {
-  const post = await prisma.post
+export async function CreateUser(data: any) {
+  const user = await prisma.user
     .create({
       data: data,
     })
     .catch(() => {
       return null;
     });
-  return post;
+  return user;
 }
 
-export async function UpdatePost(id: string, data: any) {
-  const post = await prisma.post
+export async function UpdateUser(id: string, data: any) {
+  const user = await prisma.user
     .update({
       where: {
         id: id,
@@ -41,11 +41,11 @@ export async function UpdatePost(id: string, data: any) {
     .catch(() => {
       return null;
     });
-  return post;
+  return user;
 }
 
-export async function DeletePost(id: string) {
-  const post = await prisma.post
+export async function DeleteUser(id: string) {
+  const user = await prisma.user
     .delete({
       where: {
         id: id,
@@ -54,5 +54,5 @@ export async function DeletePost(id: string) {
     .catch(() => {
       return null;
     });
-  return post;
+  return user;
 }

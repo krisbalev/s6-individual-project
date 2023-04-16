@@ -3,7 +3,7 @@ import Head from 'next/head';
 import PostCard from '../components/PostCard';
 import PostForm from '../components/PostForm';
 import { Post } from '../types/post';
-import { fetchPosts } from '../api/posts';
+import { fetchPosts, createPost } from '../api/posts';
 import Navbar from '@/components/Navbar';
 
 interface HomePageProps {
@@ -14,7 +14,11 @@ const HomePage = ({ posts }: HomePageProps) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleAddPost = (post: Post) => {
-    // You can add your code here to submit the post to your backend or store it in your state
+    try {
+      createPost(post);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const handleModalOpen = () => {
@@ -35,7 +39,7 @@ const HomePage = ({ posts }: HomePageProps) => {
 
       <Navbar />
 
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5">
         <div className="flex flex-col items-center justify-center">
           <h1 className="mt-4 text-4xl font-extrabold text-gray-900 sm:text-5xl sm:tracking-tight lg:text-6xl">
             Welcome to MyTap
@@ -45,7 +49,7 @@ const HomePage = ({ posts }: HomePageProps) => {
           </p>
         </div>
 
-        <div className="mt-10 grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-10 grid gap-6">
           {posts.map((post) => (
             <PostCard key={post.title} post={post} />
           ))}
@@ -66,7 +70,7 @@ const HomePage = ({ posts }: HomePageProps) => {
   );
 };
 
-export const getStaticProps = async () => {
+export const getServerSideProps = async () => {
   const posts = await fetchPosts();
   return {
     props: { posts },
