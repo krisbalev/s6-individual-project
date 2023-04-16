@@ -21,6 +21,10 @@
     "clean": {
       "cache": false
     },
+    "test": {
+      "outputs": ["coverage/**"],
+      "dependsOn": []
+    },
     "db:generate": {
       "cache": false,
       "dependsOn": ["^generate"]
