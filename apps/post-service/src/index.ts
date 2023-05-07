@@ -1,7 +1,7 @@
 import { createServer } from "./server";
 import { postRouter } from "./routes";
 
-const port = process.env.NEXT_PUBLIC_POST_SERVICE_URL || 3002;
+const port = process.env.NEXT_PUBLIC_POST_SERVICE_URL || 8080;
 const server = createServer();
 
 server.listen(port, () => {
