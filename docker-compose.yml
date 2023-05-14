@@ -1,23 +1,23 @@
 version: "3"
 
 services:
-  # web:
-  #   container_name: web
-  #   build:
-  #     context: .
-  #     dockerfile: ./apps/web/Dockerfile
-  #   restart: always
-  #   ports:
-  #     - 3000:3000
-  #   networks:
-  #     - app_network
-  #   environment:
-  #     - NEXT_PUBLIC_POST_SERVICE_URL=http://post-service:8080
-  #     - NEXT_PUBLIC_USER_SERVICE_URL=http://user-service:8081
-  #   image: asindividual.azurecr.io/web:latest
+  web:
+    container_name: web
+    build:
+      context: .
+      dockerfile: ./apps/web/Dockerfile
+    restart: always
+    ports:
+      - 3000:3000
+    networks:
+      - app_network
+    environment:
+      - NEXT_PUBLIC_POST_SERVICE_URL=http://post-service:8080
+      - NEXT_PUBLIC_USER_SERVICE_URL=http://user-service:8081
+    image: asindividual.azurecr.io/s6-individual-project-web:latest
 
-  s6-individual-project-post-service:
-    container_name: s6-individual-project-post-service
+  post-service:
+    container_name: post-service
     build:
       context: .
       dockerfile: ./apps/post-service/Dockerfile
@@ -28,8 +28,8 @@ services:
       - app_network
     image: asindividual.azurecr.io/s6-individual-project-post-service:latest
 
-  s6-individual-project-user-service:
-    container_name: s6-individual-project-user-service
+  user-service:
+    container_name: user-service
     build:
       context: .
       dockerfile: ./apps/user-service/Dockerfile
