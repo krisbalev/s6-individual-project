@@ -14,7 +14,7 @@ services:
     environment:
       - NEXT_PUBLIC_POST_SERVICE_URL=http://post-service:8080
       - NEXT_PUBLIC_USER_SERVICE_URL=http://user-service:8081
-    image: asindividual.azurecr.io/web:latest
+    # image: asindividual.azurecr.io/web:latest
 
   post-service:
     container_name: post-service
