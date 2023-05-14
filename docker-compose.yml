@@ -16,8 +16,8 @@ services:
   #     - NEXT_PUBLIC_USER_SERVICE_URL=http://user-service:8081
   #   image: asindividual.azurecr.io/web:latest
 
-  post-service:
-    container_name: post-service
+  s6-individual-project-post-service:
+    container_name: s6-individual-project-post-service
     build:
       context: .
       dockerfile: ./apps/post-service/Dockerfile
@@ -28,8 +28,8 @@ services:
       - app_network
     image: asindividual.azurecr.io/s6-individual-project-post-service:latest
 
-  user-service:
-    container_name: user-service
+  s6-individual-project-user-service:
+    container_name: s6-individual-project-user-service
     build:
       context: .
       dockerfile: ./apps/user-service/Dockerfile
