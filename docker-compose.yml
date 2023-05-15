@@ -38,7 +38,7 @@ services:
       - 8081:8081
     networks: 
       - app_network
-    image: s6-individual-project-user-service:latest
+    image: user-service:latest
 
 # Define a network, which allows containers to communicate
 # with each other, by using their container name as a hostname
