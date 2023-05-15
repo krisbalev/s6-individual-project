@@ -1,20 +1,20 @@
 version: "3"
 
 services:
-  web:
-    container_name: web
-    build:
-      context: .
-      dockerfile: ./apps/web/Dockerfile
-    restart: always
-    ports:
-      - 3000:3000
-    networks:
-      - app_network
-    environment:
-      - NEXT_PUBLIC_POST_SERVICE_URL=http://post-service:8080
-      - NEXT_PUBLIC_USER_SERVICE_URL=http://user-service:8081
-    image: web:latest
+  # web:
+  #   container_name: web
+  #   build:
+  #     context: .
+  #     dockerfile: ./apps/web/Dockerfile
+  #   restart: always
+  #   ports:
+  #     - 3000:3000
+  #   networks:
+  #     - app_network
+  #   environment:
+  #     - NEXT_PUBLIC_POST_SERVICE_URL=http://post-service:8080
+  #     - NEXT_PUBLIC_USER_SERVICE_URL=http://user-service:8081
+  #   image: web:latest
 
   post-service:
     container_name: post-service
