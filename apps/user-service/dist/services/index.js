@@ -59,14 +59,14 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.DeleteUsers = exports.UpdateUsers = exports.CreateUser = exports.GetUserById = exports.GetUsers = void 0;
-var prisma = __importStar(require("../repositories/index"));
+exports.DeleteUsers = exports.CreateUser = exports.GetUserById = exports.GetUsers = void 0;
+var db = __importStar(require("../repositories/index"));
 function GetUsers() {
     return __awaiter(this, void 0, void 0, function () {
         var users;
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0: return [4 /*yield*/, prisma.GetUsers()];
+                case 0: return [4 /*yield*/, db.GetUsers()];
                 case 1:
                     users = _a.sent();
                     return [2 /*return*/, users];
@@ -80,7 +80,7 @@ function GetUserById(id) {
         var user;
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0: return [4 /*yield*/, prisma.GetUserById(id)];
+                case 0: return [4 /*yield*/, db.GetUserById(id)];
                 case 1:
                     user = _a.sent();
                     return [2 /*return*/, user];
@@ -94,7 +94,7 @@ function CreateUser(data) {
         var user;
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0: return [4 /*yield*/, prisma.CreateUser(data)];
+                case 0: return [4 /*yield*/, db.CreateUser(data)];
                 case 1:
                     user = _a.sent();
                     return [2 /*return*/, user];
@@ -103,26 +103,12 @@ function CreateUser(data) {
     });
 }
 exports.CreateUser = CreateUser;
-function UpdateUsers(id, data) {
-    return __awaiter(this, void 0, void 0, function () {
-        var user;
-        return __generator(this, function (_a) {
-            switch (_a.label) {
-                case 0: return [4 /*yield*/, prisma.UpdateUser(id, data)];
-                case 1:
-                    user = _a.sent();
-                    return [2 /*return*/, user];
-            }
-        });
-    });
-}
-exports.UpdateUsers = UpdateUsers;
 function DeleteUsers(id) {
     return __awaiter(this, void 0, void 0, function () {
         var user;
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0: return [4 /*yield*/, prisma.DeleteUser(id)];
+                case 0: return [4 /*yield*/, db.DeleteUser(id)];
                 case 1:
                     user = _a.sent();
                     return [2 /*return*/, user];

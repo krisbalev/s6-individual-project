@@ -33,13 +33,6 @@ export const userRouter = () => {
       }
       return res.json(user);
     })
-    .put(async (req, res) => {
-      const user = await service.UpdateUsers(req.params.id, req.body);
-      if (!user) {
-        return res.status(404).json({ message: "user not found" });
-      }
-      return res.json(user);
-    })
     .delete(async (req, res) => {
       const user = await service.DeleteUsers(req.params.id);
       if (!user) {

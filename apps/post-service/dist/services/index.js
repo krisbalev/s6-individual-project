@@ -59,14 +59,14 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.DeletePosts = exports.UpdatePosts = exports.CreatePost = exports.GetPostById = exports.GetPosts = void 0;
-var prisma = __importStar(require("../repositories/index"));
+exports.DeletePosts = exports.CreatePost = exports.GetPostById = exports.GetPosts = void 0;
+var db = __importStar(require("../repositories/index"));
 function GetPosts() {
     return __awaiter(this, void 0, void 0, function () {
         var posts;
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0: return [4 /*yield*/, prisma.GetPosts()];
+                case 0: return [4 /*yield*/, db.GetPosts()];
                 case 1:
                     posts = _a.sent();
                     return [2 /*return*/, posts];
@@ -80,7 +80,7 @@ function GetPostById(id) {
         var post;
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0: return [4 /*yield*/, prisma.GetPostById(id)];
+                case 0: return [4 /*yield*/, db.GetPostById(id)];
                 case 1:
                     post = _a.sent();
                     return [2 /*return*/, post];
@@ -94,7 +94,7 @@ function CreatePost(data) {
         var post;
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0: return [4 /*yield*/, prisma.CreatePost(data)];
+                case 0: return [4 /*yield*/, db.CreatePost(data)];
                 case 1:
                     post = _a.sent();
                     return [2 /*return*/, post];
@@ -103,26 +103,12 @@ function CreatePost(data) {
     });
 }
 exports.CreatePost = CreatePost;
-function UpdatePosts(id, data) {
-    return __awaiter(this, void 0, void 0, function () {
-        var post;
-        return __generator(this, function (_a) {
-            switch (_a.label) {
-                case 0: return [4 /*yield*/, prisma.UpdatePost(id, data)];
-                case 1:
-                    post = _a.sent();
-                    return [2 /*return*/, post];
-            }
-        });
-    });
-}
-exports.UpdatePosts = UpdatePosts;
 function DeletePosts(id) {
     return __awaiter(this, void 0, void 0, function () {
         var post;
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0: return [4 /*yield*/, prisma.DeletePost(id)];
+                case 0: return [4 /*yield*/, db.DeletePost(id)];
                 case 1:
                     post = _a.sent();
                     return [2 /*return*/, post];

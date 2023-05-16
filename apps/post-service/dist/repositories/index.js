@@ -36,15 +36,14 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.DeletePost = exports.UpdatePost = exports.CreatePost = exports.GetPostById = exports.GetPosts = void 0;
-var database_1 = require("database");
-var prisma = new database_1.PrismaClient();
+exports.DeletePost = exports.CreatePost = exports.GetPostById = exports.GetPosts = void 0;
+var post_1 = require("../models/post");
 function GetPosts() {
     return __awaiter(this, void 0, void 0, function () {
         var posts;
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0: return [4 /*yield*/, prisma.post.findMany()];
+                case 0: return [4 /*yield*/, post_1.Post.find()];
                 case 1:
                     posts = _a.sent();
                     return [2 /*return*/, posts];
@@ -58,15 +57,7 @@ function GetPostById(id) {
         var post;
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0: return [4 /*yield*/, prisma.post
-                        .findUnique({
-                        where: {
-                            id: id,
-                        },
-                    })
-                        .catch(function () {
-                        return null;
-                    })];
+                case 0: return [4 /*yield*/, post_1.Post.findById(id)];
                 case 1:
                     post = _a.sent();
                     return [2 /*return*/, post];
@@ -80,11 +71,7 @@ function CreatePost(data) {
         var post;
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0: return [4 /*yield*/, prisma.post
-                        .create({
-                        data: data,
-                    })
-                        .catch(function () {
+                case 0: return [4 /*yield*/, post_1.Post.create(data).catch(function (error) {
                         return null;
                     })];
                 case 1:
@@ -95,43 +82,12 @@ function CreatePost(data) {
     });
 }
 exports.CreatePost = CreatePost;
-function UpdatePost(id, data) {
-    return __awaiter(this, void 0, void 0, function () {
-        var post;
-        return __generator(this, function (_a) {
-            switch (_a.label) {
-                case 0: return [4 /*yield*/, prisma.post
-                        .update({
-                        where: {
-                            id: id,
-                        },
-                        data: data,
-                    })
-                        .catch(function () {
-                        return null;
-                    })];
-                case 1:
-                    post = _a.sent();
-                    return [2 /*return*/, post];
-            }
-        });
-    });
-}
-exports.UpdatePost = UpdatePost;
 function DeletePost(id) {
     return __awaiter(this, void 0, void 0, function () {
         var post;
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0: return [4 /*yield*/, prisma.post
-                        .delete({
-                        where: {
-                            id: id,
-                        },
-                    })
-                        .catch(function () {
-                        return null;
-                    })];
+                case 0: return [4 /*yield*/, post_1.Post.findByIdAndDelete(id)];
                 case 1:
                     post = _a.sent();
                     return [2 /*return*/, post];

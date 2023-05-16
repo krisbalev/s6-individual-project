@@ -114,20 +114,6 @@ var userRouter = function () {
             }
         });
     }); })
-        .put(function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-        var user;
-        return __generator(this, function (_a) {
-            switch (_a.label) {
-                case 0: return [4 /*yield*/, service.UpdateUsers(req.params.id, req.body)];
-                case 1:
-                    user = _a.sent();
-                    if (!user) {
-                        return [2 /*return*/, res.status(404).json({ message: "user not found" })];
-                    }
-                    return [2 /*return*/, res.json(user)];
-            }
-        });
-    }); })
         .delete(function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
         var user;
         return __generator(this, function (_a) {
