@@ -7,11 +7,11 @@ var server_1 = require("./server");
 var routes_1 = require("./routes");
 var mongoose_1 = __importDefault(require("mongoose"));
 var url_1 = require("url");
-var url = new url_1.URL(process.env.NEXT_PUBLIC_USER_SERVICE_URL || "http://localhost:3002/user");
+var url = new url_1.URL(process.env.NEXT_PUBLIC_USER_SERVICE_URL || "http://localhost:8081/user");
 var port = url.port;
 // MongoDB connection string
 var mongoURI = process.env.MONGO_URI ||
-    "mongodb+srv://stassig:LLy9oetA2323VOFY@kwetterdb.dv7mwqw.mongodb.net/Users";
+    "mongodb+srv://kristiyanbalev:individualpassword@individual-project.hqwmljf.mongodb.net/user";
 // Connect to MongoDB
 mongoose_1.default.connect(mongoURI);
 var db = mongoose_1.default.connection;

@@ -20,7 +20,7 @@ export const userRouter = () => {
       return res.status(404).json({ message: "user not found" });
     }
     return res.json(user);
-  })
+  });
 
   // Dynamic routes
   router

@@ -4,6 +4,7 @@ kind: Kustomization
 resources:
   - post-service-deployment.yaml
   - user-service-deployment.yaml
+  - web-deployment.yaml
 
 
 
@@ -13,4 +14,7 @@ images:
     newTag: CICD_PLACEHOLDER
   - name: asindividual.azurecr.io/user-service
     newName: asindividual.azurecr.io/user-service
+    newTag: CICD_PLACEHOLDER
+  - name: asindividual.azurecr.io/web
+    newName: asindividual.azurecr.io/web
     newTag: CICD_PLACEHOLDER

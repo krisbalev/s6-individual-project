@@ -21,4 +21,3 @@ export async function DeleteUser(id: string) {
   const user = await User.findByIdAndDelete(id);
   return user;
 }
-

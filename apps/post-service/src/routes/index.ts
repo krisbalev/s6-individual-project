@@ -20,7 +20,7 @@ export const postRouter = () => {
       return res.status(404).json({ message: "post not found" });
     }
     return res.json(post);
-  })
+  });
 
   // Dynamic routes
   router
