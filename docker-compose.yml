@@ -12,8 +12,7 @@ services:
     networks:
       - app_network
     environment:
-      - NEXT_PUBLIC_POST_SERVICE_URL=http://post-service:8080
-      - NEXT_PUBLIC_USER_SERVICE_URL=http://user-service:8081
+      - NEXT_PUBLIC_GATEWAY=http://krakend:8080/
     image: web:latest
 
   post-service:
@@ -23,7 +22,7 @@ services:
       dockerfile: ./apps/post-service/Dockerfile
     restart: always
     ports:
-      - 8080:8080
+      - 8081:8081
     networks: 
       - app_network
     image: post-service:latest
@@ -35,10 +34,21 @@ services:
       dockerfile: ./apps/user-service/Dockerfile
     restart: always
     ports:
-      - 8081:8081
+      - 8082:8082
     networks: 
       - app_network
     image: user-service:latest
+
+  krakend:
+    container_name: krakend
+    build:
+      context: ./krakend
+      dockerfile: ./Dockerfile
+    image: krakend:latest
+    ports:
+      - 8080:8080
+    networks:
+      - app_network
 
 # Define a network, which allows containers to communicate
 # with each other, by using their container name as a hostname

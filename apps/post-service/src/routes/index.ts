@@ -6,6 +6,7 @@ export const postRouter = () => {
 
   // Static routes
   router.get("/", async (req, res) => {
+    console.log("post router"	);
     const posts = await service.GetPosts();
     if (posts) {
       return res.json(posts);

@@ -22,7 +22,7 @@ spec:
           imagePullPolicy: IfNotPresent
           name: user-service
           ports:
-            - containerPort: 8081
+            - containerPort: 8082
           resources:
             requests:
               cpu: 100m
@@ -43,6 +43,6 @@ spec:
   ports:
     - name: "user-service-port"
       port: 80
-      targetPort: 8081
+      targetPort: 8082
   selector:
     app: user-service

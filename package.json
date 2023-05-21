@@ -8,6 +8,7 @@
   ],
   "scripts": {
     "build": "turbo run build",
+    "proxy": "krakend run -d -c krakend/krakend-dev.json",
     "dev": "turbo run dev",
     "lint": "turbo run lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",

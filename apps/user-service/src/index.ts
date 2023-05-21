@@ -4,7 +4,7 @@ import mongoose from "mongoose";
 import { URL } from "url";
 
 const url = new URL(
-  process.env.NEXT_PUBLIC_USER_SERVICE_URL || "http://localhost:8081/user"
+  process.env.NEXT_PUBLIC_USER_SERVICE_URL || "http://localhost:8082/user"
 );
 const port = url.port;
 
@@ -32,4 +32,4 @@ server.listen(port, () => {
   console.log(`endpoint: ${endPoint}`);
 });
 
-server.use(endPoint, userRouter());
+server.use("/", userRouter());

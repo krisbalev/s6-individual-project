@@ -4,7 +4,7 @@ import mongoose from "mongoose";
 import { URL } from "url";
 
 const url = new URL(
-  process.env.NEXT_PUBLIC_USER_SERVICE_URL || "http://localhost:8080/post"
+  process.env.NEXT_PUBLIC_POST_SERVICE_URL || "http://localhost:8081/post"
 );
 const port = url.port;
 
@@ -23,7 +23,7 @@ db.once("open", function () {
 });
 
 // const endPoint = process.env.NODE_ENV === "production" ? "/" : "/post";
-const endPoint = process.env.NEXT_PUBLIC_USER_SERVICE_URL || "/post";
+const endPoint = process.env.NEXT_PUBLIC_POST_SERVICE_URL || "/post";
 
 const server = createServer();
 
@@ -32,4 +32,4 @@ server.listen(port, () => {
   console.log(`endpoint: ${endPoint}`);
 });
 
-server.use(endPoint, postRouter());
+server.use("/", postRouter());

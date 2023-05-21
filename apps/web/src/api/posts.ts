@@ -2,7 +2,7 @@ import { Post } from "../types/post";
 
 export const fetchPosts = async (): Promise<Post[]> => {
   const response = await fetch(
-    process.env.NEXT_PUBLIC_POST_SERVICE_URL + "/post" ||
+    process.env.NEXT_PUBLIC_GATEWAY + "/post" ||
       "http://localhost:8080/post"
   );
   const posts = await response.json();
@@ -11,7 +11,7 @@ export const fetchPosts = async (): Promise<Post[]> => {
 
 export const createPost = async (post: Post): Promise<Post> => {
   const response = await fetch(
-    process.env.NEXT_PUBLIC_POST_SERVICE_URL + "/post" ||
+    process.env.NEXT_PUBLIC_GATEWAY + "/post" ||
       "http://localhost:8080/post",
     {
       method: "POST",

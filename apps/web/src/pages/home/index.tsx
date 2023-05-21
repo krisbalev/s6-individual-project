@@ -10,7 +10,8 @@ interface HomePageProps {
   posts: Post[];
 }
 
-const HomePage = ({ posts }: HomePageProps) => {
+//Change props type later
+const HomePage = ({ posts }: any) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleAddPost = (post: Post) => {
@@ -49,7 +50,7 @@ const HomePage = ({ posts }: HomePageProps) => {
         </div> */}
 
         <div className="mt-10 grid gap-6">
-          {posts.map((post) => (
+          {posts.collection.map((post: any) => (
             <PostCard key={post.title} post={post} />
           ))}
         </div>
