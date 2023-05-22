@@ -4,7 +4,7 @@ kind: Kustomization
 resources:
   - post-service-deployment.yaml
   - user-service-deployment.yaml
-  - web-deployment.yaml
+  - krakend-deployment.yaml
 
 
 
@@ -15,6 +15,6 @@ images:
   - name: asindividual.azurecr.io/user-service
     newName: asindividual.azurecr.io/user-service
     newTag: CICD_PLACEHOLDER
-  - name: asindividual.azurecr.io/web
-    newName: asindividual.azurecr.io/web
+  - name: asindividual.azurecr.io/krakend
+    newName: asindividual.azurecr.io/krakend
     newTag: CICD_PLACEHOLDER
