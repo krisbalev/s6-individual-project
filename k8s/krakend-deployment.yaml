@@ -42,7 +42,7 @@ spec:
   - name: http
     port: 8080
     targetPort: 8080
-    nodePort: 30812
+    nodePort: 308
     protocol: TCP
   selector:
     app: krakend

@@ -7,7 +7,7 @@ var server_1 = require("./server");
 var routes_1 = require("./routes");
 var mongoose_1 = __importDefault(require("mongoose"));
 var url_1 = require("url");
-var url = new url_1.URL(process.env.NEXT_PUBLIC_USER_SERVICE_URL || "http://localhost:8081/user");
+var url = new url_1.URL(process.env.NEXT_PUBLIC_USER_SERVICE_URL || "http://localhost:8082/user");
 var port = url.port;
 // MongoDB connection string
 var mongoURI = process.env.MONGO_URI ||
@@ -26,4 +26,4 @@ server.listen(port, function () {
     console.log("api running on ".concat(port));
     console.log("endpoint: ".concat(endPoint));
 });
-server.use(endPoint, (0, routes_1.userRouter)());
+server.use("/", (0, routes_1.userRouter)());

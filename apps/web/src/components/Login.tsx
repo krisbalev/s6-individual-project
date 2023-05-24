@@ -29,21 +29,12 @@ const Login = () => {
             />
           </div>
           <div>
-            {/* <button
-                            type="submit"
-                            className="w-full py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-500 hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
-                        >
-                            Log in
-                        </button> */}
-
-            <Link href="/home">
-              <button
-                type="submit"
-                className="w-full py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-500 hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
-              >
-                Log in
-              </button>
-            </Link>
+            <button
+              type="submit"
+              className="w-full py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-500 hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
+            >
+              <Link href={"/api/auth/login"}>Login</Link>
+            </button>
           </div>
         </form>
         {/* <p className="text-gray-600 text-center mt-4">
