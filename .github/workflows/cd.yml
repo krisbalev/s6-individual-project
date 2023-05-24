@@ -62,8 +62,8 @@ jobs:
           docker tag post-service:latest ${{ env.ACR_NAME }}.azurecr.io/post-service:${{ env.COMMIT_HASH }}
           docker push ${{ env.ACR_NAME }}.azurecr.io/post-service:${{ env.COMMIT_HASH }}
 
-          docker tag web:latest ${{ env.ACR_NAME }}.azurecr.io/web:${{ env.COMMIT_HASH }}
-          docker push ${{ env.ACR_NAME }}.azurecr.io/web:${{ env.COMMIT_HASH }}
+          docker tag krakend:latest ${{ env.ACR_NAME }}.azurecr.io/krakend:${{ env.COMMIT_HASH }}
+          docker push ${{ env.ACR_NAME }}.azurecr.io/krakend:${{ env.COMMIT_HASH }}
 
   # Second job to deploy the Docker images to Azure Kubernetes Service (AKS)
   deploy:
