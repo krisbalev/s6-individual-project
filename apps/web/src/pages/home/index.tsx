@@ -3,7 +3,7 @@ import Head from "next/head";
 import PostCard from "../../components/PostCard";
 import PostForm from "../../components/PostForm";
 import { Post } from "../../types/post";
-import { fetchPosts, createPost } from "../../api/posts";
+import { createPost, fetchPosts } from "../../api/posts";
 import Navbar from "@/components/Navbar";
 
 interface HomePageProps {

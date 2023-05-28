@@ -1,3 +1,4 @@
+import { useUser } from "@auth0/nextjs-auth0/client";
 import Link from "next/link";
 
 const Login = () => {
@@ -33,16 +34,10 @@ const Login = () => {
               type="submit"
               className="w-full py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-500 hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
             >
-              <Link href={"/api/auth/login"}>Login</Link>
+              <Link href={"/api/auth/login?returnTo=/home"}>Login</Link>
             </button>
           </div>
         </form>
-        {/* <p className="text-gray-600 text-center mt-4">
-          Don't have an account?{" "}
-          <a href="#" className="text-blue-500">
-            Sign up
-          </a>
-        </p> */}
       </div>
     </div>
   );
