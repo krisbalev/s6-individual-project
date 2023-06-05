@@ -5,7 +5,7 @@ const Navbar = () => {
     <nav className="bg-gray-800 py-4">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center">
         <div>
-          <Link href="/">
+          <Link href="/home">
             <p className="text-white text-lg">Feed</p>
           </Link>
         </div>
@@ -20,7 +20,7 @@ const Navbar = () => {
           <Link href="/account">
             <p className="text-white mr-4">Account</p>
           </Link>
-          <Link href="/">
+          <Link href="/api/auth/logout">
             <p className="text-white">Log Out</p>
           </Link>
         </div>

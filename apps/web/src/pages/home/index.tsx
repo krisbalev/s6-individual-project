@@ -5,6 +5,8 @@ import PostForm from "../../components/PostForm";
 import { Post } from "../../types/post";
 import { createPost, fetchPosts } from "../../api/posts";
 import Navbar from "@/components/Navbar";
+import { useRouter } from "next/router";
+import { useUser } from '@auth0/nextjs-auth0/client'
 
 interface HomePageProps {
   posts: Post[];
@@ -12,11 +14,15 @@ interface HomePageProps {
 
 //Change props type later
 const HomePage = ({ posts }: any) => {
+  const { user, error, isLoading } = useUser()
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const router = useRouter();
 
-  const handleAddPost = (post: Post) => {
+  const handleAddPost = async (post: Post) => {
     try {
-      createPost(post);
+      await createPost(post);
+      alert("Post created successfully!");
+      router.reload();
     } catch (error) {
       console.log(error);
     }
@@ -30,6 +36,7 @@ const HomePage = ({ posts }: any) => {
     setIsModalOpen(false);
   };
 
+  console.log(user);
   return (
     <div className="bg-gray-100 min-h-screen">
       <Head>
@@ -40,17 +47,8 @@ const HomePage = ({ posts }: any) => {
       <Navbar />
 
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5">
-        {/* <div className="flex flex-col items-center justify-center">
-          <h1 className="mt-4 text-4xl font-extrabold text-gray-900 sm:text-5xl sm:tracking-tight lg:text-6xl">
-            Welcome to MyTap
-          </h1>
-          <p className="mt-4 text-xl text-gray-500">
-            Gamified Social Media
-          </p>
-        </div> */}
-
         <div className="mt-10 grid gap-6">
-          {posts.collection.map((post: any) => (
+          {posts.collection.reverse().map((post: any) => (
             <PostCard key={post.title} post={post} />
           ))}
         </div>
