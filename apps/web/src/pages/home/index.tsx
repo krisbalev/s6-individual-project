@@ -6,7 +6,6 @@ import { Post } from "../../types/post";
 import { createPost, fetchPosts } from "../../api/posts";
 import Navbar from "@/components/Navbar";
 import { useRouter } from "next/router";
-import { useUser } from '@auth0/nextjs-auth0/client'
 
 interface HomePageProps {
   posts: Post[];
@@ -14,7 +13,6 @@ interface HomePageProps {
 
 //Change props type later
 const HomePage = ({ posts }: any) => {
-  const { user, error, isLoading } = useUser()
   const [isModalOpen, setIsModalOpen] = useState(false);
   const router = useRouter();
 
@@ -36,7 +34,6 @@ const HomePage = ({ posts }: any) => {
     setIsModalOpen(false);
   };
 
-  console.log(user);
   return (
     <div className="bg-gray-100 min-h-screen">
       <Head>

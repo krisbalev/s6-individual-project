@@ -3,8 +3,6 @@ import { useUser } from "@auth0/nextjs-auth0/client";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 
-
-
 const Login = () => {
   const { user, isLoading } = useUser();
   const router = useRouter();
@@ -12,7 +10,6 @@ const Login = () => {
   useEffect(() => {
     if (user) {
       router.push("/home");
-
     }
   }, [user, router]);
 
