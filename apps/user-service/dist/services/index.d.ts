@@ -23,64 +23,107 @@
 /// <reference types="mongoose/types/virtuals" />
 /// <reference types="mongoose" />
 /// <reference types="mongoose/types/inferschematype" />
-export declare function GetUsers(): Promise<(import("mongoose").Document<unknown, {}, {
-    role: string;
-    created_at: Date;
-    password?: string | undefined;
-    email?: string | undefined;
-    username?: string | undefined;
-}> & Omit<{
-    role: string;
-    created_at: Date;
-    password?: string | undefined;
-    email?: string | undefined;
-    username?: string | undefined;
-} & {
-    _id: import("mongoose").Types.ObjectId;
-}, never>)[]>;
-export declare function GetUserById(id: string): Promise<(import("mongoose").Document<unknown, {}, {
-    role: string;
-    created_at: Date;
-    password?: string | undefined;
-    email?: string | undefined;
-    username?: string | undefined;
-}> & Omit<{
-    role: string;
-    created_at: Date;
-    password?: string | undefined;
-    email?: string | undefined;
-    username?: string | undefined;
-} & {
-    _id: import("mongoose").Types.ObjectId;
-}, never>) | null>;
-export declare function CreateUser(data: any): Promise<(import("mongoose").Document<unknown, {}, {
-    role: string;
-    created_at: Date;
-    password?: string | undefined;
-    email?: string | undefined;
-    username?: string | undefined;
-}> & Omit<{
-    role: string;
-    created_at: Date;
-    password?: string | undefined;
-    email?: string | undefined;
-    username?: string | undefined;
-} & {
-    _id: import("mongoose").Types.ObjectId;
-}, never>) | null>;
-export declare function DeleteUsers(id: string): Promise<(import("mongoose").Document<unknown, {}, {
-    role: string;
-    created_at: Date;
-    password?: string | undefined;
-    email?: string | undefined;
-    username?: string | undefined;
-}> & Omit<{
-    role: string;
-    created_at: Date;
-    password?: string | undefined;
-    email?: string | undefined;
-    username?: string | undefined;
-} & {
-    _id: import("mongoose").Types.ObjectId;
-}, never>) | null>;
+export declare function GetUsers(): Promise<
+  (import("mongoose").Document<
+    unknown,
+    {},
+    {
+      role: string;
+      created_at: Date;
+      password?: string | undefined;
+      email?: string | undefined;
+      username?: string | undefined;
+    }
+  > &
+    Omit<
+      {
+        role: string;
+        created_at: Date;
+        password?: string | undefined;
+        email?: string | undefined;
+        username?: string | undefined;
+      } & {
+        _id: import("mongoose").Types.ObjectId;
+      },
+      never
+    >)[]
+>;
+export declare function GetUserById(id: string): Promise<
+  | (import("mongoose").Document<
+      unknown,
+      {},
+      {
+        role: string;
+        created_at: Date;
+        password?: string | undefined;
+        email?: string | undefined;
+        username?: string | undefined;
+      }
+    > &
+      Omit<
+        {
+          role: string;
+          created_at: Date;
+          password?: string | undefined;
+          email?: string | undefined;
+          username?: string | undefined;
+        } & {
+          _id: import("mongoose").Types.ObjectId;
+        },
+        never
+      >)
+  | null
+>;
+export declare function CreateUser(data: any): Promise<
+  | (import("mongoose").Document<
+      unknown,
+      {},
+      {
+        role: string;
+        created_at: Date;
+        password?: string | undefined;
+        email?: string | undefined;
+        username?: string | undefined;
+      }
+    > &
+      Omit<
+        {
+          role: string;
+          created_at: Date;
+          password?: string | undefined;
+          email?: string | undefined;
+          username?: string | undefined;
+        } & {
+          _id: import("mongoose").Types.ObjectId;
+        },
+        never
+      >)
+  | null
+>;
+export declare function DeleteUsers(id: string): Promise<
+  | (import("mongoose").Document<
+      unknown,
+      {},
+      {
+        role: string;
+        created_at: Date;
+        password?: string | undefined;
+        email?: string | undefined;
+        username?: string | undefined;
+      }
+    > &
+      Omit<
+        {
+          role: string;
+          created_at: Date;
+          password?: string | undefined;
+          email?: string | undefined;
+          username?: string | undefined;
+        } & {
+          _id: import("mongoose").Types.ObjectId;
+        },
+        never
+      >)
+  | null
+>;
 //# sourceMappingURL=index.d.ts.map

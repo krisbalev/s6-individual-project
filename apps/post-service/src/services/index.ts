@@ -1,9 +1,13 @@
 import * as db from "../repositories/index";
-import { sendData, closeConnection, connectQueue } from "../message-broker/index";
+import {
+  sendData,
+  closeConnection,
+  connectQueue,
+} from "../message-broker/index";
 
 async function sendMessageAndGetResponse(data: any) {
   let response = null;
-  
+
   connectQueue();
   // Send data and get the response
   try {
@@ -15,7 +19,6 @@ async function sendMessageAndGetResponse(data: any) {
   // Close the connection
   await closeConnection();
 
-  
   return response;
 }
 
@@ -24,7 +27,7 @@ export async function GetPosts() {
 
   const test = await sendMessageAndGetResponse(posts);
 
-  console.log(test, "SHTE EBA");  
+  console.log(test, "SHTE EBA");
 
   return posts;
 }

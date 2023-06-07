@@ -50,7 +50,7 @@ services:
       - 8082:8082
     depends_on:
       - rabbitmq
-      - krakend	
+      - krakend
     image: user-service:latest
     networks: 
       - app_network

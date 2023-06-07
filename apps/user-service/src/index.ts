@@ -2,7 +2,11 @@ import { createServer } from "./server";
 import { userRouter } from "./routes";
 import mongoose from "mongoose";
 import { URL } from "url";
-import { startListening, closeConnection, connectQueue } from "./message-broker";
+import {
+  startListening,
+  closeConnection,
+  connectQueue,
+} from "./message-broker";
 
 const url = new URL(
   process.env.NEXT_PUBLIC_USER_SERVICE_URL || "http://localhost:8082/user"
@@ -22,7 +26,6 @@ db.on("error", console.error.bind(console, "MongoDB connection error:"));
 db.once("open", function () {
   console.log("Connected to MongoDB");
 });
-
 
 // async function runReceiver() {
 //   try {

@@ -1,6 +1,5 @@
 //!POST SERVICE
 
-
 import amqp from "amqplib";
 
 const QUEUE_NAME = "test-queue";
@@ -51,7 +50,9 @@ export async function sendData(data: any) {
       channel.consume(
         queue,
         (msg) => {
-          if (msg?.properties.correlationId === currentCorrelationId.toString()) {
+          if (
+            msg?.properties.correlationId === currentCorrelationId.toString()
+          ) {
             const response = msg.content.toString();
             channel.ack(msg);
             resolve(response);
