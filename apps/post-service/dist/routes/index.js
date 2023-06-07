@@ -69,9 +69,7 @@ var postRouter = function () {
         var posts;
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0:
-                    console.log("post router");
-                    return [4 /*yield*/, service.GetPosts()];
+                case 0: return [4 /*yield*/, service.GetPosts()];
                 case 1:
                     posts = _a.sent();
                     if (posts) {

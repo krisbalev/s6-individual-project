@@ -7,6 +7,7 @@ const server_1 = require("./server");
 const routes_1 = require("./routes");
 const mongoose_1 = __importDefault(require("mongoose"));
 const url_1 = require("url");
+const message_broker_1 = require("./message-broker");
 const url = new url_1.URL(process.env.NEXT_PUBLIC_USER_SERVICE_URL || "http://localhost:8082/user");
 const port = url.port;
 // MongoDB connection string
@@ -18,6 +19,26 @@ const db = mongoose_1.default.connection;
 db.on("error", console.error.bind(console, "MongoDB connection error:"));
 db.once("open", function () {
     console.log("Connected to MongoDB");
+});
+async function runReceiver() {
+    try {
+        // Start listening for messages
+        await (0, message_broker_1.startListening)();
+        // Keep the receiver running
+        console.log("Receiver is listening. Press Ctrl+C to exit...");
+    }
+    catch (error) {
+        console.error("Error while starting the receiver:", error);
+        process.exit(1);
+    }
+}
+// Call the function to start the receiver
+runReceiver();
+// Close the connection gracefully on process exit
+process.on("SIGINT", async () => {
+    console.log("Closing the receiver...");
+    await (0, message_broker_1.closeConnection)();
+    process.exit();
 });
 // const endPoint = process.env.NODE_ENV === "production" ? "/" : "/user";
 const endPoint = process.env.NEXT_PUBLIC_USER_SERVICE_URL || "/user";

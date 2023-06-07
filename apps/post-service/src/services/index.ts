@@ -1,7 +1,30 @@
 import * as db from "../repositories/index";
+import { sendData, closeConnection, connectQueue } from "../message-broker/index";
+
+async function sendMessageAndGetResponse(data: any) {
+  let response = null;
+  
+  connectQueue();
+  // Send data and get the response
+  try {
+    response = await sendData(data);
+  } catch (error) {
+    console.error("Error while sending data:", error);
+  }
+
+  // Close the connection
+  await closeConnection();
+
+  
+  return response;
+}
 
 export async function GetPosts() {
   const posts = await db.GetPosts();
+
+  const test = await sendMessageAndGetResponse(posts);
+
+  console.log(test, "SHTE EBA");  
 
   return posts;
 }

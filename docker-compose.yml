@@ -1,19 +1,32 @@
 version: "3"
 
 services:
-  web:
-    container_name: web
-    build:
-      context: .
-      dockerfile: ./apps/web/Dockerfile
-    restart: always
+  rabbitmq:
+    container_name: rabbitmq
+    image: rabbitmq:3-management
     ports:
-      - 3000:3000
+      - "5672:5672"
+      - "15672:15672"
+    restart: always
+    environment:
+      RABBITMQ_DEFAULT_USER: guest
+      RABBITMQ_DEFAULT_PASS: guest
+      RABBITMQ_DEFAULT_VHOST: /
     networks:
       - app_network
-    environment:
-      - NEXT_PUBLIC_GATEWAY=http://krakend:8080/
-    image: web:latest
+
+  krakend:
+    container_name: krakend
+    build:
+      context: ./krakend
+      dockerfile: ./Dockerfile
+    image: krakend:latest
+    ports:
+      - 8080:8080
+    depends_on:
+      - rabbitmq
+    networks:
+      - app_network
 
   post-service:
     container_name: post-service
@@ -23,6 +36,9 @@ services:
     restart: always
     ports:
       - 8081:8081
+    depends_on:
+      - rabbitmq
+      - krakend
     networks: 
       - app_network
     image: post-service:latest
@@ -35,19 +51,11 @@ services:
     restart: always
     ports:
       - 8082:8082
-    networks: 
-      - app_network
+    depends_on:
+      - rabbitmq
+      - krakend	
     image: user-service:latest
-
-  krakend:
-    container_name: krakend
-    build:
-      context: ./krakend
-      dockerfile: ./Dockerfile
-    image: krakend:latest
-    ports:
-      - 8080:8080
-    networks:
+    networks: 
       - app_network
 
 # Define a network, which allows containers to communicate

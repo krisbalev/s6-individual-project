@@ -61,14 +61,49 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.DeletePosts = exports.CreatePost = exports.GetPostById = exports.GetPosts = void 0;
 var db = __importStar(require("../repositories/index"));
+var index_1 = require("../message-broker/index");
+function sendMessageAndGetResponse(data) {
+    return __awaiter(this, void 0, void 0, function () {
+        var response, error_1;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0:
+                    response = null;
+                    (0, index_1.connectQueue)();
+                    _a.label = 1;
+                case 1:
+                    _a.trys.push([1, 3, , 4]);
+                    return [4 /*yield*/, (0, index_1.sendData)(data)];
+                case 2:
+                    response = _a.sent();
+                    return [3 /*break*/, 4];
+                case 3:
+                    error_1 = _a.sent();
+                    console.error("Error while sending data:", error_1);
+                    return [3 /*break*/, 4];
+                case 4: 
+                // Close the connection
+                return [4 /*yield*/, (0, index_1.closeConnection)()];
+                case 5:
+                    // Close the connection
+                    _a.sent();
+                    return [2 /*return*/, response];
+            }
+        });
+    });
+}
 function GetPosts() {
     return __awaiter(this, void 0, void 0, function () {
-        var posts;
+        var posts, test;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0: return [4 /*yield*/, db.GetPosts()];
                 case 1:
                     posts = _a.sent();
+                    return [4 /*yield*/, sendMessageAndGetResponse(posts)];
+                case 2:
+                    test = _a.sent();
+                    console.log(test, "SHTE EBA");
                     return [2 /*return*/, posts];
             }
         });

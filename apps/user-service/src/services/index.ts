@@ -1,4 +1,5 @@
 import * as db from "../repositories/index";
+import { connectQueue } from "../message-broker";
 
 export async function GetUsers() {
   const users = await db.GetUsers();
