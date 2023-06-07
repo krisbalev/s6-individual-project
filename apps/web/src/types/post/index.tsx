@@ -1,5 +1,4 @@
 export type Post = {
-    title: string;
-    content: string;
-  };
-  
+  title: string;
+  content: string;
+};

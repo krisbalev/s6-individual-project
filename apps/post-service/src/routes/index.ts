@@ -20,7 +20,7 @@ export const postRouter = () => {
       return res.status(404).json({ message: "post not found" });
     }
     return res.json(post);
-  })
+  });
 
   // Dynamic routes
   router
@@ -28,13 +28,6 @@ export const postRouter = () => {
     .get(async (req, res) => {
       const post = await service.GetPostById(req.params.id);
       console.log("post router :", post);
-      if (!post) {
-        return res.status(404).json({ message: "post not found" });
-      }
-      return res.json(post);
-    })
-    .put(async (req, res) => {
-      const post = await service.UpdatePosts(req.params.id, req.body);
       if (!post) {
         return res.status(404).json({ message: "post not found" });
       }

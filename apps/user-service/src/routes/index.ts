@@ -20,7 +20,7 @@ export const userRouter = () => {
       return res.status(404).json({ message: "user not found" });
     }
     return res.json(user);
-  })
+  });
 
   // Dynamic routes
   router
@@ -28,13 +28,6 @@ export const userRouter = () => {
     .get(async (req, res) => {
       const user = await service.GetUserById(req.params.id);
       console.log("user router :", user);
-      if (!user) {
-        return res.status(404).json({ message: "user not found" });
-      }
-      return res.json(user);
-    })
-    .put(async (req, res) => {
-      const user = await service.UpdateUsers(req.params.id, req.body);
       if (!user) {
         return res.status(404).json({ message: "user not found" });
       }
