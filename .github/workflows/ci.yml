@@ -1,34 +1,43 @@
 name: CI
- 
+
 on:
   push:
-    branches: ["main"]
+    branches: ["main", "development"]
   pull_request:
     types: [opened, synchronize]
- 
+
 jobs:
   build:
-      name: Build and Test
-      timeout-minutes: 15
-      runs-on: ubuntu-latest
- 
-      steps:
-        - name: Check out code
-          uses: actions/checkout@v3
-          with:
-            fetch-depth: 2
- 
-        - name: Setup Node.js environment
-          uses: actions/setup-node@v3
-          with:
-            node-version: 16
-            cache: 'yarn'
- 
-        - name: Install dependencies
-          run: yarn
- 
-        - name: Build
-          run: yarn build
- 
-        - name: Test
-          run: yarn test
+    name: Build and Test
+    timeout-minutes: 15
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 2
+
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+          cache: "yarn"
+
+      - name: Install dependencies
+        run: yarn
+
+      - name: Build
+        run: yarn build
+
+      - name: Test
+        run: yarn test
+
+      - name: Check for linting errors
+        run: yarn lint
+
+      - name: OWASP ZAP Baseline Scan
+        uses: zaproxy/action-baseline@v0.7.0
+        with:
+          token: ${{ secrets.ACCESS_TOKEN }}
+          target: 'https://s6-individual-project-web.vercel.app/'

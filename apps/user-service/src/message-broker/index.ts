@@ -5,7 +5,7 @@ const QUEUE_NAME = "test-queue";
 
 let channel: amqp.Channel, connection: amqp.Connection;
 
-const URL = "amqp://rabbitmq:5672";
+const URL = "amqp://localhost:5672";
 
 export async function connectQueue() {
   try {
