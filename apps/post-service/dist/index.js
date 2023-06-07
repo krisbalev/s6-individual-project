@@ -20,7 +20,7 @@ db.on("error", console.error.bind(console, "MongoDB connection error:"));
 db.once("open", function () {
     console.log("Connected to MongoDB");
 });
-(0, message_broker_1.connectQueue)();
+setTimeout(message_broker_1.connectQueue, 15000);
 // const endPoint = process.env.NODE_ENV === "production" ? "/" : "/post";
 var endPoint = process.env.NEXT_PUBLIC_POST_SERVICE_URL || "/post";
 var server = (0, server_1.createServer)();
