@@ -32,7 +32,8 @@ db.once("open", function () {
 //   }
 // }
 // Call the function to start the receiver
-setTimeout(message_broker_1.connectQueue, 15000);
+// setTimeout(connectQueue, 15000);
+(0, message_broker_1.connectQueue)();
 // runReceiver();
 // Close the connection gracefully on process exit
 process.on("SIGINT", async () => {

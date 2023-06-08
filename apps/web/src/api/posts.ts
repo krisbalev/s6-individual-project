@@ -1,9 +1,10 @@
 import { Post } from "../types/post";
 
-console.log(process.env.NEXT_PUBLIC_URL, "AAAAAAAAAAAAA");
-
 const URL = process.env.NEXT_PUBLIC_URL || "http://localhost:3000";
 const GATEWAY_URL = process.env.NEXT_PUBLIC_GATEWAY || "http://localhost:8080";
+
+// console.log(process.env.NEXT_PUBLIC_URL, "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+// console.log(process.env.NEXT_PUBLIC_GATEWAY, "BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB");
 
 export const fetchPosts = async (): Promise<Post[]> => {
   const response = await fetch(`${GATEWAY_URL}/post`, {
@@ -20,16 +21,14 @@ export const createPost = async (post: Post): Promise<Post> => {
   const tokenResponse = await fetch(`${URL}/api/auth/token`);
   const tokenData = await tokenResponse.json();
 
-  const response = await fetch(`${GATEWAY_URL}/post`,
-    {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: "Bearer " + tokenData,
-      },
-      body: JSON.stringify(post),
-    }
-  );
+  const response = await fetch(`${GATEWAY_URL}/post`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: "Bearer " + tokenData,
+    },
+    body: JSON.stringify(post),
+  });
   const newPost = await response.json();
   return newPost;
 };
