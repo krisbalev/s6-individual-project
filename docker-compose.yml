@@ -1,4 +1,4 @@
-version: "3"
+version: "2.4"
 
 services:
   rabbitmq:
@@ -11,6 +11,17 @@ services:
     restart: always
     networks:
       - app_network
+    healthcheck:
+      test: ["CMD", "rabbitmqctl", "status"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    volumes:
+      - ./.rabbitmq_data:/var/lib/rabbitmq/mnesia
+    environment:
+      - RABBITMQ_DEFAULT_USER=guest
+      - RABBITMQ_DEFAULT_PASS=guest
+      - RABBITMQ_DEFAULT_VHOST=/
 
   krakend:
     container_name: krakend
@@ -21,7 +32,8 @@ services:
     ports:
       - 8080:8080
     depends_on:
-      - rabbitmq
+      rabbitmq:
+        condition: service_healthy
     networks:
       - app_network
 
@@ -34,11 +46,13 @@ services:
     ports:
       - 8081:8081
     depends_on:
-      - rabbitmq
-      - krakend
-    networks: 
-      - app_network
+      rabbitmq:
+        condition: service_healthy
+      krakend:
+        condition: service_started
     image: post-service:latest
+    networks:
+      - app_network
 
   user-service:
     container_name: user-service
@@ -49,14 +63,13 @@ services:
     ports:
       - 8082:8082
     depends_on:
-      - rabbitmq
-      - krakend
+      rabbitmq:
+        condition: service_healthy
+      krakend:
+        condition: service_started
     image: user-service:latest
-    networks: 
+    networks:
       - app_network
 
-# Define a network, which allows containers to communicate
-# with each other, by using their container name as a hostname
 networks:
   app_network:
-    external: true

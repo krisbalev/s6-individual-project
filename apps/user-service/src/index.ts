@@ -41,7 +41,8 @@ db.once("open", function () {
 // }
 
 // Call the function to start the receiver
-setTimeout(connectQueue, 15000);
+// setTimeout(connectQueue, 15000);
+connectQueue();
 // runReceiver();
 
 // Close the connection gracefully on process exit
