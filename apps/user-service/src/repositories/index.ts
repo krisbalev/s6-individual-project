@@ -12,6 +12,7 @@ export async function GetUserById(id: string) {
 
 export async function CreateUser(data: any) {
   const user = await User.create(data).catch((error) => {
+    console.log(error);
     return null;
   });
   return user;
@@ -20,4 +21,11 @@ export async function CreateUser(data: any) {
 export async function DeleteUser(id: string) {
   const user = await User.findByIdAndDelete(id);
   return user;
+}
+
+export async function CheckIfUserExists(email: string) {
+  if (await User.findOne({ email: email })) {
+    return true;
+  }
+  return false;
 }

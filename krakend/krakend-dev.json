@@ -78,6 +78,30 @@
           "is_collection": true
         }
       ]
+    },
+    {
+      "endpoint": "/user",
+      "method": "POST",
+      "backend": [
+        {
+          "host": "http://localhost:8082",
+          "method": "POST",
+          "url_pattern": "/",
+          "encoding": "json"
+        }
+      ]
+    },
+    {
+      "endpoint": "/user/check/{email}",
+      "method": "GET",
+      "backend": [
+        {
+          "host": "http://localhost:8082",
+          "method": "GET",
+          "url_pattern": "/check/{email}",
+          "encoding": "json"
+        }
+      ]
     }
   ]
 }

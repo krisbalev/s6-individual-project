@@ -3,9 +3,6 @@ import { Post } from "../types/post";
 const URL = process.env.NEXT_PUBLIC_URL || "http://localhost:3000";
 const GATEWAY_URL = process.env.NEXT_PUBLIC_GATEWAY || "http://localhost:8080";
 
-// console.log(process.env.NEXT_PUBLIC_URL, "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
-// console.log(process.env.NEXT_PUBLIC_GATEWAY, "BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB");
-
 export const fetchPosts = async (): Promise<Post[]> => {
   const response = await fetch(`${GATEWAY_URL}/post`, {
     headers: {

@@ -23,7 +23,7 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.DeleteUsers = exports.CreateUser = exports.GetUserById = exports.GetUsers = void 0;
+exports.CheckIfUserExists = exports.DeleteUsers = exports.CreateUser = exports.GetUserById = exports.GetUsers = void 0;
 const db = __importStar(require("../repositories/index"));
 async function GetUsers() {
     const users = await db.GetUsers();
@@ -45,3 +45,8 @@ async function DeleteUsers(id) {
     return user;
 }
 exports.DeleteUsers = DeleteUsers;
+async function CheckIfUserExists(email) {
+    const user = await db.CheckIfUserExists(email);
+    return user;
+}
+exports.CheckIfUserExists = CheckIfUserExists;

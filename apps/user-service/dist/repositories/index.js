@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.DeleteUser = exports.CreateUser = exports.GetUserById = exports.GetUsers = void 0;
+exports.CheckIfUserExists = exports.DeleteUser = exports.CreateUser = exports.GetUserById = exports.GetUsers = void 0;
 const user_1 = require("../models/user");
 async function GetUsers() {
     const users = await user_1.User.find();
@@ -14,6 +14,7 @@ async function GetUserById(id) {
 exports.GetUserById = GetUserById;
 async function CreateUser(data) {
     const user = await user_1.User.create(data).catch((error) => {
+        console.log(error);
         return null;
     });
     return user;
@@ -24,3 +25,10 @@ async function DeleteUser(id) {
     return user;
 }
 exports.DeleteUser = DeleteUser;
+async function CheckIfUserExists(email) {
+    if (await user_1.User.findOne({ email: email })) {
+        return true;
+    }
+    return false;
+}
+exports.CheckIfUserExists = CheckIfUserExists;

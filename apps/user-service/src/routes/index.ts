@@ -41,6 +41,15 @@ export const userRouter = () => {
       return res.json(user);
     });
 
+  router.route("/check/:email").get(async (req, res) => {
+    const userExists = await service.CheckIfUserExists(req.params.email);
+    const response = {
+      result: userExists,
+    };
+
+    return res.json(response);
+  });
+
   // Middleware for dynamic routes
   router.param("id", (req, res, next, id) => {
     next();

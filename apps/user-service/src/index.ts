@@ -27,23 +27,8 @@ db.once("open", function () {
   console.log("Connected to MongoDB");
 });
 
-// async function runReceiver() {
-//   try {
-//     // Start listening for messages
-//     await startListening();
-
-//     // Keep the receiver running
-//     console.log("Receiver is listening. Press Ctrl+C to exit...");
-//   } catch (error) {
-//     console.error("Error while starting the receiver:", error);
-//     process.exit(1);
-//   }
-// }
-
-// Call the function to start the receiver
-// setTimeout(connectQueue, 15000);
+// Connect to RabbitMQ
 connectQueue();
-// runReceiver();
 
 // Close the connection gracefully on process exit
 process.on("SIGINT", async () => {
