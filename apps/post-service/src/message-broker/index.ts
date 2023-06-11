@@ -2,8 +2,8 @@
 
 import amqp from "amqplib";
 
-const QUEUE_NAME = "test-queue";
-const REPLY_QUEUE = "test-reply-queue";
+const QUEUE_NAME = "post-queue";
+const REPLY_QUEUE = "post-reply-queue";
 
 const URL = process.env.RABBITMQ_URL || "amqp://localhost:5672";
 

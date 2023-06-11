@@ -1,17 +1,15 @@
 import { Post } from "../types/post";
-import { useUser } from "@auth0/nextjs-auth0/client";
 
 type Props = {
   post: Post;
 };
 
 const PostCard = ({ post }: Props) => {
-  const { user, isLoading } = useUser();
   return (
     <div className="bg-white overflow-hidden shadow rounded-lg">
       <div className="px-4 py-5 sm:p-6">
         <div className="text-sm text-gray-500 mb-2">
-          Posted by <span className="font-medium">{user?.nickname}</span>
+          Posted by <span className="font-medium">{post.username}</span>
         </div>
         <h3 className="text-lg leading-6 font-medium text-gray-900">
           {post.title}

@@ -16,7 +16,7 @@ export const fetchPosts = async (): Promise<Post[]> => {
 
 export const createPost = async (post: Post): Promise<Post> => {
   const tokenResponse = await fetch(`${URL}/api/auth/token`);
-  const tokenData = await tokenResponse.json();
+  const tokenData = await tokenResponse.json();;
 
   const response = await fetch(`${GATEWAY_URL}/post`, {
     method: "POST",

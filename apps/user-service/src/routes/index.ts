@@ -1,5 +1,6 @@
 import { Router } from "express";
 import * as service from "../services/index";
+import { GetUsernamesPerId } from "../repositories";
 
 export const userRouter = () => {
   const router = Router();
@@ -27,7 +28,6 @@ export const userRouter = () => {
     .route("/:id")
     .get(async (req, res) => {
       const user = await service.GetUserById(req.params.id);
-      console.log("user router :", user);
       if (!user) {
         return res.status(404).json({ message: "user not found" });
       }
@@ -43,6 +43,7 @@ export const userRouter = () => {
 
   router.route("/check/:email").get(async (req, res) => {
     const userExists = await service.CheckIfUserExists(req.params.email);
+    
     const response = {
       result: userExists,
     };

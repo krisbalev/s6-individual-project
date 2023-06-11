@@ -19,18 +19,25 @@ const HomePage = ({ posts }: any) => {
   const [isUserModalOpen, setIsUserModalOpen] = useState(false);
   const router = useRouter();
   const user = useUser();
+  const [loggedInUser, setLoggedInUser] = useState<any>(null);
 
   const checkUser = async () => {
     const check: any = await checkIfUserExists(user.user?.email!);
 
     if (!check.result) {
       setIsUserModalOpen(true);
+    } else {
+      const user: any = await getUserById(check.result);
+      setLoggedInUser(user);
     }
   };
 
-  if (user && !user.isLoading) {
-    checkUser();
-  }
+  useEffect(() => {
+    if (user && !user.isLoading) {
+      checkUser();
+    }
+  }, [user]);
+
 
   const handleAddPost = async (post: Post) => {
     try {
@@ -98,7 +105,7 @@ const HomePage = ({ posts }: any) => {
         </button>
 
         {isModalOpen && (
-          <PostForm onSubmit={handleAddPost} onClose={handleModalClose} />
+          <PostForm onSubmit={handleAddPost} onClose={handleModalClose} userId={loggedInUser._id} />
         )}
 
         {isUserModalOpen && (

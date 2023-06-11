@@ -3,7 +3,6 @@ import { userRouter } from "./routes";
 import mongoose from "mongoose";
 import { URL } from "url";
 import {
-  startListening,
   closeConnection,
   connectQueue,
 } from "./message-broker";
