@@ -23,7 +23,6 @@ db.once("open", function () {
   console.log("Connected to MongoDB");
 });
 
-// setTimeout(connectQueue, 15000);
 connectQueue();
 
 // const endPoint = process.env.NODE_ENV === "production" ? "/" : "/post";
