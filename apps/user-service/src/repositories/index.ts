@@ -24,8 +24,24 @@ export async function DeleteUser(id: string) {
 }
 
 export async function CheckIfUserExists(email: string) {
-  if (await User.findOne({ email: email })) {
-    return true;
+  const user = await User.findOne({ email: email })
+
+  if (user) {
+    return user.id;
   }
   return false;
+}
+
+export async function GetUsernamesPerId(ids: string[]) {
+  const users = await User.find({ _id: { $in: ids } });
+  const usernames: {}[] = [];
+
+  users.forEach((user) => {
+    const res = {
+      username: user.username,
+      id: user.id,
+    }
+    usernames.push(res);
+  });
+  return usernames;
 }

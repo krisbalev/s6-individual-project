@@ -25,11 +25,21 @@ async function sendMessageAndGetResponse(data: any) {
 export async function GetPosts() {
   const posts = await db.GetPosts();
 
-  const test = await sendMessageAndGetResponse(posts);
+  const userIds: any = posts.map((post) => post.userId);
 
-  console.log(test, "SHTE EBA");
+  const replyData = await sendMessageAndGetResponse(userIds) as string;
 
-  return posts;
+  const data = JSON.parse(replyData);
+
+  const formattedPosts: {}[] = [];
+
+  for (const post of posts) {
+    const matchingUser = data.find((user: any) => user.id === post.userId);
+    const formattedPost = { title: post.title, content: post.content, username: matchingUser?.username };
+    formattedPosts.push(formattedPost);
+  }  
+
+  return formattedPosts;
 }
 
 export async function GetPostById(id: string) {

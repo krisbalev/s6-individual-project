@@ -1,7 +1,8 @@
 //!USER SERVICE
 
 import amqp from "amqplib";
-const QUEUE_NAME = "test-queue";
+import { GetUsernamesPerId } from "../repositories";
+const QUEUE_NAME = "post-queue";
 
 let channel: amqp.Channel, connection: amqp.Connection;
 
@@ -14,11 +15,13 @@ export async function connectQueue() {
 
     await channel.assertQueue(QUEUE_NAME);
 
-    channel.consume(QUEUE_NAME, (data) => {
+    channel.consume(QUEUE_NAME, async (data) => {
       const message = data?.content.toString();
       console.log(`Received message: ${message}`);
 
-      const response = `Response to ${message}`;
+      const replyData = await GetUsernamesPerId(JSON.parse(message!));
+
+      const response = JSON.stringify(replyData);
 
       channel.sendToQueue(data?.properties.replyTo, Buffer.from(response), {
         correlationId: data?.properties.correlationId,

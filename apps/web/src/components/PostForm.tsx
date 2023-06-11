@@ -4,15 +4,17 @@ import { useState } from "react";
 interface PostFormProps {
   onSubmit: (post: Post) => void;
   onClose: () => void;
+  userId: string;
 }
 
-const PostForm = ({ onSubmit, onClose }: PostFormProps) => {
+const PostForm = ({ onSubmit, onClose, userId }: PostFormProps) => {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const post = { title, content,  };
+    const post = { title, content, userId };
+    console.log(post);
     onSubmit(post);
     onClose();
   };

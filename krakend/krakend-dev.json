@@ -102,6 +102,17 @@
           "encoding": "json"
         }
       ]
+    },
+    {
+      "endpoint": "/user/{id}",
+      "backend": [
+        {
+          "host": "http://localhost:8082",
+          "method": "GET",
+          "url_pattern": "/{id}",
+          "encoding": "json"
+        }
+      ]
     }
   ]
 }
