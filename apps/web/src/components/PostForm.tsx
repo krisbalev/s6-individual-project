@@ -12,7 +12,7 @@ const PostForm = ({ onSubmit, onClose }: PostFormProps) => {
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const post = { title, content };
+    const post = { title, content,  };
     onSubmit(post);
     onClose();
   };

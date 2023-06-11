@@ -30,7 +30,6 @@ export default async function handler(
       });
 
     res.status(200).json(access_token);
-    console.log(access_token);
   }
   res.status(405).end();
 }

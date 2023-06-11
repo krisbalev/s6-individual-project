@@ -61,6 +61,7 @@ const HomePage = ({ posts }: any) => {
     try {
       if (await createUser(newUser)) {
         alert("Profile setup successfully!");
+        router.reload();
       } else {
         alert("Error while creating profile, please try again later.");
       }
