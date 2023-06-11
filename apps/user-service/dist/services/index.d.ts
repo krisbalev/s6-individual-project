@@ -26,13 +26,13 @@
 export declare function GetUsers(): Promise<(import("mongoose").Document<unknown, {}, {
     role: string;
     created_at: Date;
-    password?: string | undefined;
+    points: number;
     email?: string | undefined;
     username?: string | undefined;
 }> & Omit<{
     role: string;
     created_at: Date;
-    password?: string | undefined;
+    points: number;
     email?: string | undefined;
     username?: string | undefined;
 } & {
@@ -41,13 +41,13 @@ export declare function GetUsers(): Promise<(import("mongoose").Document<unknown
 export declare function GetUserById(id: string): Promise<(import("mongoose").Document<unknown, {}, {
     role: string;
     created_at: Date;
-    password?: string | undefined;
+    points: number;
     email?: string | undefined;
     username?: string | undefined;
 }> & Omit<{
     role: string;
     created_at: Date;
-    password?: string | undefined;
+    points: number;
     email?: string | undefined;
     username?: string | undefined;
 } & {
@@ -56,13 +56,13 @@ export declare function GetUserById(id: string): Promise<(import("mongoose").Doc
 export declare function CreateUser(data: any): Promise<(import("mongoose").Document<unknown, {}, {
     role: string;
     created_at: Date;
-    password?: string | undefined;
+    points: number;
     email?: string | undefined;
     username?: string | undefined;
 }> & Omit<{
     role: string;
     created_at: Date;
-    password?: string | undefined;
+    points: number;
     email?: string | undefined;
     username?: string | undefined;
 } & {
@@ -71,16 +71,17 @@ export declare function CreateUser(data: any): Promise<(import("mongoose").Docum
 export declare function DeleteUsers(id: string): Promise<(import("mongoose").Document<unknown, {}, {
     role: string;
     created_at: Date;
-    password?: string | undefined;
+    points: number;
     email?: string | undefined;
     username?: string | undefined;
 }> & Omit<{
     role: string;
     created_at: Date;
-    password?: string | undefined;
+    points: number;
     email?: string | undefined;
     username?: string | undefined;
 } & {
     _id: import("mongoose").Types.ObjectId;
 }, never>) | null>;
+export declare function CheckIfUserExists(email: string): Promise<boolean>;
 //# sourceMappingURL=index.d.ts.map

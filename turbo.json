@@ -1,10 +1,22 @@
 {
   "$schema": "https://turbo.build/schema.json",
-  "globalDependencies": ["**/.env.local", "**/.env", ".env.**"],
+  "globalDependencies": ["**/.env.local", "**/.env", ".env"],
   "globalEnv": ["NODE_ENV"],
   "pipeline": {
     "build": {
       "dependsOn": ["^build"],
+      "env": [
+        "NEXT_PUBLIC_URL",
+        "NEXT_PUBLIC_GATEWAY",
+    
+        "DATABASE_URL",
+    
+        "AUTH0_SECRET",
+        "AUTH0_BASE_URL",
+        "AUTH0_ISSUER_BASE_URL",
+        "AUTH0_CLIENT_ID",
+        "AUTH0_CLIENT_SECRET"
+      ],
       "outputs": ["dist/**", ".next/**", "public/dist/**"]
     },
     "lint": {

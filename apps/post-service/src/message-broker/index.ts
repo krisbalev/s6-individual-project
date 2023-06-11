@@ -5,7 +5,9 @@ import amqp from "amqplib";
 const QUEUE_NAME = "test-queue";
 const REPLY_QUEUE = "test-reply-queue";
 
-const URL = "amqp://localhost:5672";
+const URL = process.env.RABBITMQ_URL || "amqp://localhost:5672";
+
+console.log(URL);
 
 let channel: amqp.Channel, connection: amqp.Connection;
 let correlationId = 1;
