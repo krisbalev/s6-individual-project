@@ -26,44 +26,44 @@
 export declare function GetPosts(): Promise<(import("mongoose").Document<unknown, {}, {
     title?: string | undefined;
     content?: string | undefined;
-    authorId?: string | undefined;
+    userId?: string | undefined;
 }> & Omit<{
     title?: string | undefined;
     content?: string | undefined;
-    authorId?: string | undefined;
+    userId?: string | undefined;
 } & {
     _id: import("mongoose").Types.ObjectId;
 }, never>)[]>;
 export declare function GetPostById(id: string): Promise<(import("mongoose").Document<unknown, {}, {
     title?: string | undefined;
     content?: string | undefined;
-    authorId?: string | undefined;
+    userId?: string | undefined;
 }> & Omit<{
     title?: string | undefined;
     content?: string | undefined;
-    authorId?: string | undefined;
+    userId?: string | undefined;
 } & {
     _id: import("mongoose").Types.ObjectId;
 }, never>) | null>;
 export declare function CreatePost(data: any): Promise<(import("mongoose").Document<unknown, {}, {
     title?: string | undefined;
     content?: string | undefined;
-    authorId?: string | undefined;
+    userId?: string | undefined;
 }> & Omit<{
     title?: string | undefined;
     content?: string | undefined;
-    authorId?: string | undefined;
+    userId?: string | undefined;
 } & {
     _id: import("mongoose").Types.ObjectId;
 }, never>) | null>;
 export declare function DeletePost(id: string): Promise<(import("mongoose").Document<unknown, {}, {
     title?: string | undefined;
     content?: string | undefined;
-    authorId?: string | undefined;
+    userId?: string | undefined;
 }> & Omit<{
     title?: string | undefined;
     content?: string | undefined;
-    authorId?: string | undefined;
+    userId?: string | undefined;
 } & {
     _id: import("mongoose").Types.ObjectId;
 }, never>) | null>;

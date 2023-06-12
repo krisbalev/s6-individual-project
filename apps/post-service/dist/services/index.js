@@ -69,22 +69,24 @@ function sendMessageAndGetResponse(data) {
             switch (_a.label) {
                 case 0:
                     response = null;
-                    (0, index_1.connectQueue)();
                     _a.label = 1;
                 case 1:
-                    _a.trys.push([1, 3, , 4]);
-                    return [4 /*yield*/, (0, index_1.sendData)(data)];
+                    _a.trys.push([1, 4, , 5]);
+                    return [4 /*yield*/, (0, index_1.connectQueue)()];
                 case 2:
-                    response = _a.sent();
-                    return [3 /*break*/, 4];
+                    _a.sent();
+                    return [4 /*yield*/, (0, index_1.sendData)(data)];
                 case 3:
+                    response = _a.sent();
+                    return [3 /*break*/, 5];
+                case 4:
                     error_1 = _a.sent();
                     console.error("Error while sending data:", error_1);
-                    return [3 /*break*/, 4];
-                case 4: 
+                    return [3 /*break*/, 5];
+                case 5: 
                 // Close the connection
                 return [4 /*yield*/, (0, index_1.closeConnection)()];
-                case 5:
+                case 6:
                     // Close the connection
                     _a.sent();
                     return [2 /*return*/, response];
@@ -94,16 +96,29 @@ function sendMessageAndGetResponse(data) {
 }
 function GetPosts() {
     return __awaiter(this, void 0, void 0, function () {
-        var posts, test;
+        var posts, userIds, replyData, data;
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0: return [4 /*yield*/, db.GetPosts()];
+                case 0:
+                    posts = [{
+                            _id: "6485e927cb33e6a21ae62964",
+                            title: "asdhnipoadpohad",
+                            content: "oabhnsfouabs",
+                            userId: "64824368b9c3b2053ce51628"
+                        }];
+                    userIds = posts.map(function (post) { return post.userId; });
+                    return [4 /*yield*/, sendMessageAndGetResponse(userIds)];
                 case 1:
-                    posts = _a.sent();
-                    return [4 /*yield*/, sendMessageAndGetResponse(posts)];
-                case 2:
-                    test = _a.sent();
-                    console.log(test, "SHTE EBA");
+                    replyData = _a.sent();
+                    data = JSON.parse(replyData);
+                    console.log(data, "RESPONSEEEEEEEEEEEEEEEEEEE");
+                    // const formattedPosts: {}[] = [];
+                    // for (const post of posts) {
+                    //   const matchingUser = data.find((user: any) => user.id === post.userId);
+                    //   const formattedPost = { title: post.title, content: post.content, username: matchingUser?.username };
+                    //   formattedPosts.push(formattedPost);
+                    // }  
+                    // return formattedPosts;
                     return [2 /*return*/, posts];
             }
         });
