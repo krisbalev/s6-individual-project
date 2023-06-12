@@ -16,7 +16,7 @@ spec:
         - name: acr-credentials
       containers:
       - name: krakend
-        image: asindividual.azurecr.io/krakend
+        image: asindividual.azurecr.io/krakend:4f676d75232666e8fd14d10c1d5906aa955853cb
         ports:
         - containerPort: 8080
         command: [ "/usr/bin/krakend" ]
@@ -37,11 +37,12 @@ kind: Service
 metadata:
   name: krakend-service
 spec:
-  type: ClusterIP
+  type: LoadBalancer
   ports:
   - name: http
-    port: 8000
+    port: 8080
     targetPort: 8080
+    nodePort: 30800
     protocol: TCP
   selector:
     app: krakend

@@ -8,9 +8,10 @@ import {
 async function sendMessageAndGetResponse(data: any) {
   let response = null;
 
-  connectQueue();
+
   // Send data and get the response
   try {
+    await connectQueue();
     response = await sendData(data);
   } catch (error) {
     console.error("Error while sending data:", error);
@@ -31,15 +32,19 @@ export async function GetPosts() {
 
   const data = JSON.parse(replyData);
 
-  const formattedPosts: {}[] = [];
+  console.log(data, "RESPONSEEEEEEEEEEEEEEEEEEE");
 
-  for (const post of posts) {
-    const matchingUser = data.find((user: any) => user.id === post.userId);
-    const formattedPost = { title: post.title, content: post.content, username: matchingUser?.username };
-    formattedPosts.push(formattedPost);
-  }  
+  // const formattedPosts: {}[] = [];
 
-  return formattedPosts;
+  // for (const post of posts) {
+  //   const matchingUser = data.find((user: any) => user.id === post.userId);
+  //   const formattedPost = { title: post.title, content: post.content, username: matchingUser?.username };
+  //   formattedPosts.push(formattedPost);
+  // }  
+
+  // return formattedPosts;
+
+  return posts;
 }
 
 export async function GetPostById(id: string) {
