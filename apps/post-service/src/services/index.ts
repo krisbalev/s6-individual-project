@@ -32,19 +32,17 @@ export async function GetPosts() {
 
   const data = JSON.parse(replyData);
 
-  console.log(data, "RESPONSEEEEEEEEEEEEEEEEEEE");
+  console.log(data, "SHTE EBA");
 
-  // const formattedPosts: {}[] = [];
+  const formattedPosts: {}[] = [];
 
-  // for (const post of posts) {
-  //   const matchingUser = data.find((user: any) => user.id === post.userId);
-  //   const formattedPost = { title: post.title, content: post.content, username: matchingUser?.username };
-  //   formattedPosts.push(formattedPost);
-  // }  
+  for (const post of posts) {
+    const matchingUser = data.find((user: any) => user.id === post.userId);
+    const formattedPost = { title: post.title, content: post.content, username: matchingUser?.username };
+    formattedPosts.push(formattedPost);
+  }  
 
-  // return formattedPosts;
-
-  return posts;
+  return formattedPosts;
 }
 
 export async function GetPostById(id: string) {
