@@ -5,8 +5,11 @@ resources:
   - post-service-deployment.yaml
   - user-service-deployment.yaml
   - krakend-deployment.yaml
-
-
+  - cluster-issuer.yaml
+  - api-gateway-ingress.yaml
+  - rabbitmq-ingress.yaml
+  - rabbitmq-deployment.yaml
+  
 images:
   - name: asindividual.azurecr.io/post-service
     newName: asindividual.azurecr.io/post-service
