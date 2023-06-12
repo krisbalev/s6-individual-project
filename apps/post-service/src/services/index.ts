@@ -24,14 +24,8 @@ async function sendMessageAndGetResponse(data: any) {
 }
 
 export async function GetPosts() {
-  // const posts = await db.GetPosts();
+  const posts = await db.GetPosts();
 
-  const posts = [{
-    _id: "6485e927cb33e6a21ae62964",
-    title: "asdhnipoadpohad",
-    content:"oabhnsfouabs",
-    userId: "64824368b9c3b2053ce51628"
-  }];
   const userIds: any = posts.map((post) => post.userId);
 
   const replyData = await sendMessageAndGetResponse(userIds) as string;
