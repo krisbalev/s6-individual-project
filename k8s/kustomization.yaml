@@ -7,7 +7,6 @@ resources:
   - krakend-deployment.yaml
 
 
-
 images:
   - name: asindividual.azurecr.io/post-service
     newName: asindividual.azurecr.io/post-service

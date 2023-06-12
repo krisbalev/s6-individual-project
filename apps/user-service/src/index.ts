@@ -27,7 +27,7 @@ db.once("open", function () {
 });
 
 // Connect to RabbitMQ
-connectQueue();
+setTimeout(connectQueue, 30000);
 
 // Close the connection gracefully on process exit
 process.on("SIGINT", async () => {
