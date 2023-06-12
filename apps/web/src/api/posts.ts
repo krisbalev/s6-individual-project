@@ -11,7 +11,7 @@ export const fetchPosts = async (): Promise<Post[]> => {
   });
 
   const posts = await response.json();
-  return posts;
+  return posts.collection;
 };
 
 export const createPost = async (post: Post): Promise<Post> => {

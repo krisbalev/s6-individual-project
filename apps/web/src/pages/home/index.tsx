@@ -12,14 +12,23 @@ import UserFirstLoginForm from "@/components/UserFirstLoginForm";
 
 // interface HomePageProps {
 //   posts: Post[];
-// }
+// } { posts }: any
 
-const HomePage = ({ posts }: any) => {
+const HomePage = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isUserModalOpen, setIsUserModalOpen] = useState(false);
   const router = useRouter();
   const user = useUser();
   const [loggedInUser, setLoggedInUser] = useState<any>(null);
+  const [posts, setPosts] = useState<any>([]);
+
+
+  const fetchPostsAsync = async () => {
+    const posts = await fetchPosts();
+    const reversedPosts = posts.length > 0 ? [...posts].reverse() : [];
+    setPosts(reversedPosts);
+    
+  };
 
   const checkUser = async () => {
     const check: any = await checkIfUserExists(user.user?.email!);
@@ -38,6 +47,9 @@ const HomePage = ({ posts }: any) => {
     }
   }, [user]);
 
+  useEffect(() => {
+    fetchPostsAsync();
+  }, []);
 
   const handleAddPost = async (post: Post) => {
     try {
@@ -92,7 +104,7 @@ const HomePage = ({ posts }: any) => {
 
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5">
         <div className="mt-10 grid gap-6">
-          {posts.collection.reverse().map((post: Post) => (
+          {posts.reverse().map((post: Post) => (
             <PostCard key={post.title} post={post} />
           ))}
         </div>
@@ -119,11 +131,11 @@ const HomePage = ({ posts }: any) => {
   );
 };
 
-export const getServerSideProps = async () => {
-  const posts = await fetchPosts();
-  return {
-    props: { posts },
-  };
-};
+// export const getServerSideProps = async () => {
+//   const posts = await fetchPosts();
+//   return {
+//     props: { posts },
+//   };
+// };
 
 export default HomePage;
