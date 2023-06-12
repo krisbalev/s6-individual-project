@@ -83,5 +83,6 @@ export declare function DeleteUser(id: string): Promise<(import("mongoose").Docu
 } & {
     _id: import("mongoose").Types.ObjectId;
 }, never>) | null>;
-export declare function CheckIfUserExists(email: string): Promise<boolean>;
+export declare function CheckIfUserExists(email: string): Promise<any>;
+export declare function GetUsernamesPerId(ids: string[]): Promise<{}[]>;
 //# sourceMappingURL=index.d.ts.map

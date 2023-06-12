@@ -23,6 +23,9 @@ export async function connectQueue() {
     await channel.assertQueue(QUEUE_NAME);
 
     console.log("Connected to RabbitMQ");
+
+
+    console.log("TYJA SUN")
   } catch (error) {
     handleConnectionError(error);
   }
@@ -42,7 +45,7 @@ export async function sendData(data: any) {
       console.log("RabbitMQ channel not available. Reconnecting...");
       await connectQueue();
     }
-
+    
     const currentCorrelationId = correlationId++;
     const message = JSON.stringify(data);
 

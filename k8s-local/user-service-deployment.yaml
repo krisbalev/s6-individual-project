@@ -18,7 +18,7 @@ spec:
       imagePullSecrets:
         - name: acr-credentials
       containers:
-        - image: asindividual.azurecr.io/user-service:69164264ecc75b5a2173a26636992fc07e4ec942
+        - image: asindividual.azurecr.io/user-service:971261df61ddafed7161a3161cc78a1548a537cd
           imagePullPolicy: IfNotPresent
           name: user-service
           ports:

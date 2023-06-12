@@ -16,7 +16,7 @@ spec:
         - name: acr-credentials
       containers:
       - name: krakend
-        image: asindividual.azurecr.io/krakend:69164264ecc75b5a2173a26636992fc07e4ec942
+        image: asindividual.azurecr.io/krakend:971261df61ddafed7161a3161cc78a1548a537cd
         ports:
         - containerPort: 8080
         command: [ "/usr/bin/krakend" ]

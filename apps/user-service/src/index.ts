@@ -5,6 +5,7 @@ import { URL } from "url";
 import {
   closeConnection,
   connectQueue,
+  startListening
 } from "./message-broker";
 
 const url = new URL(
@@ -27,7 +28,8 @@ db.once("open", function () {
 });
 
 // Connect to RabbitMQ
-setTimeout(connectQueue, 30000);
+// connectQueue();
+startListening();
 
 // Close the connection gracefully on process exit
 process.on("SIGINT", async () => {

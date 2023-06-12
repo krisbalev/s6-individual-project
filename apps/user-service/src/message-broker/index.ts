@@ -31,14 +31,26 @@ export async function connectQueue() {
     });
 
     console.log("Connected to RabbitMQ");
+    return true;
   } catch (error) {
     console.error("RabbitMQ connection error:", error);
+    return false;
   }
 }
 
-export async function startListening() {
+async function retryConnection(retryInterval: number) {
+  let isConnected = await connectQueue();
+
+  while(!isConnected) {
+    console.log(`Retrying connection in ${retryInterval / 1000} seconds`);
+    await new Promise(resolve => setTimeout(resolve, retryInterval));
+    isConnected = await connectQueue();
+  }
+}
+
+export async function startListening(retryInterval = 5000) {
   try {
-    await connectQueue();
+    await retryConnection(retryInterval);
   } catch (error) {
     console.error("Error while starting to listen:", error);
   }

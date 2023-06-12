@@ -50,7 +50,6 @@ const userRouter = () => {
         .route("/:id")
         .get(async (req, res) => {
         const user = await service.GetUserById(req.params.id);
-        console.log("user router :", user);
         if (!user) {
             return res.status(404).json({ message: "user not found" });
         }
