@@ -27,7 +27,6 @@ const HomePage = () => {
     const posts = await fetchPosts();
     const reversedPosts = posts.length > 0 ? [...posts].reverse() : [];
     setPosts(reversedPosts);
-    
   };
 
   const checkUser = async () => {
@@ -131,11 +130,5 @@ const HomePage = () => {
   );
 };
 
-// export const getServerSideProps = async () => {
-//   const posts = await fetchPosts();
-//   return {
-//     props: { posts },
-//   };
-// };
 
 export default HomePage;
