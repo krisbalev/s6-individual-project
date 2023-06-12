@@ -18,7 +18,10 @@ spec:
       imagePullSecrets:
         - name: acr-credentials
       containers:
-        - image: asindividual.azurecr.io/post-service:971261df61ddafed7161a3161cc78a1548a537cd
+        - image: asindividual.azurecr.io/post-service:4f676d75232666e8fd14d10c1d5906aa955853cb
+          env:
+            - name: RABBITMQ_URL
+              value: amqp://rabbitmq:5672
           imagePullPolicy: IfNotPresent
           name: post-service
           ports:
