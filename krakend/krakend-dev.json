@@ -113,6 +113,18 @@
           "encoding": "json"
         }
       ]
+    },
+    {
+      "endpoint": "/user/change-username",
+      "method": "POST",
+      "backend": [
+        {
+          "host": "http://localhost:8082",
+          "method": "POST",
+          "url_pattern": "/change-username",
+          "encoding": "json"
+        }
+      ]
     }
   ]
 }

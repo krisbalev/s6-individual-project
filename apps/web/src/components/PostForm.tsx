@@ -5,15 +5,16 @@ interface PostFormProps {
   onSubmit: (post: Post) => void;
   onClose: () => void;
   userId: string;
+  username: string;
 }
 
-const PostForm = ({ onSubmit, onClose, userId }: PostFormProps) => {
+const PostForm = ({ onSubmit, onClose, userId, username }: PostFormProps) => {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const post = { title, content, userId };
+    const post = { title, content, userId, username };
     console.log(post);
     onSubmit(post);
     onClose();

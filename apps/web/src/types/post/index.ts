@@ -2,5 +2,5 @@ export type Post = {
   title: string;
   content: string;
   userId: string;
-  username?: string;
+  username: string;
 };

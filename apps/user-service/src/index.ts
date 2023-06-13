@@ -28,7 +28,6 @@ db.once("open", function () {
 });
 
 // Connect to RabbitMQ
-// connectQueue();
 startListening();
 
 // Close the connection gracefully on process exit

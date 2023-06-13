@@ -45,3 +45,8 @@ export async function GetUsernamesPerId(ids: string[]) {
   });
   return usernames;
 }
+
+export async function ChangeUsername(id: string, newUsername: string) {
+  const user = await User.findByIdAndUpdate(id, { username: newUsername }, { new: true });
+  return user;
+}

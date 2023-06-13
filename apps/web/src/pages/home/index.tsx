@@ -12,7 +12,7 @@ import UserFirstLoginForm from "@/components/UserFirstLoginForm";
 
 // interface HomePageProps {
 //   posts: Post[];
-// } { posts }: any
+// }
 
 const HomePage = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -116,7 +116,7 @@ const HomePage = () => {
         </button>
 
         {isModalOpen && (
-          <PostForm onSubmit={handleAddPost} onClose={handleModalClose} userId={loggedInUser._id} />
+          <PostForm onSubmit={handleAddPost} onClose={handleModalClose} userId={loggedInUser._id} username={loggedInUser.username} />
         )}
 
         {isUserModalOpen && (
