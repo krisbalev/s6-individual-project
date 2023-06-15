@@ -66,13 +66,13 @@ const AccountPage = () => {
         <main className="w-full sm:w-1/3 sm:flex-col">
           <div className="rounded-justify-center border bg-gray-600 p-6">
             <div className="mb-6 h-64">
-              {/* <Image
-                src="https://myprofilepage.com.au/public/assets/images/new/home/monstar.gif"
+              <Image
+                src={user.user?.picture!}
                 alt="User profile image"
                 height={500}
                 width={500}
                 className="h-full w-full object-contain"
-              /> */}
+              />
             </div>
             <p className="text-center text-lg font-bold">{loggedInUser?.username}</p>
           </div>
