@@ -33,3 +33,8 @@ export async function updatePostUsernames(userId: string, newUsername: string) {
     console.error('An error occurred:', error);
   }
 } 
+
+export async function GetPostsByUserId(userId: string) {
+  const posts = await Post.find({ userId });
+  return posts;
+}

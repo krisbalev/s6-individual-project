@@ -29,3 +29,15 @@ export const createPost = async (post: Post): Promise<Post> => {
   const newPost = await response.json();
   return newPost;
 };
+
+export const fetchPostsByUser = async (userId: string): Promise<Post[]> => {
+  const response = await fetch(`${GATEWAY_URL}/post/posts/${userId}`, {
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+
+  const posts = await response.json();
+  return posts.collection;
+}
+

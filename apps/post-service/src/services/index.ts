@@ -24,6 +24,12 @@ export async function DeletePosts(id: string) {
   return post;
 }
 
+export function GetPostsByUserId(userId: string) {
+  const posts = db.GetPostsByUserId(userId);
+
+  return posts;
+}
+
 export async function updatePostUsernames(userId: string, newUsername: string) {
   try {
     await db.updatePostUsernames(userId, newUsername);

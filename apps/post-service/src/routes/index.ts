@@ -41,6 +41,13 @@ export const postRouter = () => {
       return res.json(post);
     });
 
+router
+    .route("/posts/:userId")
+    .get(async (req, res) => {
+      const posts = await service.GetPostsByUserId(req.params.userId);
+      return res.json(posts);
+    });
+
   // Middleware for dynamic routes
   router.param("id", (req, res, next, id) => {
     next();

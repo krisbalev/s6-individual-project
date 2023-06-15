@@ -68,6 +68,18 @@
       ]
     },
     {
+      "endpoint": "/post/posts/{userId}",
+      "backend": [
+        {
+          "host": "http://localhost:8081",
+          "method": "GET",
+          "url_pattern": "/posts/{userId}",
+          "encoding": "json",
+          "is_collection": true
+        }
+      ]
+    },
+    {
       "endpoint": "/user",
       "backend": [
         {
