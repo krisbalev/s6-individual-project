@@ -34,29 +34,6 @@ const PostCard = ({ post }: Props) => {
               </svg> */}
               <span>512 Likes</span>
             </button>
-            <button className="flex items-center space-x-1 text-gray-500">
-              {/* <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                className="h-5 w-5"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M21 12h-6"
-                />
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M3 12h6"
-                />
-              </svg> */}
-              <span>12 Dislikes</span>
-            </button>
           </div>
         </div>
       </div>

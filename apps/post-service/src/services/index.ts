@@ -38,3 +38,21 @@ export async function updatePostUsernames(userId: string, newUsername: string) {
     console.error('An error occurred:', error);
   }
 }
+
+export async function LikePost(postId: string, userId: string) {
+  const post = await db.LikePost(postId, userId);
+
+  return post;
+}
+
+export async function GetPostLikes(postId: string) {
+  const post = await db.GetPostLikes(postId);
+
+  return post;
+}
+
+export async function UnlikePost(postId: string, userId: string) {
+  const post = await db.UnlikePost(postId, userId);
+
+  return post;
+}

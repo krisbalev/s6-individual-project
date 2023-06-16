@@ -80,6 +80,42 @@
       ]
     },
     {
+      "endpoint": "/post/like/{postId}/userId/{userId}",
+      "method": "POST",
+      "backend": [
+        {
+          "host": "http://localhost:8081",
+          "method": "POST",
+          "url_pattern": "/like/{postId}/userId/{userId}",
+          "encoding": "json"
+        }
+      ]
+    },
+    {
+      "endpoint": "/post/like/{postId}",
+      "method": "GET",
+      "backend": [
+        {
+          "host": "http://localhost:8081",
+          "method": "GET",
+          "url_pattern": "/like/{postId}",
+          "encoding": "json"
+        }
+      ]
+    },
+    {
+      "endpoint": "/post/unlike/{postId}/userId/{userId}",
+      "method": "POST",
+      "backend": [
+        {
+          "host": "http://localhost:8081",
+          "method": "POST",
+          "url_pattern": "/unlike/{postId}/userId/{userId}",
+          "encoding": "json"
+        }
+      ]
+    },
+    {
       "endpoint": "/user",
       "backend": [
         {
