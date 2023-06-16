@@ -3,4 +3,6 @@ export type Post = {
   content: string;
   userId: string;
   username: string;
+  likes?: string[];
+  _id?: string;
 };

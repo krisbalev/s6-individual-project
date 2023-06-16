@@ -31,9 +31,13 @@ export const createPost = async (post: Post): Promise<Post> => {
 };
 
 export const fetchPostsByUser = async (userId: string): Promise<Post[]> => {
+  const tokenResponse = await fetch(`${URL}/api/auth/token`);
+  const tokenData = await tokenResponse.json();;
+
   const response = await fetch(`${GATEWAY_URL}/post/posts/${userId}`, {
     headers: {
       "Content-Type": "application/json",
+      Authorization: "Bearer " + tokenData,
     },
   });
 
@@ -41,3 +45,49 @@ export const fetchPostsByUser = async (userId: string): Promise<Post[]> => {
   return posts.collection;
 }
 
+export const likePost = async (postId: string, userId: string): Promise<Post> => {
+  const tokenResponse = await fetch(`${URL}/api/auth/token`);
+  const tokenData = await tokenResponse.json();;
+
+  const response = await fetch(`${GATEWAY_URL}/post/like/${postId}/userId/${userId}`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: "Bearer " + tokenData,
+    },
+  });
+
+  const post = await response.json();
+  return post;
+}
+
+export const getPostLikes = async (postId: string): Promise<string[]> => {
+  const tokenResponse = await fetch(`${URL}/api/auth/token`);
+  const tokenData = await tokenResponse.json();
+
+  const response = await fetch(`${GATEWAY_URL}/post/likes/${postId}`, {
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: "Bearer " + tokenData,
+    },
+  });
+
+  const likes = await response.json();
+  return likes.collection;
+}
+
+export const unlikePost = async (postId: string, userId: string): Promise<Post> => {
+  const tokenResponse = await fetch(`${URL}/api/auth/token`);
+  const tokenData = await tokenResponse.json();
+
+  const response = await fetch(`${GATEWAY_URL}/post/unlike/${postId}/userId/${userId}`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: "Bearer " + tokenData,
+    },
+  });
+
+  const post = await response.json();
+  return post;
+}
