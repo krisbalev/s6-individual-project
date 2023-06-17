@@ -5,4 +5,5 @@ export type Post = {
   username: string;
   likes?: string[];
   _id?: string;
+  picture?: string;
 };

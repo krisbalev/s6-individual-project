@@ -1,4 +1,15 @@
 "use strict";
+var __assign = (this && this.__assign) || function () {
+    __assign = Object.assign || function(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+                t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
+};
 var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
     var desc = Object.getOwnPropertyDescriptor(m, k);
@@ -58,9 +69,28 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.UnlikePost = exports.GetPostLikes = exports.LikePost = exports.updatePostUsernames = exports.GetPostsByUserId = exports.DeletePosts = exports.CreatePost = exports.GetPostById = exports.GetPosts = void 0;
 var db = __importStar(require("../repositories/index"));
+var client_s3_1 = require("@aws-sdk/client-s3");
+var dotenv_1 = __importDefault(require("dotenv"));
+var sharp_1 = __importDefault(require("sharp"));
+dotenv_1.default.config();
+var bucketName = process.env.S3_BUCKET_NAME;
+var region = process.env.S3_BUCKET_REGION;
+var accessKeyId = process.env.S3_ACCESS_KEY;
+var secretAccessKey = process.env.S3_SECRET_ACCESS_KEY;
+console.log(bucketName, region, accessKeyId, secretAccessKey);
+var s3 = new client_s3_1.S3Client({
+    region: region,
+    credentials: {
+        accessKeyId: accessKeyId,
+        secretAccessKey: secretAccessKey,
+    },
+});
 function GetPosts() {
     return __awaiter(this, void 0, void 0, function () {
         var posts;
@@ -89,13 +119,37 @@ function GetPostById(id) {
     });
 }
 exports.GetPostById = GetPostById;
-function CreatePost(data) {
+function CreatePost(data, file) {
     return __awaiter(this, void 0, void 0, function () {
-        var post;
+        var imageName, now, resizedBuffer, buffer, params, command, postData, post;
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0: return [4 /*yield*/, db.CreatePost(data)];
+                case 0:
+                    now = new Date();
+                    if (!file) return [3 /*break*/, 4];
+                    imageName = "".concat(now.toISOString(), "-").concat(file.originalname);
+                    return [4 /*yield*/, (0, sharp_1.default)(file.buffer).toBuffer()];
                 case 1:
+                    resizedBuffer = _a.sent();
+                    return [4 /*yield*/, (0, sharp_1.default)(resizedBuffer).jpeg({ quality: 50 }).toBuffer()];
+                case 2:
+                    buffer = _a.sent();
+                    params = {
+                        Bucket: bucketName,
+                        Key: imageName,
+                        Body: buffer,
+                        ContentType: file.mimetype,
+                    };
+                    command = new client_s3_1.PutObjectCommand(params);
+                    return [4 /*yield*/, s3.send(command)];
+                case 3:
+                    _a.sent();
+                    _a.label = 4;
+                case 4:
+                    postData = __assign(__assign({}, data), { picture: imageName || null });
+                    console.log("tuka service", postData, file);
+                    return [4 /*yield*/, db.CreatePost(postData)];
+                case 5:
                     post = _a.sent();
                     return [2 /*return*/, post];
             }

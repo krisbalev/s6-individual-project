@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@aws-sdk/s3-request-presigner": "^3.335.0",
     "@auth0/nextjs-auth0": "^2.6.0",
     "@types/node": "18.15.11",
     "@types/react": "18.0.33",
@@ -20,7 +21,8 @@
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "swr": "^2.1.5",
-    "typescript": "5.0.4"
+    "typescript": "5.0.4",
+    "sharp": "^0.32.0"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.14",

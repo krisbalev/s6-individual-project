@@ -25,12 +25,14 @@
 /// <reference types="mongoose/types/inferschematype" />
 export declare function GetPosts(): Promise<(import("mongoose").Document<unknown, {}, {
     likes: string[];
+    picture: string;
     title?: string | undefined;
     content?: string | undefined;
     userId?: string | undefined;
     username?: string | undefined;
 }> & Omit<{
     likes: string[];
+    picture: string;
     title?: string | undefined;
     content?: string | undefined;
     userId?: string | undefined;
@@ -40,12 +42,14 @@ export declare function GetPosts(): Promise<(import("mongoose").Document<unknown
 }, never>)[]>;
 export declare function GetPostById(id: string): Promise<(import("mongoose").Document<unknown, {}, {
     likes: string[];
+    picture: string;
     title?: string | undefined;
     content?: string | undefined;
     userId?: string | undefined;
     username?: string | undefined;
 }> & Omit<{
     likes: string[];
+    picture: string;
     title?: string | undefined;
     content?: string | undefined;
     userId?: string | undefined;
@@ -53,14 +57,16 @@ export declare function GetPostById(id: string): Promise<(import("mongoose").Doc
 } & {
     _id: import("mongoose").Types.ObjectId;
 }, never>) | null>;
-export declare function CreatePost(data: any): Promise<(import("mongoose").Document<unknown, {}, {
+export declare function CreatePost(data: any, file: any): Promise<(import("mongoose").Document<unknown, {}, {
     likes: string[];
+    picture: string;
     title?: string | undefined;
     content?: string | undefined;
     userId?: string | undefined;
     username?: string | undefined;
 }> & Omit<{
     likes: string[];
+    picture: string;
     title?: string | undefined;
     content?: string | undefined;
     userId?: string | undefined;
@@ -70,12 +76,14 @@ export declare function CreatePost(data: any): Promise<(import("mongoose").Docum
 }, never>) | null>;
 export declare function DeletePosts(id: string): Promise<(import("mongoose").Document<unknown, {}, {
     likes: string[];
+    picture: string;
     title?: string | undefined;
     content?: string | undefined;
     userId?: string | undefined;
     username?: string | undefined;
 }> & Omit<{
     likes: string[];
+    picture: string;
     title?: string | undefined;
     content?: string | undefined;
     userId?: string | undefined;
@@ -85,12 +93,14 @@ export declare function DeletePosts(id: string): Promise<(import("mongoose").Doc
 }, never>) | null>;
 export declare function GetPostsByUserId(userId: string): Promise<(import("mongoose").Document<unknown, {}, {
     likes: string[];
+    picture: string;
     title?: string | undefined;
     content?: string | undefined;
     userId?: string | undefined;
     username?: string | undefined;
 }> & Omit<{
     likes: string[];
+    picture: string;
     title?: string | undefined;
     content?: string | undefined;
     userId?: string | undefined;
@@ -101,12 +111,14 @@ export declare function GetPostsByUserId(userId: string): Promise<(import("mongo
 export declare function updatePostUsernames(userId: string, newUsername: string): Promise<true | undefined>;
 export declare function LikePost(postId: string, userId: string): Promise<(import("mongoose").Document<unknown, {}, {
     likes: string[];
+    picture: string;
     title?: string | undefined;
     content?: string | undefined;
     userId?: string | undefined;
     username?: string | undefined;
 }> & Omit<{
     likes: string[];
+    picture: string;
     title?: string | undefined;
     content?: string | undefined;
     userId?: string | undefined;
@@ -117,12 +129,14 @@ export declare function LikePost(postId: string, userId: string): Promise<(impor
 export declare function GetPostLikes(postId: string): Promise<string[] | null>;
 export declare function UnlikePost(postId: string, userId: string): Promise<(import("mongoose").Document<unknown, {}, {
     likes: string[];
+    picture: string;
     title?: string | undefined;
     content?: string | undefined;
     userId?: string | undefined;
     username?: string | undefined;
 }> & Omit<{
     likes: string[];
+    picture: string;
     title?: string | undefined;
     content?: string | undefined;
     userId?: string | undefined;

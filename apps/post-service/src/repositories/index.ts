@@ -11,7 +11,9 @@ export async function GetPostById(id: string) {
 }
 
 export async function CreatePost(data: any) {
+  console.log("tuka db", data)
   const post = await Post.create(data).catch((error) => {
+    console.log("error", error)
     return null;
   });
   return post;

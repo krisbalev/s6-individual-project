@@ -10,7 +10,8 @@ module.exports = {
   images: {
     domains: [
       's.gravatar.com',
-      'lh3.googleusercontent.com'
+      'lh3.googleusercontent.com',
+      'individualbucket.s3.eu-north-1.amazonaws.com'
     ]
   },
 };

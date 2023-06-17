@@ -54,7 +54,8 @@ const HomePage = () => {
     fetchPostsAsync();
   }, []);
 
-  const handleAddPost = async (post: Post) => {
+  const handleAddPost = async (post: any) => {
+    console.log(post);
     try {
       if (await createPost(post)) {
         alert("Post created successfully!");

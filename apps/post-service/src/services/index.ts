@@ -1,7 +1,48 @@
 import * as db from "../repositories/index";
+import {
+  S3Client,
+  PutObjectCommand,
+  GetObjectCommand,
+} from "@aws-sdk/client-s3";
+import dotenv from "dotenv";
+import sharp, { bool } from "sharp";
+
+import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
+
+dotenv.config();
+
+const bucketName = "individualbucket";
+const region = "eu-north-1";
+const accessKeyId = "AKIA4KVU4TXFQKSL3H53";
+const secretAccessKey = "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";
+
+const s3 = new S3Client({
+  region: region,
+  credentials: {
+    accessKeyId: accessKeyId!,
+    secretAccessKey: secretAccessKey!,
+  },
+});
 
 export async function GetPosts() {
   const posts = await db.GetPosts();
+
+  for (const post of posts) {
+    if (!post.picture) {
+      // Skip this iteration if picture is null
+      continue;
+    }
+
+    const getObjectParams = {
+      Bucket: bucketName,
+      Key: post.picture,
+    };
+
+    const command = new GetObjectCommand(getObjectParams);
+
+    const url = await getSignedUrl(s3, command, { expiresIn: 3600 });
+    post.picture = url;
+  }
 
   return posts;
 }
@@ -12,8 +53,34 @@ export async function GetPostById(id: string) {
   return post;
 }
 
-export async function CreatePost(data: any) {
-  const post = await db.CreatePost(data);
+export async function CreatePost(data: any, file: any) {
+  let imageName;
+  const now = new Date();
+
+  if (file) {
+    imageName = `${now.toISOString()}-${file.originalname}`;
+    const resizedBuffer = await sharp(file.buffer).toBuffer();
+    const buffer = await sharp(resizedBuffer).jpeg({ quality: 50 }).toBuffer();
+
+    const params = {
+      Bucket: bucketName,
+      Key: imageName,
+      Body: buffer,
+      ContentType: file.mimetype,
+    };
+    const command = new PutObjectCommand(params);
+
+    await s3.send(command);
+  }
+
+  const postData = {
+    ...data,
+    picture: imageName || null
+  }
+
+  console.log("tuka service", postData, file);
+
+  const post = await db.CreatePost(postData);
 
   return post;
 }
