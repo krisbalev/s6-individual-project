@@ -58,10 +58,16 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.postRouter = void 0;
 var express_1 = require("express");
 var service = __importStar(require("../services/index"));
+var multer_1 = __importDefault(require("multer"));
+var storage = multer_1.default.memoryStorage();
+var upload = (0, multer_1.default)({ storage: storage });
 var postRouter = function () {
     var router = (0, express_1.Router)();
     // Static routes
@@ -82,17 +88,19 @@ var postRouter = function () {
             }
         });
     }); });
-    router.post("/", function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+    router.post("/", upload.single("file"), function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
         var post;
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0: return [4 /*yield*/, service.CreatePost(req.body)];
+                case 0:
+                    console.log("tuka route", req.body, req.file);
+                    return [4 /*yield*/, service.CreatePost(req.body, req.file)];
                 case 1:
                     post = _a.sent();
                     if (!post) {
-                        return [2 /*return*/, res.status(404).json({ message: "post not found" })];
+                        return [2 /*return*/, res.status(404).json({ message: "post not created" })];
                     }
-                    return [2 /*return*/, res.json(post)];
+                    return [2 /*return*/, res.json({ post: post })];
             }
         });
     }); });

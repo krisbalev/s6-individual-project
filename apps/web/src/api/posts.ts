@@ -18,19 +18,18 @@ export const fetchPosts = async (): Promise<Post[]> => {
   return posts.collection;
 };
 
-export const createPost = async (post: Post): Promise<Post> => {
+export const createPost = async (post: any): Promise<any> => {
   const tokenResponse = await fetch(`${URL}/api/auth/token`);
   const tokenData = await tokenResponse.json();
 
   const response = await fetch(`${GATEWAY_URL}/post`, {
     method: "POST",
     headers: {
-      "Content-Type": "application/json",
       Authorization: "Bearer " + tokenData,
     },
-    body: JSON.stringify(post),
+    body: post,
   });
-  const newPost = await response.json();
+  const newPost = response.json();
   return newPost;
 };
 

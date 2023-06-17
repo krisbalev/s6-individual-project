@@ -1,5 +1,8 @@
 import { Router } from "express";
 import * as service from "../services/index";
+import multer from "multer";
+const storage = multer.memoryStorage();
+const upload = multer({ storage: storage });
 
 export const postRouter = () => {
   const router = Router();
@@ -14,12 +17,13 @@ export const postRouter = () => {
     }
   });
 
-  router.post("/", async (req, res) => {
-    const post = await service.CreatePost(req.body);
+  router.post("/", upload.single("file"), async (req, res) => {
+    console.log("tuka route", req.body, req.file)
+    const post = await service.CreatePost(req.body, req.file);
     if (!post) {
-      return res.status(404).json({ message: "post not found" });
+      return res.status(404).json({ message: "post not created" });
     }
-    return res.json(post);
+    return res.json({ post });
   });
 
   // Dynamic routes

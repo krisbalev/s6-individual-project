@@ -71,9 +71,12 @@ function CreatePost(data) {
         var post;
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0: return [4 /*yield*/, post_1.Post.create(data).catch(function (error) {
-                        return null;
-                    })];
+                case 0:
+                    console.log("tuka db", data);
+                    return [4 /*yield*/, post_1.Post.create(data).catch(function (error) {
+                            console.log("error", error);
+                            return null;
+                        })];
                 case 1:
                     post = _a.sent();
                     return [2 /*return*/, post];

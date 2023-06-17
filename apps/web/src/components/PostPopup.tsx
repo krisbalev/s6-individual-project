@@ -3,6 +3,7 @@ import { useUser } from "@auth0/nextjs-auth0/client";
 import { getUserById, checkIfUserExists, changeUsername } from "../api/users";
 import { getPostLikes, likePost, unlikePost } from "@/api/posts";
 import { useEffect, useState } from "react";
+import Image from "next/image";
 
 type Props = {
   post: Post;
@@ -71,7 +72,19 @@ const PostPopup = ({ post, onClose }: Props) => {
             {post?.title}
           </h3>
           <p className="mt-2 max-w-2xl text-lg text-black pt-1 pb-3">
-            {post?.content}
+            {post?.content} <br />
+            <div className="">
+              {post.picture && (
+                <Image
+                  src={post.picture}
+                  priority
+                  alt=""
+                  width={500}
+                  height={400}
+                  className="justify-self-center object-contain rounded-lg max-h-96"
+                />
+              )}
+            </div>
           </p>
           <div className="flex justify-between items-center mt-4">
             <div className="flex items-center space-x-2">
