@@ -73,7 +73,7 @@ const PostPopup = ({ post, onClose }: Props) => {
           </h3>
           <p className="mt-2 max-w-2xl text-lg text-black pt-1 pb-3">
             {post?.content} <br />
-            {/* <div>
+            <div className="">
               {post.picture && (
                 <Image
                   src={post.picture}
@@ -81,11 +81,10 @@ const PostPopup = ({ post, onClose }: Props) => {
                   alt=""
                   width={500}
                   height={400}
-                  style={{ objectFit: "cover" }}
-                  className="justify-self-center rounded-lg"
+                  className="justify-self-center object-contain rounded-lg max-h-96"
                 />
               )}
-            </div> */}
+            </div>
           </p>
           <div className="flex justify-between items-center mt-4">
             <div className="flex items-center space-x-2">
