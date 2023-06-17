@@ -1,7 +1,7 @@
 import { Post } from "../models/post";
 
 export async function GetPosts() {
-  const posts = await Post.find();
+  // const posts = await Post.find();
   const testPosts = [{test: "test", picture: null}];
   return testPosts;
 }
