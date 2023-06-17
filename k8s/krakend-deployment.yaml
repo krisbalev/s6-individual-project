@@ -46,7 +46,7 @@ spec:
   selector:
     app: krakend
 ---
-apiVersion: autoscaling/v1
+apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
 metadata:
   name: krakend-service-deployment

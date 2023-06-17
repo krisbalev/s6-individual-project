@@ -50,7 +50,7 @@ spec:
   selector:
     app: post-service
 ---
-apiVersion: autoscaling/v1
+apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
 metadata:
   name: post-service-deployment
