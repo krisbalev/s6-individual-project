@@ -65,7 +65,10 @@ export const getUserById = async (id: string): Promise<User> => {
   return user;
 };
 
-export const changeUsername = async (id: string, newUsername: string): Promise<User> => {
+export const changeUsername = async (
+  id: string,
+  newUsername: string
+): Promise<User> => {
   const tokenResponse = await fetch(`${URL}/api/auth/token`);
   const tokenData = await tokenResponse.json();
 
@@ -80,5 +83,4 @@ export const changeUsername = async (id: string, newUsername: string): Promise<U
 
   const user = await response.json();
   return user;
-}
-
+};

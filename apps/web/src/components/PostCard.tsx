@@ -1,7 +1,5 @@
 import { Post } from "../types/post";
-import { useUser } from "@auth0/nextjs-auth0/client";
-import { getUserById, checkIfUserExists, changeUsername } from "../api/users";
-import { getPostLikes, likePost, unlikePost } from "@/api/posts";
+import { likePost, unlikePost } from "@/api/posts";
 import { useEffect, useState } from "react";
 
 type Props = {

@@ -13,7 +13,7 @@ export async function connectQueue() {
 
     await channel.assertQueue(QUEUE_NAME);
 
-    await getMessage()
+    await getMessage();
 
     console.log("Connected to RabbitMQ");
     return true;
@@ -28,7 +28,7 @@ async function retryConnection(retryInterval: number) {
 
   while (!isConnected) {
     console.log(`Retrying connection in ${retryInterval / 1000} seconds`);
-    await new Promise(resolve => setTimeout(resolve, retryInterval));
+    await new Promise((resolve) => setTimeout(resolve, retryInterval));
     isConnected = await connectQueue();
   }
 }
@@ -54,12 +54,14 @@ export async function getMessage() {
   channel.consume(QUEUE_NAME, async (data) => {
     const message = data?.content.toString() as string;
     const parsedMessage = JSON.parse(message);
-    
+
     try {
-      await updatePostUsernames(parsedMessage.userId, parsedMessage.newUsername);
-    }
-    catch (error) {
+      await updatePostUsernames(
+        parsedMessage.userId,
+        parsedMessage.newUsername
+      );
+    } catch (error) {
       console.log(error);
-    };
+    }
   });
 }

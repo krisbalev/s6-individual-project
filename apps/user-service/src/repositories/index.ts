@@ -24,7 +24,7 @@ export async function DeleteUser(id: string) {
 }
 
 export async function CheckIfUserExists(email: string) {
-  const user = await User.findOne({ email: email })
+  const user = await User.findOne({ email: email });
 
   if (user) {
     return user.id;
@@ -40,13 +40,17 @@ export async function GetUsernamesPerId(ids: string[]) {
     const res = {
       username: user.username,
       id: user.id,
-    }
+    };
     usernames.push(res);
   });
   return usernames;
 }
 
 export async function ChangeUsername(id: string, newUsername: string) {
-  const user = await User.findByIdAndUpdate(id, { username: newUsername }, { new: true });
+  const user = await User.findByIdAndUpdate(
+    id,
+    { username: newUsername },
+    { new: true }
+  );
   return user;
 }

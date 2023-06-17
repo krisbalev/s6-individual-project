@@ -37,7 +37,7 @@ export async function ChangeUsername(userId: string, newUsername: string) {
   //Change username in posts through rabbitmq
   const data = {
     userId: userId,
-    newUsername: newUsername
+    newUsername: newUsername,
   };
 
   await sendData(data);

@@ -17,7 +17,7 @@ export const createServer = () => {
     .get("/healthz", (req, res) => {
       return res.json({ ok: true });
     })
-    .get('/favicon.ico', (req, res) => res.status(204));
+    .get("/favicon.ico", (req, res) => res.status(204));
 
   return app;
 };

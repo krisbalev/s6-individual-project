@@ -6,10 +6,14 @@ const Navbar = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center">
         <div className="flex items-center space-x-4">
           <Link href="/home">
-            <p className="text-yellow-200 text-lg font-semibold pr-5 transition-colors transform hover:scale-105">MyTap</p>
+            <p className="text-yellow-200 text-lg font-semibold pr-5 transition-colors transform hover:scale-105">
+              MyTap
+            </p>
           </Link>
           <Link href="/home">
-            <p className="text-white text-lg font-semibold transition-colors hover:text-yellow-200">Feed</p>
+            <p className="text-white text-lg font-semibold transition-colors hover:text-yellow-200">
+              Feed
+            </p>
           </Link>
         </div>
         <div className="flex items-center justify-center flex-grow">
@@ -21,15 +25,18 @@ const Navbar = () => {
         </div>
         <div className="flex items-center space-x-4">
           <Link href="/account">
-            <p className="text-white transition-colors hover:text-yellow-200">Account</p>
+            <p className="text-white transition-colors hover:text-yellow-200">
+              Account
+            </p>
           </Link>
           <Link href="/api/auth/logout">
-            <p className="text-white transition-colors hover:text-yellow-200">Log Out</p>
+            <p className="text-white transition-colors hover:text-yellow-200">
+              Log Out
+            </p>
           </Link>
         </div>
       </div>
     </nav>
-
   );
 };
 

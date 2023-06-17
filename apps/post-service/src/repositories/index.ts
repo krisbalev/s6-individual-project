@@ -24,15 +24,12 @@ export async function DeletePost(id: string) {
 
 export async function updatePostUsernames(userId: string, newUsername: string) {
   try {
-    await Post.updateMany(
-      { userId },
-      { $set: { username: newUsername } }
-    );
+    await Post.updateMany({ userId }, { $set: { username: newUsername } });
     return true;
   } catch (error) {
-    console.error('An error occurred:', error);
+    console.error("An error occurred:", error);
   }
-} 
+}
 
 export async function GetPostsByUserId(userId: string) {
   const posts = await Post.find({ userId });

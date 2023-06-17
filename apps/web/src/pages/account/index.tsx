@@ -74,7 +74,9 @@ const AccountPage = () => {
                 className="h-full w-full object-contain"
               />
             </div>
-            <p className="text-center text-lg font-bold">{loggedInUser?.username}</p>
+            <p className="text-center text-lg font-bold">
+              {loggedInUser?.username}
+            </p>
           </div>
           <button
             onClick={handleModalOpen}

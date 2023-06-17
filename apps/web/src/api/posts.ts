@@ -16,7 +16,7 @@ export const fetchPosts = async (): Promise<Post[]> => {
 
 export const createPost = async (post: Post): Promise<Post> => {
   const tokenResponse = await fetch(`${URL}/api/auth/token`);
-  const tokenData = await tokenResponse.json();;
+  const tokenData = await tokenResponse.json();
 
   const response = await fetch(`${GATEWAY_URL}/post`, {
     method: "POST",
@@ -32,7 +32,7 @@ export const createPost = async (post: Post): Promise<Post> => {
 
 export const fetchPostsByUser = async (userId: string): Promise<Post[]> => {
   const tokenResponse = await fetch(`${URL}/api/auth/token`);
-  const tokenData = await tokenResponse.json();;
+  const tokenData = await tokenResponse.json();
 
   const response = await fetch(`${GATEWAY_URL}/post/posts/${userId}`, {
     headers: {
@@ -43,23 +43,29 @@ export const fetchPostsByUser = async (userId: string): Promise<Post[]> => {
 
   const posts = await response.json();
   return posts.collection;
-}
+};
 
-export const likePost = async (postId: string, userId: string): Promise<Post> => {
+export const likePost = async (
+  postId: string,
+  userId: string
+): Promise<Post> => {
   const tokenResponse = await fetch(`${URL}/api/auth/token`);
-  const tokenData = await tokenResponse.json();;
+  const tokenData = await tokenResponse.json();
 
-  const response = await fetch(`${GATEWAY_URL}/post/like/${postId}/userId/${userId}`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: "Bearer " + tokenData,
-    },
-  });
+  const response = await fetch(
+    `${GATEWAY_URL}/post/like/${postId}/userId/${userId}`,
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + tokenData,
+      },
+    }
+  );
 
   const post = await response.json();
   return post;
-}
+};
 
 export const getPostLikes = async (postId: string): Promise<string[]> => {
   const tokenResponse = await fetch(`${URL}/api/auth/token`);
@@ -74,20 +80,26 @@ export const getPostLikes = async (postId: string): Promise<string[]> => {
 
   const likes = await response.json();
   return likes.collection;
-}
+};
 
-export const unlikePost = async (postId: string, userId: string): Promise<Post> => {
+export const unlikePost = async (
+  postId: string,
+  userId: string
+): Promise<Post> => {
   const tokenResponse = await fetch(`${URL}/api/auth/token`);
   const tokenData = await tokenResponse.json();
 
-  const response = await fetch(`${GATEWAY_URL}/post/unlike/${postId}/userId/${userId}`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: "Bearer " + tokenData,
-    },
-  });
+  const response = await fetch(
+    `${GATEWAY_URL}/post/unlike/${postId}/userId/${userId}`,
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + tokenData,
+      },
+    }
+  );
 
   const post = await response.json();
   return post;
-}
+};

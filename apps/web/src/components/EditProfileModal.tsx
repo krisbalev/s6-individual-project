@@ -1,6 +1,5 @@
 import { useState } from "react";
 
-
 const EdintProfileForm = ({ onSubmit, onClose, user }: any) => {
   const [username, setUsername] = useState(user.username);
 

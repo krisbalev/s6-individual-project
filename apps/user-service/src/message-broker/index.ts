@@ -60,7 +60,7 @@ async function retryConnection(retryInterval: number) {
 
   while (!isConnected) {
     console.log(`Retrying connection in ${retryInterval / 1000} seconds`);
-    await new Promise(resolve => setTimeout(resolve, retryInterval));
+    await new Promise((resolve) => setTimeout(resolve, retryInterval));
     isConnected = await connectQueue();
   }
 }

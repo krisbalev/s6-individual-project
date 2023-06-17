@@ -25,7 +25,6 @@ const HomePage = () => {
   const [isPostModalOpen, setIsPostModalOpen] = useState(false);
   const [selectedPost, setSelectedPost] = useState<Post | null>(null);
 
-
   const fetchPostsAsync = async () => {
     const posts = await fetchPosts();
     const reversedPosts = posts.length > 0 ? [...posts].reverse() : [];
@@ -122,7 +121,7 @@ const HomePage = () => {
           ))}
         </div>
 
-        {isPostModalOpen && selectedPost &&(
+        {isPostModalOpen && selectedPost && (
           <PostPopup post={selectedPost} onClose={handlePostModalClose} />
         )}
 
@@ -134,7 +133,12 @@ const HomePage = () => {
         </button>
 
         {isModalOpen && (
-          <PostForm onSubmit={handleAddPost} onClose={handleModalClose} userId={loggedInUser._id} username={loggedInUser.username} />
+          <PostForm
+            onSubmit={handleAddPost}
+            onClose={handleModalClose}
+            userId={loggedInUser._id}
+            username={loggedInUser.username}
+          />
         )}
 
         {isUserModalOpen && (
@@ -147,6 +151,5 @@ const HomePage = () => {
     </div>
   );
 };
-
 
 export default HomePage;

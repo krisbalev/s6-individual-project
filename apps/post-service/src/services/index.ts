@@ -35,7 +35,7 @@ export async function updatePostUsernames(userId: string, newUsername: string) {
     await db.updatePostUsernames(userId, newUsername);
     return true;
   } catch (error) {
-    console.error('An error occurred:', error);
+    console.error("An error occurred:", error);
   }
 }
 

@@ -41,33 +41,25 @@ export const postRouter = () => {
       return res.json(post);
     });
 
-router
-    .route("/posts/:userId")
-    .get(async (req, res) => {
-      const posts = await service.GetPostsByUserId(req.params.userId);
-      return res.json(posts);
-    });
+  router.route("/posts/:userId").get(async (req, res) => {
+    const posts = await service.GetPostsByUserId(req.params.userId);
+    return res.json(posts);
+  });
 
-router
-    .route("/like/:postId/userId/:userId")
-    .post(async (req, res) => {
-      const post = await service.LikePost(req.params.postId, req.params.userId);
-      return res.json(post);
-    });
+  router.route("/like/:postId/userId/:userId").post(async (req, res) => {
+    const post = await service.LikePost(req.params.postId, req.params.userId);
+    return res.json(post);
+  });
 
-router.
-    route("/likes/:postId")
-    .get(async (req, res) => {
-      const post = await service.GetPostLikes(req.params.postId);
-      return res.json(post);
-    });
+  router.route("/likes/:postId").get(async (req, res) => {
+    const post = await service.GetPostLikes(req.params.postId);
+    return res.json(post);
+  });
 
-router
-    .route("/unlike/:postId/userId/:userId")
-    .post(async (req, res) => {
-      const post = await service.UnlikePost(req.params.postId, req.params.userId);
-      return res.json(post);
-    });
+  router.route("/unlike/:postId/userId/:userId").post(async (req, res) => {
+    const post = await service.UnlikePost(req.params.postId, req.params.userId);
+    return res.json(post);
+  });
 
   // Middleware for dynamic routes
   router.param("id", (req, res, next, id) => {
