@@ -119,8 +119,8 @@ const HomePage = () => {
       <main className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 py-5">
         <div className="mt-10 grid gap-6">
           {posts.reverse().map((post: Post) => (
-            <span key={post.title} onClick={() => handlePostModalOpen(post)}>
-              <PostCard key={post.title} post={post} />
+            <span key={post._id} onClick={() => handlePostModalOpen(post)}>
+              <PostCard key={post._id} post={post} />
             </span>
           ))}
         </div>
