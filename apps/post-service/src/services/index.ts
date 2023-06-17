@@ -27,22 +27,22 @@ const s3 = new S3Client({
 export async function GetPosts() {
   const posts = await db.GetPosts();
 
-  for (const post of posts) {
-    if (!post.picture) {
-      // Skip this iteration if picture is null
-      continue;
-    }
+  // for (const post of posts) {
+  //   if (!post.picture) {
+  //     // Skip this iteration if picture is null
+  //     continue;
+  //   }
 
-    const getObjectParams = {
-      Bucket: bucketName,
-      Key: post.picture,
-    };
+  //   const getObjectParams = {
+  //     Bucket: bucketName,
+  //     Key: post.picture,
+  //   };
 
-    const command = new GetObjectCommand(getObjectParams);
+  //   const command = new GetObjectCommand(getObjectParams);
 
-    const url = await getSignedUrl(s3, command, { expiresIn: 3600 });
-    post.picture = url;
-  }
+  //   const url = await getSignedUrl(s3, command, { expiresIn: 3600 });
+  //   post.picture = url;
+  // }
 
   return posts;
 }

@@ -18,7 +18,7 @@ spec:
       imagePullSecrets:
         - name: acr-credentials
       containers:
-        - image: asindividual.azurecr.io/post-service:4f676d75232666e8fd14d10c1d5906aa955853cb
+        - image: asindividual.azurecr.io/post-service:3d9b0712813af2290c7c13868a79c4691225f835
           env:
             - name: RABBITMQ_URL
               value: amqp://rabbitmq:5672
@@ -28,7 +28,7 @@ spec:
             - containerPort: 8081
           resources:
             requests:
-              cpu: 100m
+              cpu: 128m
               memory: 256Mi
             limits:
               cpu: 250m
@@ -49,3 +49,22 @@ spec:
       targetPort: 8081
   selector:
     app: post-service
+---
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: post-service-deployment
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: post-service-deployment
+  minReplicas: 3
+  maxReplicas: 45
+  metrics:
+  - type: Resource
+    resource:
+      name: cpu
+      target:
+        type: Utilization
+        averageUtilization: 50
