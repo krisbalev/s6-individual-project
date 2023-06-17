@@ -88,7 +88,7 @@ const AccountPage = () => {
             <div>
               <p className="pb-2 text-xl text-black font-medium">YOUR POSTS</p>
               <hr className="border border-black" />
-              <div className="my-5 grid gap-3">
+              <div className="my-5 mx-3 grid gap-3">
                 {posts.reverse().map((post: Post) => (
                   <PostCard key={post.title} post={post} />
                 ))}

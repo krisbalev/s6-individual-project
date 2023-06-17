@@ -41,7 +41,7 @@ const PostCard = ({ post }: Props) => {
   }, [post]);
 
   return (
-    <div className="bg-white overflow-hidden shadow rounded-lg">
+    <div className="bg-white overflow-hidden shadow rounded-lg cursor-pointer transition duration-300 transform hover:scale-105">
       <div className="px-4 py-5 sm:p-6">
         <div className="text-sm text-gray-500 mb-2">
           Posted by <span className="font-medium">{post.username}</span>
@@ -49,7 +49,7 @@ const PostCard = ({ post }: Props) => {
         <h3 className="text-lg leading-6 font-medium text-gray-900">
           {post.title}
         </h3>
-        <p className="mt-2 max-w-2xl text-sm text-gray-500">{post.content}</p>
+        {/* <p className="mt-2 max-w-2xl text-sm text-gray-500">{post.content}</p> */}
         <div className="flex justify-between items-center mt-4">
           <div className="flex items-center space-x-2">
             <button
