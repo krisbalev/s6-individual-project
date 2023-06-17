@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.GetUsernamesPerId = exports.CheckIfUserExists = exports.DeleteUser = exports.CreateUser = exports.GetUserById = exports.GetUsers = void 0;
+exports.ChangeUsername = exports.GetUsernamesPerId = exports.CheckIfUserExists = exports.DeleteUser = exports.CreateUser = exports.GetUserById = exports.GetUsers = void 0;
 const user_1 = require("../models/user");
 async function GetUsers() {
     const users = await user_1.User.find();
@@ -46,3 +46,8 @@ async function GetUsernamesPerId(ids) {
     return usernames;
 }
 exports.GetUsernamesPerId = GetUsernamesPerId;
+async function ChangeUsername(id, newUsername) {
+    const user = await user_1.User.findByIdAndUpdate(id, { username: newUsername }, { new: true });
+    return user;
+}
+exports.ChangeUsername = ChangeUsername;

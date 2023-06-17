@@ -44,7 +44,16 @@
           "encoding": "json",
           "is_collection": true
         }
-      ]
+      ],
+      "extra_config": {
+        "auth/validator": {
+          "alg": "RS256",
+          "audience": [
+            "https://dev-nydlolpi6mfz5eo3.eu.auth0.com/api/v2/"
+          ],
+          "jwk_url": "https://dev-nydlolpi6mfz5eo3.eu.auth0.com/.well-known/jwks.json"
+        }
+      }
     },
     {
       "endpoint": "/post",
@@ -68,6 +77,91 @@
       ]
     },
     {
+      "endpoint": "/post/posts/{userId}",
+      "backend": [
+        {
+          "host": "http://post-service:8081",
+          "method": "GET",
+          "url_pattern": "/posts/{userId}",
+          "encoding": "json",
+          "is_collection": true
+        }
+      ],
+      "extra_config": {
+        "auth/validator": {
+          "alg": "RS256",
+          "audience": [
+            "https://dev-nydlolpi6mfz5eo3.eu.auth0.com/api/v2/"
+          ],
+          "jwk_url": "https://dev-nydlolpi6mfz5eo3.eu.auth0.com/.well-known/jwks.json"
+        }
+      }
+    },
+    {
+      "endpoint": "/post/likes/{postId}",
+      "method": "GET",
+      "backend": [
+        {
+          "host": "http://post-service:8081",
+          "method": "GET",
+          "url_pattern": "/likes/{postId}",
+          "encoding": "json",
+          "is_collection": true
+        }
+      ],
+      "extra_config": {
+        "auth/validator": {
+          "alg": "RS256",
+          "audience": [
+            "https://dev-nydlolpi6mfz5eo3.eu.auth0.com/api/v2/"
+          ],
+          "jwk_url": "https://dev-nydlolpi6mfz5eo3.eu.auth0.com/.well-known/jwks.json"
+        }
+      }
+    },
+    {
+      "endpoint": "/post/like/{postId}/userId/{userId}",
+      "method": "POST",
+      "backend": [
+        {
+          "host": "http://post-service:8081",
+          "method": "POST",
+          "url_pattern": "/like/{postId}/userId/{userId}",
+          "encoding": "json"
+        }
+      ],
+      "extra_config": {
+        "auth/validator": {
+          "alg": "RS256",
+          "audience": [
+            "https://dev-nydlolpi6mfz5eo3.eu.auth0.com/api/v2/"
+          ],
+          "jwk_url": "https://dev-nydlolpi6mfz5eo3.eu.auth0.com/.well-known/jwks.json"
+        }
+      }
+    },
+    {
+      "endpoint": "/post/unlike/{postId}/userId/{userId}",
+      "method": "POST",
+      "backend": [
+        {
+          "host": "http://post-service:8081",
+          "method": "POST",
+          "url_pattern": "/unlike/{postId}/userId/{userId}",
+          "encoding": "json"
+        }
+      ],
+      "extra_config": {
+        "auth/validator": {
+          "alg": "RS256",
+          "audience": [
+            "https://dev-nydlolpi6mfz5eo3.eu.auth0.com/api/v2/"
+          ],
+          "jwk_url": "https://dev-nydlolpi6mfz5eo3.eu.auth0.com/.well-known/jwks.json"
+        }
+      }
+    },
+    {
       "endpoint": "/user",
       "backend": [
         {
@@ -77,7 +171,16 @@
           "encoding": "json",
           "is_collection": true
         }
-      ]
+      ],
+      "extra_config": {
+        "auth/validator": {
+          "alg": "RS256",
+          "audience": [
+            "https://dev-nydlolpi6mfz5eo3.eu.auth0.com/api/v2/"
+          ],
+          "jwk_url": "https://dev-nydlolpi6mfz5eo3.eu.auth0.com/.well-known/jwks.json"
+        }
+      }
     },
     {
       "endpoint": "/user/check/{email}",
@@ -89,7 +192,16 @@
           "url_pattern": "/check/{email}",
           "encoding": "json"
         }
-      ]
+      ],
+      "extra_config": {
+        "auth/validator": {
+          "alg": "RS256",
+          "audience": [
+            "https://dev-nydlolpi6mfz5eo3.eu.auth0.com/api/v2/"
+          ],
+          "jwk_url": "https://dev-nydlolpi6mfz5eo3.eu.auth0.com/.well-known/jwks.json"
+        }
+      }
     },
     {
       "endpoint": "/user/{id}",
@@ -100,7 +212,37 @@
           "url_pattern": "/{id}",
           "encoding": "json"
         }
-      ]
+      ],
+      "extra_config": {
+        "auth/validator": {
+          "alg": "RS256",
+          "audience": [
+            "https://dev-nydlolpi6mfz5eo3.eu.auth0.com/api/v2/"
+          ],
+          "jwk_url": "https://dev-nydlolpi6mfz5eo3.eu.auth0.com/.well-known/jwks.json"
+        }
+      }
+    },
+    {
+      "endpoint": "/user/change-username",
+      "method": "POST",
+      "backend": [
+        {
+          "host": "http://user-service:8082",
+          "method": "POST",
+          "url_pattern": "/change-username",
+          "encoding": "json"
+        }
+      ],
+      "extra_config": {
+        "auth/validator": {
+          "alg": "RS256",
+          "audience": [
+            "https://dev-nydlolpi6mfz5eo3.eu.auth0.com/api/v2/"
+          ],
+          "jwk_url": "https://dev-nydlolpi6mfz5eo3.eu.auth0.com/.well-known/jwks.json"
+        }
+      }
     }
   ]
 }

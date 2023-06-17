@@ -68,6 +68,55 @@
       ]
     },
     {
+      "endpoint": "/post/posts/{userId}",
+      "backend": [
+        {
+          "host": "http://localhost:8081",
+          "method": "GET",
+          "url_pattern": "/posts/{userId}",
+          "encoding": "json",
+          "is_collection": true
+        }
+      ]
+    },
+    {
+      "endpoint": "/post/likes/{postId}",
+      "method": "GET",
+      "backend": [
+        {
+          "host": "http://localhost:8081",
+          "method": "GET",
+          "url_pattern": "/likes/{postId}",
+          "encoding": "json",
+          "is_collection": true
+        }
+      ]
+    },
+    {
+      "endpoint": "/post/like/{postId}/userId/{userId}",
+      "method": "POST",
+      "backend": [
+        {
+          "host": "http://localhost:8081",
+          "method": "POST",
+          "url_pattern": "/like/{postId}/userId/{userId}",
+          "encoding": "json"
+        }
+      ]
+    },
+    {
+      "endpoint": "/post/unlike/{postId}/userId/{userId}",
+      "method": "POST",
+      "backend": [
+        {
+          "host": "http://localhost:8081",
+          "method": "POST",
+          "url_pattern": "/unlike/{postId}/userId/{userId}",
+          "encoding": "json"
+        }
+      ]
+    },
+    {
       "endpoint": "/user",
       "backend": [
         {
@@ -110,6 +159,18 @@
           "host": "http://localhost:8082",
           "method": "GET",
           "url_pattern": "/{id}",
+          "encoding": "json"
+        }
+      ]
+    },
+    {
+      "endpoint": "/user/change-username",
+      "method": "POST",
+      "backend": [
+        {
+          "host": "http://localhost:8082",
+          "method": "POST",
+          "url_pattern": "/change-username",
           "encoding": "json"
         }
       ]

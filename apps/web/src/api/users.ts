@@ -64,3 +64,23 @@ export const getUserById = async (id: string): Promise<User> => {
   const user = await response.json();
   return user;
 };
+
+export const changeUsername = async (
+  id: string,
+  newUsername: string
+): Promise<User> => {
+  const tokenResponse = await fetch(`${URL}/api/auth/token`);
+  const tokenData = await tokenResponse.json();
+
+  const response = await fetch(`${GATEWAY_URL}/user/change-username`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: "Bearer " + tokenData,
+    },
+    body: JSON.stringify({ id, newUsername }),
+  });
+
+  const user = await response.json();
+  return user;
+};

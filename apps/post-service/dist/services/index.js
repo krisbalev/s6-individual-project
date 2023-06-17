@@ -59,66 +59,16 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.DeletePosts = exports.CreatePost = exports.GetPostById = exports.GetPosts = void 0;
+exports.UnlikePost = exports.GetPostLikes = exports.LikePost = exports.updatePostUsernames = exports.GetPostsByUserId = exports.DeletePosts = exports.CreatePost = exports.GetPostById = exports.GetPosts = void 0;
 var db = __importStar(require("../repositories/index"));
-var index_1 = require("../message-broker/index");
-function sendMessageAndGetResponse(data) {
-    return __awaiter(this, void 0, void 0, function () {
-        var response, error_1;
-        return __generator(this, function (_a) {
-            switch (_a.label) {
-                case 0:
-                    response = null;
-                    _a.label = 1;
-                case 1:
-                    _a.trys.push([1, 4, , 5]);
-                    return [4 /*yield*/, (0, index_1.connectQueue)()];
-                case 2:
-                    _a.sent();
-                    return [4 /*yield*/, (0, index_1.sendData)(data)];
-                case 3:
-                    response = _a.sent();
-                    return [3 /*break*/, 5];
-                case 4:
-                    error_1 = _a.sent();
-                    console.error("Error while sending data:", error_1);
-                    return [3 /*break*/, 5];
-                case 5: 
-                // Close the connection
-                return [4 /*yield*/, (0, index_1.closeConnection)()];
-                case 6:
-                    // Close the connection
-                    _a.sent();
-                    return [2 /*return*/, response];
-            }
-        });
-    });
-}
 function GetPosts() {
     return __awaiter(this, void 0, void 0, function () {
-        var posts, userIds, replyData, data;
+        var posts;
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0:
-                    posts = [{
-                            _id: "6485e927cb33e6a21ae62964",
-                            title: "asdhnipoadpohad",
-                            content: "oabhnsfouabs",
-                            userId: "64824368b9c3b2053ce51628"
-                        }];
-                    userIds = posts.map(function (post) { return post.userId; });
-                    return [4 /*yield*/, sendMessageAndGetResponse(userIds)];
+                case 0: return [4 /*yield*/, db.GetPosts()];
                 case 1:
-                    replyData = _a.sent();
-                    data = JSON.parse(replyData);
-                    console.log(data, "RESPONSEEEEEEEEEEEEEEEEEEE");
-                    // const formattedPosts: {}[] = [];
-                    // for (const post of posts) {
-                    //   const matchingUser = data.find((user: any) => user.id === post.userId);
-                    //   const formattedPost = { title: post.title, content: post.content, username: matchingUser?.username };
-                    //   formattedPosts.push(formattedPost);
-                    // }  
-                    // return formattedPosts;
+                    posts = _a.sent();
                     return [2 /*return*/, posts];
             }
         });
@@ -167,3 +117,71 @@ function DeletePosts(id) {
     });
 }
 exports.DeletePosts = DeletePosts;
+function GetPostsByUserId(userId) {
+    var posts = db.GetPostsByUserId(userId);
+    return posts;
+}
+exports.GetPostsByUserId = GetPostsByUserId;
+function updatePostUsernames(userId, newUsername) {
+    return __awaiter(this, void 0, void 0, function () {
+        var error_1;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0:
+                    _a.trys.push([0, 2, , 3]);
+                    return [4 /*yield*/, db.updatePostUsernames(userId, newUsername)];
+                case 1:
+                    _a.sent();
+                    return [2 /*return*/, true];
+                case 2:
+                    error_1 = _a.sent();
+                    console.error("An error occurred:", error_1);
+                    return [3 /*break*/, 3];
+                case 3: return [2 /*return*/];
+            }
+        });
+    });
+}
+exports.updatePostUsernames = updatePostUsernames;
+function LikePost(postId, userId) {
+    return __awaiter(this, void 0, void 0, function () {
+        var post;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0: return [4 /*yield*/, db.LikePost(postId, userId)];
+                case 1:
+                    post = _a.sent();
+                    return [2 /*return*/, post];
+            }
+        });
+    });
+}
+exports.LikePost = LikePost;
+function GetPostLikes(postId) {
+    return __awaiter(this, void 0, void 0, function () {
+        var post;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0: return [4 /*yield*/, db.GetPostLikes(postId)];
+                case 1:
+                    post = _a.sent();
+                    return [2 /*return*/, post];
+            }
+        });
+    });
+}
+exports.GetPostLikes = GetPostLikes;
+function UnlikePost(postId, userId) {
+    return __awaiter(this, void 0, void 0, function () {
+        var post;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0: return [4 /*yield*/, db.UnlikePost(postId, userId)];
+                case 1:
+                    post = _a.sent();
+                    return [2 /*return*/, post];
+            }
+        });
+    });
+}
+exports.UnlikePost = UnlikePost;

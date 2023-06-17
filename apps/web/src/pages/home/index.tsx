@@ -9,10 +9,11 @@ import { useRouter } from "next/router";
 import { createUser, getUserById, checkIfUserExists } from "@/api/users";
 import { useUser } from "@auth0/nextjs-auth0/client";
 import UserFirstLoginForm from "@/components/UserFirstLoginForm";
+import PostPopup from "@/components/PostPopup";
 
 // interface HomePageProps {
 //   posts: Post[];
-// } { posts }: any
+// }
 
 const HomePage = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -21,9 +22,11 @@ const HomePage = () => {
   const user = useUser();
   const [loggedInUser, setLoggedInUser] = useState<any>(null);
   const [posts, setPosts] = useState<any>([]);
-
+  const [isPostModalOpen, setIsPostModalOpen] = useState(false);
+  const [selectedPost, setSelectedPost] = useState<Post | null>(null);
 
   const fetchPostsAsync = async () => {
+    setPosts([]);
     const posts = await fetchPosts();
     const reversedPosts = posts.length > 0 ? [...posts].reverse() : [];
     setPosts(reversedPosts);
@@ -44,6 +47,7 @@ const HomePage = () => {
     if (user && !user.isLoading) {
       checkUser();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user]);
 
   useEffect(() => {
@@ -92,6 +96,16 @@ const HomePage = () => {
     setIsUserModalOpen(false);
   };
 
+  const handlePostModalOpen = (post: Post) => {
+    setIsPostModalOpen(true);
+    setSelectedPost(post);
+  };
+
+  const handlePostModalClose = () => {
+    setIsPostModalOpen(false);
+    fetchPostsAsync();
+  };
+
   return (
     <div className="bg-gray-100 min-h-screen">
       <Head>
@@ -101,12 +115,18 @@ const HomePage = () => {
 
       <Navbar />
 
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5">
+      <main className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 py-5">
         <div className="mt-10 grid gap-6">
           {posts.reverse().map((post: Post) => (
-            <PostCard key={post.title} post={post} />
+            <span key={post.title} onClick={() => handlePostModalOpen(post)}>
+              <PostCard key={post.title} post={post} />
+            </span>
           ))}
         </div>
+
+        {isPostModalOpen && selectedPost && (
+          <PostPopup post={selectedPost} onClose={handlePostModalClose} />
+        )}
 
         <button
           onClick={handleModalOpen}
@@ -116,7 +136,12 @@ const HomePage = () => {
         </button>
 
         {isModalOpen && (
-          <PostForm onSubmit={handleAddPost} onClose={handleModalClose} userId={loggedInUser._id} />
+          <PostForm
+            onSubmit={handleAddPost}
+            onClose={handleModalClose}
+            userId={loggedInUser._id}
+            username={loggedInUser.username}
+          />
         )}
 
         {isUserModalOpen && (
@@ -129,6 +154,5 @@ const HomePage = () => {
     </div>
   );
 };
-
 
 export default HomePage;

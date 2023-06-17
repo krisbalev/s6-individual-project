@@ -1,22 +1,12 @@
-import { Post } from "@/types/post";
 import { useState } from "react";
 
-interface PostFormProps {
-  onSubmit: (post: Post) => void;
-  onClose: () => void;
-  userId: string;
-  username: string;
-}
-
-const PostForm = ({ onSubmit, onClose, userId, username }: PostFormProps) => {
-  const [title, setTitle] = useState("");
-  const [content, setContent] = useState("");
+const EdintProfileForm = ({ onSubmit, onClose, user }: any) => {
+  const [username, setUsername] = useState(user.username);
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const post = { title, content, userId, username };
-    console.log(post);
-    onSubmit(post);
+    const newUsername: string = username;
+    onSubmit(newUsername);
     onClose();
   };
 
@@ -25,38 +15,23 @@ const PostForm = ({ onSubmit, onClose, userId, username }: PostFormProps) => {
       <div className="absolute inset-0 bg-gray-900 opacity-50 "></div>
       <div className="bg-white rounded-lg p-8 z-10 w-1/3">
         <h2 className="text-2xl font-medium mb-4 text-black text-center">
-          Add New Post
+          Edit Profile
         </h2>
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
             <label
-              htmlFor="title"
-              className="block mb-2 font-bold text-gray-700"
+              htmlFor="username"
+              className="block mb-2 font-bold text-gray-700 text-center text-xl"
             >
-              Title
+              New Username:
             </label>
             <input
               type="text"
-              id="title"
+              id="username"
               className="w-full px-3 py-2 text-gray-700 border rounded-lg focus:outline-none focus:border-blue-500"
-              value={title}
-              onChange={(event) => setTitle(event.target.value)}
+              value={username}
+              onChange={(event) => setUsername(event.target.value)}
             />
-          </div>
-
-          <div className="mb-4">
-            <label
-              htmlFor="content"
-              className="block mb-2 font-bold text-gray-700"
-            >
-              Content
-            </label>
-            <textarea
-              id="content"
-              className="w-full px-3 py-2 text-gray-700 border rounded-lg focus:outline-none focus:border-blue-500"
-              value={content}
-              onChange={(event) => setContent(event.target.value)}
-            ></textarea>
           </div>
 
           <div className="flex justify-end">
@@ -80,4 +55,4 @@ const PostForm = ({ onSubmit, onClose, userId, username }: PostFormProps) => {
   );
 };
 
-export default PostForm;
+export default EdintProfileForm;

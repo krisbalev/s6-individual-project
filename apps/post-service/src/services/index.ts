@@ -1,48 +1,9 @@
 import * as db from "../repositories/index";
-import {
-  sendData,
-  closeConnection,
-  connectQueue,
-} from "../message-broker/index";
-
-async function sendMessageAndGetResponse(data: any) {
-  let response = null;
-
-
-  // Send data and get the response
-  try {
-    await connectQueue();
-    response = await sendData(data);
-  } catch (error) {
-    console.error("Error while sending data:", error);
-  }
-
-  // Close the connection
-  await closeConnection();
-
-  return response;
-}
 
 export async function GetPosts() {
   const posts = await db.GetPosts();
 
-  const userIds: any = posts.map((post) => post.userId);
-
-  const replyData = await sendMessageAndGetResponse(userIds) as string;
-
-  const data = JSON.parse(replyData);
-
-  console.log(data, "SHTE EBA");
-
-  const formattedPosts: {}[] = [];
-
-  for (const post of posts) {
-    const matchingUser = data.find((user: any) => user.id === post.userId);
-    const formattedPost = { title: post.title, content: post.content, username: matchingUser?.username };
-    formattedPosts.push(formattedPost);
-  }  
-
-  return formattedPosts;
+  return posts;
 }
 
 export async function GetPostById(id: string) {
@@ -59,6 +20,39 @@ export async function CreatePost(data: any) {
 
 export async function DeletePosts(id: string) {
   const post = await db.DeletePost(id);
+
+  return post;
+}
+
+export function GetPostsByUserId(userId: string) {
+  const posts = db.GetPostsByUserId(userId);
+
+  return posts;
+}
+
+export async function updatePostUsernames(userId: string, newUsername: string) {
+  try {
+    await db.updatePostUsernames(userId, newUsername);
+    return true;
+  } catch (error) {
+    console.error("An error occurred:", error);
+  }
+}
+
+export async function LikePost(postId: string, userId: string) {
+  const post = await db.LikePost(postId, userId);
+
+  return post;
+}
+
+export async function GetPostLikes(postId: string) {
+  const post = await db.GetPostLikes(postId);
+
+  return post;
+}
+
+export async function UnlikePost(postId: string, userId: string) {
+  const post = await db.UnlikePost(postId, userId);
 
   return post;
 }

@@ -2,7 +2,7 @@ import { createServer } from "./server";
 import { postRouter } from "./routes";
 import mongoose from "mongoose";
 import { URL } from "url";
-import { connectQueue } from "./message-broker";
+import { startListening } from "./message-broker";
 
 const url = new URL(
   process.env.NEXT_PUBLIC_POST_SERVICE_URL || "http://localhost:8081/post"
@@ -23,8 +23,8 @@ db.once("open", function () {
   console.log("Connected to MongoDB");
 });
 
-// connectQueue();
-// startListening();
+//Connect to RabbitMQ
+startListening();
 
 // const endPoint = process.env.NODE_ENV === "production" ? "/" : "/post";
 const endPoint = process.env.NEXT_PUBLIC_POST_SERVICE_URL || "/post";

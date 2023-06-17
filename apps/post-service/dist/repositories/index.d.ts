@@ -24,46 +24,109 @@
 /// <reference types="mongoose" />
 /// <reference types="mongoose/types/inferschematype" />
 export declare function GetPosts(): Promise<(import("mongoose").Document<unknown, {}, {
+    likes: string[];
     title?: string | undefined;
     content?: string | undefined;
     userId?: string | undefined;
+    username?: string | undefined;
 }> & Omit<{
+    likes: string[];
     title?: string | undefined;
     content?: string | undefined;
     userId?: string | undefined;
+    username?: string | undefined;
 } & {
     _id: import("mongoose").Types.ObjectId;
 }, never>)[]>;
 export declare function GetPostById(id: string): Promise<(import("mongoose").Document<unknown, {}, {
+    likes: string[];
     title?: string | undefined;
     content?: string | undefined;
     userId?: string | undefined;
+    username?: string | undefined;
 }> & Omit<{
+    likes: string[];
     title?: string | undefined;
     content?: string | undefined;
     userId?: string | undefined;
+    username?: string | undefined;
 } & {
     _id: import("mongoose").Types.ObjectId;
 }, never>) | null>;
 export declare function CreatePost(data: any): Promise<(import("mongoose").Document<unknown, {}, {
+    likes: string[];
     title?: string | undefined;
     content?: string | undefined;
     userId?: string | undefined;
+    username?: string | undefined;
 }> & Omit<{
+    likes: string[];
     title?: string | undefined;
     content?: string | undefined;
     userId?: string | undefined;
+    username?: string | undefined;
 } & {
     _id: import("mongoose").Types.ObjectId;
 }, never>) | null>;
 export declare function DeletePost(id: string): Promise<(import("mongoose").Document<unknown, {}, {
+    likes: string[];
     title?: string | undefined;
     content?: string | undefined;
     userId?: string | undefined;
+    username?: string | undefined;
 }> & Omit<{
+    likes: string[];
     title?: string | undefined;
     content?: string | undefined;
     userId?: string | undefined;
+    username?: string | undefined;
+} & {
+    _id: import("mongoose").Types.ObjectId;
+}, never>) | null>;
+export declare function updatePostUsernames(userId: string, newUsername: string): Promise<true | undefined>;
+export declare function GetPostsByUserId(userId: string): Promise<(import("mongoose").Document<unknown, {}, {
+    likes: string[];
+    title?: string | undefined;
+    content?: string | undefined;
+    userId?: string | undefined;
+    username?: string | undefined;
+}> & Omit<{
+    likes: string[];
+    title?: string | undefined;
+    content?: string | undefined;
+    userId?: string | undefined;
+    username?: string | undefined;
+} & {
+    _id: import("mongoose").Types.ObjectId;
+}, never>)[]>;
+export declare function LikePost(postId: string, userId: string): Promise<(import("mongoose").Document<unknown, {}, {
+    likes: string[];
+    title?: string | undefined;
+    content?: string | undefined;
+    userId?: string | undefined;
+    username?: string | undefined;
+}> & Omit<{
+    likes: string[];
+    title?: string | undefined;
+    content?: string | undefined;
+    userId?: string | undefined;
+    username?: string | undefined;
+} & {
+    _id: import("mongoose").Types.ObjectId;
+}, never>) | null>;
+export declare function GetPostLikes(postId: string): Promise<string[] | null>;
+export declare function UnlikePost(postId: string, userId: string): Promise<(import("mongoose").Document<unknown, {}, {
+    likes: string[];
+    title?: string | undefined;
+    content?: string | undefined;
+    userId?: string | undefined;
+    username?: string | undefined;
+}> & Omit<{
+    likes: string[];
+    title?: string | undefined;
+    content?: string | undefined;
+    userId?: string | undefined;
+    username?: string | undefined;
 } & {
     _id: import("mongoose").Types.ObjectId;
 }, never>) | null>;

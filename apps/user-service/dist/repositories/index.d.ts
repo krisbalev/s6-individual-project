@@ -85,4 +85,19 @@ export declare function DeleteUser(id: string): Promise<(import("mongoose").Docu
 }, never>) | null>;
 export declare function CheckIfUserExists(email: string): Promise<any>;
 export declare function GetUsernamesPerId(ids: string[]): Promise<{}[]>;
+export declare function ChangeUsername(id: string, newUsername: string): Promise<(import("mongoose").Document<unknown, {}, {
+    role: string;
+    created_at: Date;
+    points: number;
+    email?: string | undefined;
+    username?: string | undefined;
+}> & Omit<{
+    role: string;
+    created_at: Date;
+    points: number;
+    email?: string | undefined;
+    username?: string | undefined;
+} & {
+    _id: import("mongoose").Types.ObjectId;
+}, never>) | null>;
 //# sourceMappingURL=index.d.ts.map

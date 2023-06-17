@@ -22,7 +22,7 @@ var createServer = function () {
         .get("/healthz", function (req, res) {
         return res.json({ ok: true });
     })
-        .get('/favicon.ico', function (req, res) { return res.status(204); });
+        .get("/favicon.ico", function (req, res) { return res.status(204); });
     return app;
 };
 exports.createServer = createServer;

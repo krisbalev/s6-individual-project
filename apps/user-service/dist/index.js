@@ -21,7 +21,6 @@ db.once("open", function () {
     console.log("Connected to MongoDB");
 });
 // Connect to RabbitMQ
-// connectQueue();
 (0, message_broker_1.startListening)();
 // Close the connection gracefully on process exit
 process.on("SIGINT", async () => {
