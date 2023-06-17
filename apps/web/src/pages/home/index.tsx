@@ -26,6 +26,7 @@ const HomePage = () => {
   const [selectedPost, setSelectedPost] = useState<Post | null>(null);
 
   const fetchPostsAsync = async () => {
+    setPosts([]);
     const posts = await fetchPosts();
     const reversedPosts = posts.length > 0 ? [...posts].reverse() : [];
     setPosts(reversedPosts);
@@ -102,6 +103,7 @@ const HomePage = () => {
 
   const handlePostModalClose = () => {
     setIsPostModalOpen(false);
+    fetchPostsAsync();
   };
 
   return (
