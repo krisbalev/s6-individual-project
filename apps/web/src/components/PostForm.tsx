@@ -30,8 +30,8 @@ const PostForm = ({ onSubmit, onClose, userId, username }: PostFormProps) => {
 
     try {
       console.log(formData);
-      // onSubmit(formData);
-      await createPost(formData);
+      onSubmit(formData);
+      // await createPost(formData);
       onClose();
     } catch (error) {
       console.log(error);
@@ -94,20 +94,20 @@ const PostForm = ({ onSubmit, onClose, userId, username }: PostFormProps) => {
             ></textarea>
           </div>
 
-          <section className="flex">
-            <section className="basis-3/4">
+          <div className="flex">
+            <div className="w-3/4">
               <p className="mb-1 flex items-center justify-center bg-white text-[12px] text-red-500">
                 {message}
               </p>
-              <section className="relative h-32 w-full cursor-pointer items-center overflow-hidden">
+              <div className="relative h-32 w-full cursor-pointer items-center overflow-hidden">
                 <input
                   type="file"
                   onChange={handleFile}
                   className="absolute z-10 h-full w-full opacity-0"
                   name="file"
                 />
-                <section className="z-1 absolute top-0 flex h-full w-full items-center justify-center bg-slate-50">
-                  <div className="flex flex-col">
+                <div>
+                  <div className="flex flex-col text-black">
                     <p className="text-xl">
                       Drag image here or click to select file
                     </p>
@@ -115,10 +115,10 @@ const PostForm = ({ onSubmit, onClose, userId, username }: PostFormProps) => {
                       Attach an image file, not exceeding 5MB in size
                     </p>
                   </div>
-                </section>
-              </section>
+                </div>
+              </div>
               {file && (
-                <div className="flex h-16 w-full items-center justify-between rounded bg-white p-3">
+                <div className="flex h-16 w-full items-center justify-between rounded p-3">
                   <div className="flex flex-row items-center gap-2">
                     <div className="h-12 w-12">
                       <Image
@@ -133,14 +133,14 @@ const PostForm = ({ onSubmit, onClose, userId, username }: PostFormProps) => {
                   </div>
                   <div
                     onClick={removeImage}
-                    className="flex h-6 w-6 cursor-pointer items-center justify-center rounded-sm bg-red-400"
+                    className="flex h-6 w-6 px-2 cursor-pointer items-center justify-center rounded-sm bg-red-400"
                   >
-                    <i className="mdi mdi-trash-can text-[14px] text-white"></i>
+                    X
                   </div>
                 </div>
               )}
-            </section>
-          </section>
+            </div>
+          </div>
 
           <div className="flex justify-end">
             <button
