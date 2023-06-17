@@ -9,19 +9,19 @@ const url = new URL(
 );
 const port = url.port;
 
-// MongoDB connection string
-const mongoURI =
-  process.env.MONGO_URI ||
-  "mongodb+srv://kristiyanbalev:individualpassword@individual-project.hqwmljf.mongodb.net/post";
+// // MongoDB connection string
+// const mongoURI =
+//   process.env.MONGO_URI ||
+//   "mongodb+srv://kristiyanbalev:individualpassword@individual-project.hqwmljf.mongodb.net/post";
 
-// Connect to MongoDB
-mongoose.connect(mongoURI);
+// // Connect to MongoDB
+// mongoose.connect(mongoURI);
 
-const db = mongoose.connection;
-db.on("error", console.error.bind(console, "MongoDB connection error:"));
-db.once("open", function () {
-  console.log("Connected to MongoDB");
-});
+// const db = mongoose.connection;
+// db.on("error", console.error.bind(console, "MongoDB connection error:"));
+// db.once("open", function () {
+//   console.log("Connected to MongoDB");
+// });
 
 //Connect to RabbitMQ
 startListening();
