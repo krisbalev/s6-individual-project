@@ -1,7 +1,6 @@
 import { Post } from "@/types/post";
 import { useState } from "react";
 import Image from "next/image";
-import { createPost } from "@/api/posts";
 
 interface PostFormProps {
   onSubmit: (post: any) => void;
@@ -31,7 +30,6 @@ const PostForm = ({ onSubmit, onClose, userId, username }: PostFormProps) => {
     try {
       console.log(formData);
       onSubmit(formData);
-      // await createPost(formData);
       onClose();
     } catch (error) {
       console.log(error);
