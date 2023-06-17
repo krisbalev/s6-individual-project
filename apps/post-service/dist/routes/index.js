@@ -128,6 +128,50 @@ var postRouter = function () {
             }
         });
     }); });
+    router.route("/posts/:userId").get(function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+        var posts;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0: return [4 /*yield*/, service.GetPostsByUserId(req.params.userId)];
+                case 1:
+                    posts = _a.sent();
+                    return [2 /*return*/, res.json(posts)];
+            }
+        });
+    }); });
+    router.route("/like/:postId/userId/:userId").post(function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+        var post;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0: return [4 /*yield*/, service.LikePost(req.params.postId, req.params.userId)];
+                case 1:
+                    post = _a.sent();
+                    return [2 /*return*/, res.json(post)];
+            }
+        });
+    }); });
+    router.route("/likes/:postId").get(function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+        var post;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0: return [4 /*yield*/, service.GetPostLikes(req.params.postId)];
+                case 1:
+                    post = _a.sent();
+                    return [2 /*return*/, res.json(post)];
+            }
+        });
+    }); });
+    router.route("/unlike/:postId/userId/:userId").post(function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+        var post;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0: return [4 /*yield*/, service.UnlikePost(req.params.postId, req.params.userId)];
+                case 1:
+                    post = _a.sent();
+                    return [2 /*return*/, res.json(post)];
+            }
+        });
+    }); });
     // Middleware for dynamic routes
     router.param("id", function (req, res, next, id) {
         next();

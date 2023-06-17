@@ -23,8 +23,9 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.CheckIfUserExists = exports.DeleteUsers = exports.CreateUser = exports.GetUserById = exports.GetUsers = void 0;
+exports.ChangeUsername = exports.CheckIfUserExists = exports.DeleteUsers = exports.CreateUser = exports.GetUserById = exports.GetUsers = void 0;
 const db = __importStar(require("../repositories/index"));
+const message_broker_1 = require("../message-broker");
 async function GetUsers() {
     const users = await db.GetUsers();
     return users;
@@ -50,3 +51,14 @@ async function CheckIfUserExists(email) {
     return user;
 }
 exports.CheckIfUserExists = CheckIfUserExists;
+async function ChangeUsername(userId, newUsername) {
+    const user = await db.ChangeUsername(userId, newUsername);
+    //Change username in posts through rabbitmq
+    const data = {
+        userId: userId,
+        newUsername: newUsername,
+    };
+    await (0, message_broker_1.sendData)(data);
+    return user;
+}
+exports.ChangeUsername = ChangeUsername;

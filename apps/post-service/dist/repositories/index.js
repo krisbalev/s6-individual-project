@@ -36,7 +36,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.DeletePost = exports.CreatePost = exports.GetPostById = exports.GetPosts = void 0;
+exports.UnlikePost = exports.GetPostLikes = exports.LikePost = exports.GetPostsByUserId = exports.updatePostUsernames = exports.DeletePost = exports.CreatePost = exports.GetPostById = exports.GetPosts = void 0;
 var post_1 = require("../models/post");
 function GetPosts() {
     return __awaiter(this, void 0, void 0, function () {
@@ -96,3 +96,97 @@ function DeletePost(id) {
     });
 }
 exports.DeletePost = DeletePost;
+function updatePostUsernames(userId, newUsername) {
+    return __awaiter(this, void 0, void 0, function () {
+        var error_1;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0:
+                    _a.trys.push([0, 2, , 3]);
+                    return [4 /*yield*/, post_1.Post.updateMany({ userId: userId }, { $set: { username: newUsername } })];
+                case 1:
+                    _a.sent();
+                    return [2 /*return*/, true];
+                case 2:
+                    error_1 = _a.sent();
+                    console.error("An error occurred:", error_1);
+                    return [3 /*break*/, 3];
+                case 3: return [2 /*return*/];
+            }
+        });
+    });
+}
+exports.updatePostUsernames = updatePostUsernames;
+function GetPostsByUserId(userId) {
+    return __awaiter(this, void 0, void 0, function () {
+        var posts;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0: return [4 /*yield*/, post_1.Post.find({ userId: userId })];
+                case 1:
+                    posts = _a.sent();
+                    return [2 /*return*/, posts];
+            }
+        });
+    });
+}
+exports.GetPostsByUserId = GetPostsByUserId;
+function LikePost(postId, userId) {
+    return __awaiter(this, void 0, void 0, function () {
+        var post;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0: return [4 /*yield*/, post_1.Post.findById(postId)];
+                case 1:
+                    post = _a.sent();
+                    if (!post) {
+                        return [2 /*return*/, null];
+                    }
+                    post.likes.push(userId);
+                    return [4 /*yield*/, post.save()];
+                case 2:
+                    _a.sent();
+                    return [2 /*return*/, post];
+            }
+        });
+    });
+}
+exports.LikePost = LikePost;
+function GetPostLikes(postId) {
+    return __awaiter(this, void 0, void 0, function () {
+        var post;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0: return [4 /*yield*/, post_1.Post.findById(postId)];
+                case 1:
+                    post = _a.sent();
+                    if (!post) {
+                        return [2 /*return*/, null];
+                    }
+                    return [2 /*return*/, post.likes];
+            }
+        });
+    });
+}
+exports.GetPostLikes = GetPostLikes;
+function UnlikePost(postId, userId) {
+    return __awaiter(this, void 0, void 0, function () {
+        var post;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0: return [4 /*yield*/, post_1.Post.findById(postId)];
+                case 1:
+                    post = _a.sent();
+                    if (!post) {
+                        return [2 /*return*/, null];
+                    }
+                    post.likes = post.likes.filter(function (like) { return like !== userId; });
+                    return [4 /*yield*/, post.save()];
+                case 2:
+                    _a.sent();
+                    return [2 /*return*/, post];
+            }
+        });
+    });
+}
+exports.UnlikePost = UnlikePost;

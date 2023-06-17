@@ -69,6 +69,13 @@ const userRouter = () => {
         };
         return res.json(response);
     });
+    router.route("/change-username").post(async (req, res) => {
+        const user = await service.ChangeUsername(req.body.id, req.body.newUsername);
+        if (!user) {
+            return res.status(404).json({ message: "user not found" });
+        }
+        return res.json(user);
+    });
     // Middleware for dynamic routes
     router.param("id", (req, res, next, id) => {
         next();

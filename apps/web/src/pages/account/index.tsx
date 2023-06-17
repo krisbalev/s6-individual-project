@@ -32,12 +32,14 @@ const AccountPage = () => {
     if (user && !user.isLoading) {
       checkUser();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user]);
 
   useEffect(() => {
     if (loggedInUser) {
       fetchPostsAsync();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [loggedInUser]);
 
   const editProfile = async (newUsername: string) => {

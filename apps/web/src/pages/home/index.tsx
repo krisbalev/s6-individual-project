@@ -46,6 +46,7 @@ const HomePage = () => {
     if (user && !user.isLoading) {
       checkUser();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user]);
 
   useEffect(() => {
@@ -115,7 +116,7 @@ const HomePage = () => {
       <main className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 py-5">
         <div className="mt-10 grid gap-6">
           {posts.reverse().map((post: Post) => (
-            <span onClick={() => handlePostModalOpen(post)}>
+            <span key={post.title} onClick={() => handlePostModalOpen(post)}>
               <PostCard key={post.title} post={post} />
             </span>
           ))}
