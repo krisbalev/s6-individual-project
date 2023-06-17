@@ -183,6 +183,27 @@
       }
     },
     {
+      "endpoint": "/user",
+      "method": "POST",
+      "backend": [
+        {
+          "host": "http://user-service:8082",
+          "method": "POST",
+          "url_pattern": "/",
+          "encoding": "json"
+        }
+      ],
+      "extra_config": {
+        "auth/validator": {
+          "alg": "RS256",
+          "audience": [
+            "https://dev-nydlolpi6mfz5eo3.eu.auth0.com/api/v2/"
+          ],
+          "jwk_url": "https://dev-nydlolpi6mfz5eo3.eu.auth0.com/.well-known/jwks.json"
+        }
+      }
+    },
+    {
       "endpoint": "/user/check/{email}",
       "method": "GET",
       "backend": [
