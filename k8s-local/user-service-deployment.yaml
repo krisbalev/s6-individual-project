@@ -18,7 +18,7 @@ spec:
       imagePullSecrets:
         - name: acr-credentials
       containers:
-        - image: asindividual.azurecr.io/user-service:8d02d6de50eda132e47bdfd235531f9801425007
+        - image: asindividual.azurecr.io/user-service:1eb65879223910d60c79a05c2dd610fa82a56b5d
           env:
             - name: RABBITMQ_URL
               value: amqp://rabbitmq:5672

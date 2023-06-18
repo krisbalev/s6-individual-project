@@ -29,7 +29,7 @@ spec:
           resources:
             requests:
               cpu: 100m
-              memory: 256Mi
+              memory: 128Mi
             limits:
               cpu: 250m
               memory: 256Mi
@@ -60,7 +60,7 @@ spec:
     kind: Deployment
     name: user-service-deployment
   minReplicas: 1
-  maxReplicas: 45
+  maxReplicas: 10
   metrics:
   - type: Resource
     resource:
