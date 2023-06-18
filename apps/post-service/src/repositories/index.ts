@@ -1,9 +1,9 @@
 import { Post } from "../models/post";
 
 export async function GetPosts() {
-  // const posts = await Post.find();
-  const testPosts = [{test: "test", picture: null}];
-  return testPosts;
+  const posts = await Post.find();
+  // const testPosts = [{test: "test", picture: null}];
+  return posts;
 }
 
 export async function GetPostById(id: string) {
