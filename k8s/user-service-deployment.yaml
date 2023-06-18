@@ -60,7 +60,7 @@ spec:
     kind: Deployment
     name: user-service-deployment
   minReplicas: 1
-  maxReplicas: 10
+  maxReplicas: 45
   metrics:
   - type: Resource
     resource:
