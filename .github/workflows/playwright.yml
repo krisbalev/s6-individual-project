@@ -42,12 +42,10 @@ jobs:
         - ${{ github.workspace }}/krakend:/app/krakend
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
-      
       - name: Run Krakend
         run: |
-          krakend run -c /app/krakend/krakend.json
+          cd /app/krakend
+          krakend run -c krakend.json
 
   test:
     needs: [rabbitmq, krakend]
