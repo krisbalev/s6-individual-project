@@ -44,16 +44,7 @@
           "encoding": "json",
           "is_collection": true
         }
-      ],
-      "extra_config": {
-        "auth/validator": {
-          "alg": "RS256",
-          "audience": [
-            "https://dev-nydlolpi6mfz5eo3.eu.auth0.com/api/v2/"
-          ],
-          "jwk_url": "https://dev-nydlolpi6mfz5eo3.eu.auth0.com/.well-known/jwks.json"
-        }
-      }
+      ]
     },
     {
       "endpoint": "/post",

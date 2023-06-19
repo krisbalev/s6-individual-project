@@ -1,0 +1,104 @@
+name: Playwright Tests
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  setup:
+    runs-on: ubuntu-latest
+    outputs:
+      krakend-folder: ${{ steps.fetch.outputs.path }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Docker
+        uses: docker/setup-buildx-action@v2
+
+      - name: Fetch krakend folder
+        id: fetch
+        uses: actions/checkout@v3
+        with:
+          sparse-checkout: krakend
+
+  rabbitmq:
+    needs: setup
+    runs-on: ubuntu-latest
+    container:
+      image: rabbitmq:3.12-management
+      ports:
+        - 5672:5672
+        - 15672:15672
+
+    steps:
+      - name: Wait for RabbitMQ to start
+        run: sleep 10
+
+  # krakend:
+  #   needs: setup
+  #   runs-on: ubuntu-latest
+  #   container:
+  #     image: devopsfaith/krakend:2.3.2
+  #     volumes:
+  #       - ${{ github.workspace }}/krakend:/app/krakend
+  #   steps:
+  #     - name: Debug
+  #       run: ls -l ${{ github.workspace }}
+
+  #     - name: Run Krakend
+  #       working-directory: /app/krakend
+  #       run: krakend run -d
+
+  krakend:
+    needs: setup
+    runs-on: ubuntu-latest
+    container:
+      image: devopsfaith/krakend:2.3.2
+      ports:
+      - 8080:8080
+
+    steps:
+      - name: Wait for Krakend to start
+        run: sleep 10     
+
+  test:
+    needs: [rabbitmq, krakend]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install Playwright Browsers
+        run: npx playwright install --with-deps
+
+      - name: Run Playwright tests
+        run: npx playwright test
+
+      - uses: actions/upload-artifact@v3
+        if: always()
+        with:
+          name: playwright-report
+          path: playwright-report/
+          retention-days: 30
+
+      - name: Stop and remove Docker containers
+        run: |
+          docker stop rabbitmq
+          docker rm rabbitmq
+          docker stop krakend
+          docker rm krakend

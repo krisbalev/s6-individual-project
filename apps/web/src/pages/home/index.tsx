@@ -21,7 +21,7 @@ const HomePage = () => {
   const router = useRouter();
   const user = useUser();
   const [loggedInUser, setLoggedInUser] = useState<any>(null);
-  const [posts, setPosts] = useState<any>([]);
+  const [posts, setPosts] = useState<any>(null);
   const [isPostModalOpen, setIsPostModalOpen] = useState(false);
   const [selectedPost, setSelectedPost] = useState<Post | null>(null);
 
@@ -46,6 +46,8 @@ const HomePage = () => {
   useEffect(() => {
     if (user && !user.isLoading) {
       checkUser();
+    } else {
+      router.push("/");
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user]);
@@ -116,42 +118,48 @@ const HomePage = () => {
 
       <Navbar />
 
-      <main className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 py-5">
-        <div className="mt-10 grid gap-6">
-          {posts.reverse().map((post: Post) => (
-            <span key={post.title} onClick={() => handlePostModalOpen(post)}>
-              <PostCard key={post.title} post={post} />
-            </span>
-          ))}
+      {loggedInUser ? (
+        <main className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 py-5">
+          <div className="mt-10 grid gap-6">
+            {posts.reverse().map((post: Post) => (
+              <span key={post._id} onClick={() => handlePostModalOpen(post)}>
+                <PostCard key={post._id} post={post} />
+              </span>
+            ))}
+          </div>
+
+          {isPostModalOpen && selectedPost && (
+            <PostPopup post={selectedPost} onClose={handlePostModalClose} />
+          )}
+
+          <button
+            onClick={handleModalOpen}
+            className="fixed bottom-4 right-4 px-4 py-2 font-medium text-white bg-blue-500 rounded-md shadow-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-opacity-50"
+          >
+            Add Post
+          </button>
+
+          {isModalOpen && (
+            <PostForm
+              onSubmit={handleAddPost}
+              onClose={handleModalClose}
+              userId={loggedInUser._id}
+              username={loggedInUser.username}
+            />
+          )}
+
+          {isUserModalOpen && (
+            <UserFirstLoginForm
+              onSubmit={handleCreateUser}
+              onClose={handleUserModalClose}
+            />
+          )}
+        </main>
+      ) : (
+        <div className="flex justify-center items-center h-screen">
+          <p className="text-black font-bold text-xl">Loading...</p>
         </div>
-
-        {isPostModalOpen && selectedPost && (
-          <PostPopup post={selectedPost} onClose={handlePostModalClose} />
-        )}
-
-        <button
-          onClick={handleModalOpen}
-          className="fixed bottom-4 right-4 px-4 py-2 font-medium text-white bg-blue-500 rounded-md shadow-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-opacity-50"
-        >
-          Add Post
-        </button>
-
-        {isModalOpen && (
-          <PostForm
-            onSubmit={handleAddPost}
-            onClose={handleModalClose}
-            userId={loggedInUser._id}
-            username={loggedInUser.username}
-          />
-        )}
-
-        {isUserModalOpen && (
-          <UserFirstLoginForm
-            onSubmit={handleCreateUser}
-            onClose={handleUserModalClose}
-          />
-        )}
-      </main>
+      )}
     </div>
   );
 };

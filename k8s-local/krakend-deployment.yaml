@@ -16,7 +16,7 @@ spec:
         - name: acr-credentials
       containers:
       - name: krakend
-        image: asindividual.azurecr.io/krakend:4f676d75232666e8fd14d10c1d5906aa955853cb
+        image: asindividual.azurecr.io/krakend:1eb65879223910d60c79a05c2dd610fa82a56b5d
         ports:
         - containerPort: 8080
         command: [ "/usr/bin/krakend" ]
@@ -24,7 +24,7 @@ spec:
         resources:
           requests:
             cpu: 100m
-            memory: 256Mi
+            memory: 128Mi
           limits:
             cpu: 250m
             memory: 256Mi
@@ -37,12 +37,30 @@ kind: Service
 metadata:
   name: krakend-service
 spec:
-  type: LoadBalancer
+  type: ClusterIP
   ports:
   - name: http
-    port: 8080
+    port: 8000
     targetPort: 8080
-    nodePort: 30800
     protocol: TCP
   selector:
     app: krakend
+---
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: krakend-service-deployment
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: krakend-deployment
+  minReplicas: 10
+  maxReplicas: 45
+  metrics:
+  - type: Resource
+    resource:
+      name: cpu
+      target:
+        type: Utilization
+        averageUtilization: 50

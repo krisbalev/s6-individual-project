@@ -2,6 +2,7 @@ import { Post } from "../models/post";
 
 export async function GetPosts() {
   const posts = await Post.find();
+  // const testPosts = [{test: "test", picture: null}];
   return posts;
 }
 
@@ -11,9 +12,9 @@ export async function GetPostById(id: string) {
 }
 
 export async function CreatePost(data: any) {
-  console.log("tuka db", data)
+  console.log("tuka db", data);
   const post = await Post.create(data).catch((error) => {
-    console.log("error", error)
+    console.log("error", error);
     return null;
   });
   return post;

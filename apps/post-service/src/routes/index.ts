@@ -18,7 +18,7 @@ export const postRouter = () => {
   });
 
   router.post("/", upload.single("file"), async (req, res) => {
-    console.log("tuka route", req.body, req.file)
+    console.log("tuka route", req.body, req.file);
     const post = await service.CreatePost(req.body, req.file);
     if (!post) {
       return res.status(404).json({ message: "post not created" });

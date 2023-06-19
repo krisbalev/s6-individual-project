@@ -46,6 +46,7 @@ function GetPosts() {
                 case 0: return [4 /*yield*/, post_1.Post.find()];
                 case 1:
                     posts = _a.sent();
+                    // const testPosts = [{test: "test", picture: null}];
                     return [2 /*return*/, posts];
             }
         });

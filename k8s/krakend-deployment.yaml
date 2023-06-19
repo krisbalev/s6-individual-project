@@ -24,7 +24,7 @@ spec:
         resources:
           requests:
             cpu: 100m
-            memory: 256Mi
+            memory: 128Mi
           limits:
             cpu: 250m
             memory: 256Mi
@@ -45,3 +45,22 @@ spec:
     protocol: TCP
   selector:
     app: krakend
+---
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: krakend-service-deployment
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: krakend-deployment
+  minReplicas: 3
+  maxReplicas: 45
+  metrics:
+  - type: Resource
+    resource:
+      name: cpu
+      target:
+        type: Utilization
+        averageUtilization: 50
