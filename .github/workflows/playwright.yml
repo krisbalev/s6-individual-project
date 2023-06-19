@@ -52,7 +52,7 @@ jobs:
     steps:
       - name: Run Krakend
         working-directory: /app/krakend
-        run: krakend run -d -c krakend.json
+        run: krakend run -d -c /app/krakend/krakend.json
 
   test:
     needs: [rabbitmq, krakend]
