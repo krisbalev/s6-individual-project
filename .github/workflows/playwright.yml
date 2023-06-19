@@ -45,9 +45,9 @@ jobs:
       - name: List directories in the root
         run: ls /app/
 
-      # - name: Run Krakend
-      #   working-directory: /app/krakend
-      #   run: krakend run -d -c krakend/krakend.json
+      - name: Run Krakend
+        working-directory: /app/krakend
+        run: krakend run -d -c krakend/krakend.json
 
   test:
     needs: [rabbitmq, krakend]
