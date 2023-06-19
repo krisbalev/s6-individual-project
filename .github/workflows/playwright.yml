@@ -24,7 +24,7 @@ jobs:
     needs: setup
     runs-on: ubuntu-latest
     container:
-      image: rabbitmq:3.9-management
+      image: rabbitmq:3.12-management
       ports:
         - 5672:5672
         - 15672:15672
@@ -43,7 +43,7 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       
       - name: Run Krakend
         run: |
@@ -57,6 +57,9 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 16
+
+      - name: Checkout repository
+        uses: actions/checkout@v3
 
       - name: Install dependencies
         run: npm ci
