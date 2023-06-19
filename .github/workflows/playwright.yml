@@ -43,7 +43,7 @@ jobs:
         
     steps:
       - name: List directories in the root
-        run: ls /
+        run: ls /app/
 
       # - name: Run Krakend
       #   working-directory: /app/krakend
