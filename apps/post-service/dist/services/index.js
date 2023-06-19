@@ -78,12 +78,12 @@ var db = __importStar(require("../repositories/index"));
 var client_s3_1 = require("@aws-sdk/client-s3");
 var dotenv_1 = __importDefault(require("dotenv"));
 var sharp_1 = __importDefault(require("sharp"));
+var s3_request_presigner_1 = require("@aws-sdk/s3-request-presigner");
 dotenv_1.default.config();
-var bucketName = process.env.S3_BUCKET_NAME;
-var region = process.env.S3_BUCKET_REGION;
-var accessKeyId = process.env.S3_ACCESS_KEY;
-var secretAccessKey = process.env.S3_SECRET_ACCESS_KEY;
-console.log(bucketName, region, accessKeyId, secretAccessKey);
+var bucketName = "individualbucket";
+var region = "eu-north-1";
+var accessKeyId = "AKIA4KVU4TXFQKSL3H53";
+var secretAccessKey = "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";
 var s3 = new client_s3_1.S3Client({
     region: region,
     credentials: {
@@ -93,13 +93,35 @@ var s3 = new client_s3_1.S3Client({
 });
 function GetPosts() {
     return __awaiter(this, void 0, void 0, function () {
-        var posts;
+        var posts, _i, posts_1, post, getObjectParams, command, url;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0: return [4 /*yield*/, db.GetPosts()];
                 case 1:
                     posts = _a.sent();
-                    return [2 /*return*/, posts];
+                    _i = 0, posts_1 = posts;
+                    _a.label = 2;
+                case 2:
+                    if (!(_i < posts_1.length)) return [3 /*break*/, 5];
+                    post = posts_1[_i];
+                    if (!post.picture) {
+                        // Skip this iteration if picture is null
+                        return [3 /*break*/, 4];
+                    }
+                    getObjectParams = {
+                        Bucket: bucketName,
+                        Key: post.picture,
+                    };
+                    command = new client_s3_1.GetObjectCommand(getObjectParams);
+                    return [4 /*yield*/, (0, s3_request_presigner_1.getSignedUrl)(s3, command, { expiresIn: 3600 })];
+                case 3:
+                    url = _a.sent();
+                    post.picture = url;
+                    _a.label = 4;
+                case 4:
+                    _i++;
+                    return [3 /*break*/, 2];
+                case 5: return [2 /*return*/, posts];
             }
         });
     });

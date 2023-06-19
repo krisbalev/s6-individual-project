@@ -6,7 +6,7 @@ const postSchema = new mongoose.Schema({
   userId: String,
   username: String,
   likes: [String],
-  picture: { type: String, default: null }
+  picture: { type: String, default: null },
 });
 
 export const Post = mongoose.model("Post", postSchema);

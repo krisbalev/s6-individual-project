@@ -8,12 +8,15 @@ import PostCard from "@/components/PostCard";
 import { Post } from "@/types/post";
 import router from "next/router";
 import EdintProfileForm from "@/components/EditProfileModal";
+import PostPopup from "@/components/PostPopup";
 
 const AccountPage = () => {
   const [loggedInUser, setLoggedInUser] = useState<any>(null);
   const user = useUser();
   const [posts, setPosts] = useState<any>([]);
   const [isUserModalOpen, setIsUserModalOpen] = useState(false);
+  const [selectedPost, setSelectedPost] = useState<Post | null>(null);
+  const [isPostModalOpen, setIsPostModalOpen] = useState(false);
 
   const checkUser = async () => {
     const check: any = await checkIfUserExists(user.user?.email!);
@@ -60,54 +63,79 @@ const AccountPage = () => {
     setIsUserModalOpen(false);
   };
 
+  const handlePostModalOpen = (post: Post) => {
+    setIsPostModalOpen(true);
+    setSelectedPost(post);
+  };
+
+  const handlePostModalClose = () => {
+    setIsPostModalOpen(false);
+    fetchPostsAsync();
+  };
+
   return (
     <div className="bg-gray-100 min-h-screen">
       <Navbar />
-
-      <article className="mt-7 mx-2 sm:mx-10 md:mx-20 flex flex-col sm:flex-row">
-        <main className="w-full sm:w-1/3 sm:flex-col">
-          <div className="rounded-justify-center border bg-gray-600 p-6">
-            <div className="mb-6 h-64">
-              <Image
-                src={user.user?.picture!}
-                alt="User profile image"
-                height={500}
-                width={500}
-                className="h-full w-full object-contain"
-              />
-            </div>
-            <p className="text-center text-lg font-bold">
-              {loggedInUser?.username}
-            </p>
-          </div>
-          <button
-            onClick={handleModalOpen}
-            className="mt-2 flex w-full items-center justify-center roundepx-4 py-2 font-medium text-white bg-blue-500 rounded-md shadow-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-opacity-50"
-          >
-            Edit Profile
-          </button>
-        </main>
-        <div className="w-full sm:w-2/3 pl-4">
-          <main>
-            <div>
-              <p className="pb-2 text-xl text-black font-medium">YOUR POSTS</p>
-              <hr className="border border-black" />
-              <div className="my-5 mx-3 grid gap-3">
-                {posts.reverse().map((post: Post) => (
-                  <PostCard key={post.title} post={post} />
-                ))}
+      {user && loggedInUser ? (
+        <article className="mt-7 mx-2 sm:mx-10 md:mx-20 flex flex-col sm:flex-row">
+          <main className="w-full sm:w-1/3 sm:flex-col">
+            <div className="rounded-justify-center border bg-gray-600 p-6">
+              <div className="mb-6 h-64">
+                <Image
+                  src={user.user?.picture!}
+                  alt="User profile image"
+                  height={500}
+                  width={500}
+                  className="h-full w-full object-contain"
+                />
               </div>
+              <p className="text-center text-lg font-bold">
+                {loggedInUser?.username}
+              </p>
             </div>
+            <button
+              onClick={handleModalOpen}
+              className="mt-2 flex w-full items-center justify-center roundepx-4 py-2 font-medium text-white bg-blue-500 rounded-md shadow-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-opacity-50"
+            >
+              Edit Profile
+            </button>
           </main>
+          <div className="w-full sm:w-2/3 pl-4">
+            <main>
+              <div>
+                <p className="pb-2 text-xl text-black font-medium">
+                  YOUR POSTS
+                </p>
+                <hr className="border border-black" />
+                <div className="my-5 mx-3 grid gap-3">
+                  {posts.reverse().map((post: Post) => (
+                    <span
+                      key={post._id}
+                      onClick={() => handlePostModalOpen(post)}
+                    >
+                      <PostCard key={post._id} post={post} />
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </main>
+          </div>
+          {isUserModalOpen && (
+            <EdintProfileForm
+              onSubmit={editProfile}
+              onClose={handleUserModalClose}
+              user={loggedInUser}
+            />
+          )}
+          {isPostModalOpen && selectedPost && (
+            <PostPopup post={selectedPost} onClose={handlePostModalClose} />
+          )}
+        </article>
+      ) : (
+        <div className="flex justify-center items-center h-screen">
+          <p className="text-black font-bold text-xl">Loading...</p>
         </div>
-        {isUserModalOpen && (
-          <EdintProfileForm
-            onSubmit={editProfile}
-            onClose={handleUserModalClose}
-            user={loggedInUser}
-          />
-        )}
-      </article>
+      )}
     </div>
   );
 };

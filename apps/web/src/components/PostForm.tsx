@@ -15,7 +15,9 @@ const PostForm = ({ onSubmit, onClose, userId, username }: PostFormProps) => {
   const [file, setFile] = useState<File | null>(null);
   const [message, setMessage] = useState<string>("");
 
-  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>): Promise<void> => {
+  const handleSubmit = async (
+    event: React.FormEvent<HTMLFormElement>
+  ): Promise<void> => {
     event.preventDefault();
     // const post = { title, content, userId, username };
     const formData = new FormData();

@@ -36,7 +36,7 @@ const PostCard = ({ post }: Props) => {
 
   useEffect(() => {
     checkIfLiked();
-   // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [post]);
 
   return (

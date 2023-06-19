@@ -75,8 +75,8 @@ export async function CreatePost(data: any, file: any) {
 
   const postData = {
     ...data,
-    picture: imageName || null
-  }
+    picture: imageName || null,
+  };
 
   console.log("tuka service", postData, file);
 
