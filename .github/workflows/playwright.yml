@@ -45,10 +45,13 @@ jobs:
     needs: setup
     runs-on: ubuntu-latest
     container:
-      image: devopsfaith/krakend:latest
-      volumes:
-        - ${{ github.workspace }}/krakend:/app/krakend
-        
+      # image: devopsfaith/krakend:latest
+      # volumes:
+      #   - ${{ github.workspace }}/krakend:/app/krakend
+      image: devopsfaith/krakend:2.3.2
+      ports:
+        - 8080:8080
+
     steps:
       - name: Run Krakend
         working-directory: /app/krakend
