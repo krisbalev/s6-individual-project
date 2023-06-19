@@ -39,13 +39,12 @@ jobs:
     container:
       image: devopsfaith/krakend:1.4.0
       volumes:
-        - ${{ github.workspace }}/krakend:/app/krakend
-
+        - ${{ github.workspace }}:/app
+        
     steps:
       - name: Run Krakend
-        run: |
-          cd /app/krakend
-          krakend run -c krakend.json
+        working-directory: /app/krakend
+        run: krakend run -c krakend.json
 
   test:
     needs: [rabbitmq, krakend]
