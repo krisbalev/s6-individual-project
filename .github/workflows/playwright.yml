@@ -13,12 +13,20 @@ concurrency:
 jobs:
   setup:
     runs-on: ubuntu-latest
+    outputs:
+      krakend-folder: ${{ steps.fetch.outputs.path }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
 
       - name: Set up Docker
         uses: docker/setup-buildx-action@v2
+
+      - name: Fetch krakend folder
+        id: fetch
+        uses: actions/checkout@v3
+        with:
+          sparse-checkout: krakend
 
   rabbitmq:
     needs: setup
@@ -39,15 +47,12 @@ jobs:
     container:
       image: devopsfaith/krakend:1.4.0
       volumes:
-        - ${{ github.workspace }}:/app
+        - ${{ github.workspace }}/krakend:/app/krakend
         
     steps:
-      - name: List directories in the root
-        run: ls /github
-
       - name: Run Krakend
         working-directory: /app/krakend
-        run: krakend run -d -c krakend/krakend.json
+        run: krakend run -d -c krakend.json
 
   test:
     needs: [rabbitmq, krakend]
