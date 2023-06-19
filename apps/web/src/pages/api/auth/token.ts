@@ -13,9 +13,9 @@ export default async function handler(
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          client_id: "ozKpdSeEg9sftMt1YnTn8uAWthClrPOW",
+          client_id: "rvqgFs2lofJ7MuvFw1kd4ffC78C5McEO",
           client_secret:
-            "3P7Vv45SVuWDT7fE0yZMa5RLC5UIf6G1jWYcirIL-I0Kuedi4_GLEwkLSKrXWVM-",
+            "1q9Za55OkdZusOLyJf_sSM5VWSPZOYljwoB7aB6RRwa7NNXXVxT0hQkZSFjcwlMB",
           audience: "https://dev-nydlolpi6mfz5eo3.eu.auth0.com/api/v2/",
           grant_type: "client_credentials",
         }),
