@@ -30,6 +30,16 @@ test.describe("Home Page", () => {
     });
   });
 
+  test("like post", async ({ page }) => {
+    await page.goto('http://localhost:3000/home');
+    await page.getByText('post').first().click();
+    const likes = await page.locator('div:nth-child(5) > div > .flex').innerText();
+    await page.locator('div:nth-child(5) > div > .flex').click();
+    await page.waitForTimeout(1000);
+    const newLikes = await page.locator('div:nth-child(5) > div > .flex').innerText();
+    expect(newLikes).not.toBe(likes);
+  });
+
   test("change username", async ({ page }) => {
     await page.goto("http://localhost:3000/account");
     await page.getByRole("link", { name: "Account" }).click();
@@ -45,15 +55,5 @@ test.describe("Home Page", () => {
     page.on("dialog", async (dialog) => {
       await dialog.accept();
     });
-  });
-
-  test("like post", async ({ page }) => {
-    await page.goto('http://localhost:3000/home');
-    await page.getByText('Posted by playwrighttestnew1Test post0').first().click();
-    const likes = await page.locator('div:nth-child(5) > div > .flex').innerText();
-    await page.locator('div:nth-child(5) > div > .flex').click();
-    await page.waitForTimeout(1000);
-    const newLikes = await page.locator('div:nth-child(5) > div > .flex').innerText();
-    expect(newLikes).not.toBe(likes);
   });
 });
