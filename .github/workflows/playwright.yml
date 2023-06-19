@@ -45,17 +45,18 @@ jobs:
     needs: setup
     runs-on: ubuntu-latest
     container:
-      # image: devopsfaith/krakend:latest
-      # volumes:
-      #   - ${{ github.workspace }}/krakend:/app/krakend
       image: devopsfaith/krakend:2.3.2
       ports:
         - 8080:8080
-
+      env:
+        KRAKEND_CONFIG_FILE: /app/krakend/krakend.json
     steps:
+      - name: Copy krakend.json
+        run: cp krakend/krakend.json /app/krakend/krakend.json
+        
       - name: Run Krakend
         working-directory: /app/krakend
-        run: krakend run -d -c /app/krakend/krakend.json
+        run: krakend run -d
 
   test:
     needs: [rabbitmq, krakend]
