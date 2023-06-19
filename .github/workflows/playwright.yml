@@ -24,7 +24,7 @@ jobs:
     needs: setup
     runs-on: ubuntu-latest
     container:
-      image: rabbitmq:3.12-management
+      image: rabbitmq:3.9-management
       options: |
         --name rabbitmq
         -p 5672:5672
@@ -41,15 +41,14 @@ jobs:
       image: devopsfaith/krakend:1.4.0
       options: |
         --name krakend-container
-        -v ../../krakend/krakend
-        -w /app/krakend
+        -v ${{ github.workspace }}/krakend:/app/krakend
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
       
       - name: Run Krakend
         run: |
-          krakend run -c ../../krakend/krakend.json
+          krakend run -c /app/krakend/krakend.json
 
   test:
     needs: [rabbitmq, krakend]
