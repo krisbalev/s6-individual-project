@@ -42,9 +42,12 @@ jobs:
         - ${{ github.workspace }}:/app
         
     steps:
-      - name: Run Krakend
-        working-directory: /app/krakend
-        run: krakend run -d -c krakend/krakend.json
+      - name: List directories in the root
+        run: ls /
+
+      # - name: Run Krakend
+      #   working-directory: /app/krakend
+      #   run: krakend run -d -c krakend/krakend.json
 
   test:
     needs: [rabbitmq, krakend]
