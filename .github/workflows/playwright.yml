@@ -51,11 +51,8 @@ jobs:
       env:
         KRAKEND_CONFIG_FILE: /app/krakend/krakend.json
     steps:
-      - name: List files in the krakend directory
-        run: ls -l
-    
       - name: Copy krakend.json
-        run: cp krakend/krakend.json /app/krakend/krakend.json
+        run: cp ${{ github.workspace }}/krakend/krakend.json /app/krakend/krakend.json
 
       - name: Run Krakend
         working-directory: /app/krakend
