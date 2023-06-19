@@ -38,12 +38,18 @@ jobs:
     needs: setup
     runs-on: ubuntu-latest
     container:
-      image: krakend-image
+      image: devopsfaith/krakend:1.4.0
       options: |
         --name krakend-container
         -v /path/to/krakend:/app/krakend
         -w /app/krakend
-        krakend run -d -c krakend/krakend-dev.json
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      
+      - name: Run Krakend
+        run: |
+          krakend run -c ../../krakend/krakend.json
 
   test:
     needs: [rabbitmq, krakend]
