@@ -52,11 +52,11 @@ jobs:
         KRAKEND_CONFIG_FILE: /app/krakend/krakend.json
     steps:
       - name: Debug
-        run: ls -l ${{ github.workspace }}/krakend
+        run: ls -l ${{ github.workspace }}
 
       - name: Debug
         run: ls -l /app/krakend
-        
+
       - name: Copy krakend.json
         run: cp ${{ github.workspace }}/krakend/krakend.json /app/krakend/krakend.json
 
