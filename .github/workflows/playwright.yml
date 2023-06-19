@@ -46,13 +46,11 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: devopsfaith/krakend:2.3.2
-      ports:
-        - 8080:8080
-      env:
-        KRAKEND_CONFIG_FILE: /app/krakend/krakend.json
+      volumes:
+        - ${{ github.workspace }}/krakend:/app/krakend
     steps:
       - name: Debug
-        run: ls -l
+        run: ls -l ${{ github.workspace }}
 
       - name: Run Krakend
         working-directory: /app/krakend
