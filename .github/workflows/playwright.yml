@@ -57,7 +57,7 @@ jobs:
 #         run: krakend run -d
 
   test:
-    needs: [rabbitmq, krakend]
+    # needs: [rabbitmq, krakend]
     runs-on: ubuntu-latest
     steps:
       - name: Setup Node.js
